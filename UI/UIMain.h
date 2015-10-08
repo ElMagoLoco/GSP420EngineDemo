@@ -12,12 +12,14 @@
 #include "defines.h"
 #include <vector>
 #include "..\Main\DirectInput.h"
+#include "..\Main\Player.h"
 using namespace std;
 using GFXCore::SpriteData;
 
 
 class UIMain {
 protected:
+	Player * player;
 	GAMESTATE currentState;
 	//GFXCore::Graphics gfx;
 	// Stores the position of sprites that LoadSprite loads into an array so that they can be accessed later
@@ -32,9 +34,9 @@ protected:
 private:
 	bool spriteClicked(DirectInput &suppliedInput, int spriteID)
 	{
-		if (suppliedInput.mouseDX() >  GFX->getSpritePosX(spriteID) && suppliedInput.mouseDX() < GFX->getSpritePosX(spriteID) + GFX->getSpriteWidth(spriteID)) 
+		if (suppliedInput.MouseDX() >  GFX->getSpritePosX(spriteID) && suppliedInput.MouseDX() < GFX->getSpritePosX(spriteID) + GFX->getSpriteWidth(spriteID)) 
 		{
-			if (suppliedInput.mouseDY() > GFX->getSpritePosY(spriteID) && suppliedInput.mouseDY() < GFX->getSpritePosY(spriteID) + GFX->getSpriteHeight(spriteID))
+			if (suppliedInput.MouseDY() > GFX->getSpritePosY(spriteID) && suppliedInput.MouseDY() < GFX->getSpritePosY(spriteID) + GFX->getSpriteHeight(spriteID))
 			{
 				return true;
 			}
@@ -54,7 +56,7 @@ public:
 
 		// check for mouse input
 		int MOUSE_LEFT = 0;
-		if (input.mouseButtonDown(MOUSE_LEFT))
+		if (input.MouseButtonDown(MOUSE_LEFT))
 		{
 			if (spriteClicked(input, menuSpriteIDs[START]))
 			{
@@ -69,8 +71,8 @@ public:
 	}
 
 	void updateGame() {
-		int healthSize = getMaxHealth();
-		int currAmmo = getMissileAmmo();
+		int healthSize = player->getMaxHealth();
+		int currAmmo = player->getMissileAmmo();
 
 		// tells graphics what to draw
 		GFX->addToSpriteRenderList((int*)gameSpriteIDs[0], gameSpriteIDs.size());
@@ -78,15 +80,15 @@ public:
 		// update health bar and number of missiles
 
 		//Health bar update
-		if(getMaxHealth() > getHealth()) // if current health is less than maximum health
+		if(healthSize > player->getHealth()) // if current health is less than maximum health
 		{
-			for(healthSize; healthSize > getHealth(); --healthSize) //reduce the health bar size from the difference.
+			for(healthSize; healthSize > player->getHealth(); --healthSize) //reduce the health bar size from the difference.
 			{
 				GFX->updateSprite(gameSpriteIDs.at(HEALTH), D3DXVECTOR3(350, 400, 0.0f)); // update the information
 			}
 		}
 		//Missle Bar Update
-		if(currAmmo < getMissileAmmo()) // if current ammo is less than its maximum supply
+		if(currAmmo < player->getMissileAmmo()) // if current ammo is less than its maximum supply
 		{
 			GFX->updateSprite(gameSpriteIDs.at(MISSILE), D3DXVECTOR3(310, 400, 0.0f)); //update the information
 		}
@@ -101,7 +103,7 @@ public:
 			GFX->addToSpriteRenderList((int*)pauseSpriteIDs[0], pauseSpriteIDs.size());
 			if (spriteClicked(input, pauseSpriteIDs[BACK]))
 			{
-				paused = false;
+				//paused = false;
 			}
 		}
 	}
@@ -110,6 +112,4 @@ public:
 		GFX->addToSpriteRenderList((int*)exitSpriteIDs[0], exitSpriteIDs.size());
 		currentState = STATE_EXIT;
 	}
-
-
 };
