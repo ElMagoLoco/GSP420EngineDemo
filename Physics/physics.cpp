@@ -152,8 +152,8 @@ int physics::updateWorld()
 			//and do create or remove it.
 
 			b2Vec2 position = gameObject->second->body->GetPosition();
-			gameObject->second->x = position.x*M2P;
-			gameObject->second->y = position.y*M2P;
+			gameObject->second->x = int(position.x*M2P);
+			gameObject->second->y = int(position.y*M2P);
 			float32 theAngle = gameObject->second->body->GetAngle();
 			gameObject->second->angle = theAngle;
 
