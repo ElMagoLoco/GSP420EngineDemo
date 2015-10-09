@@ -17,7 +17,7 @@ static const float ENEMY_BULLET_FR = 3.0f;
 static const float ENEMY_MISSILE_FR = 3.0f;
 static const float ENEMY_MINE_FR = 2.0f;
 
-static const float PI = 3.14159;
+static const float PI = 3.14159f;
 
 class AI
 {
