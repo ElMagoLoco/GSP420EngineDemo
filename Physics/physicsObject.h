@@ -2,7 +2,7 @@
 
 #include <string>
 #include "Box2D/Box2D.h"
-
+#include <vector>
 
 
 class physicsObject
@@ -11,7 +11,7 @@ public:
 	
 	b2Body* body;
 	std::string objectName;
-	float32 shape[16];
+	std::vector<float32> shape;
 	float32 angle;
 	float32 angularVelocityX; 
 	float32 angularVelocityY; 
@@ -22,6 +22,7 @@ public:
 	bool   isActive;
 	bool   isColliding; 
 	bool   isDynamic;
+	bool   isStatic; 
 	int    x; 
 	int    y; 
 	int    halfHeight; 
@@ -42,8 +43,6 @@ public:
 	int applyTorqueFromCenter(float32 x, float32 y);
 	int setLinkedObject(void* linkedObject);
 	int setBounceAmount(float32 ba);
-	// int addForceAtPos(std::string name, int x, int y);
-	// int addConstentForce(std::string name, int x, int y);
-	// int addTorque(std::string name, int x, int y);
+	
 };
 
