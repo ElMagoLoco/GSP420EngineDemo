@@ -5,9 +5,6 @@
 #include <vector>
 
 
-
-
-
 gameObjectManager::gameObjectManager()
 {
 
