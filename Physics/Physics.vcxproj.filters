@@ -13,6 +13,15 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Box2D Libs">
+      <UniqueIdentifier>{285aaedf-2304-4194-813a-6a365c3816ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Box2D Libs\Release">
+      <UniqueIdentifier>{0de0a3f2-691b-48a6-8819-2b6ac8161eff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Box2D Libs\Debug">
+      <UniqueIdentifier>{2ff1cf6a-2148-4ebf-935a-5c3ce3964aa4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="gameObjectManager.cpp">
@@ -35,5 +44,13 @@
     <ClInclude Include="gameObjectManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="Lib\Debug\Box2D.lib">
+      <Filter>Box2D Libs\Debug</Filter>
+    </Library>
+    <Library Include="Lib\Release\Box2D.lib">
+      <Filter>Box2D Libs\Release</Filter>
+    </Library>
   </ItemGroup>
 </Project>

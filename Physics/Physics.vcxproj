@@ -22,6 +22,10 @@
     <ClInclude Include="physics.h" />
     <ClInclude Include="physicsObject.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Library Include="Lib\Debug\Box2D.lib" />
+    <Library Include="Lib\Release\Box2D.lib" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{86B8BFB7-7F37-4910-9592-968DCAF55A36}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
