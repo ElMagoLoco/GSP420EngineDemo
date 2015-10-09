@@ -3,7 +3,7 @@
 #pragma once
 
 //d3d includes and libraries
-#include "D3DUtils.h"
+#include "../D3D9Graphics/D3DUtils.h"
 // #include <d3d9.h>
 // #include <d3dx9.h>
 // #pragma comment(lib, "d3d9.lib")
