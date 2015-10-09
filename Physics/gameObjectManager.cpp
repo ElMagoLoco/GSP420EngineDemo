@@ -4,9 +4,6 @@
 #include <string>
 #include <vector>
 
-typedef std::vector<std::string> TShapeList;
-
-
 
 gameObjectManager::gameObjectManager()
 {
@@ -22,12 +19,16 @@ gameObjectManager::~gameObjectManager()
 // Add a game object that is not controlled by physics but reacts to collisions
 int gameObjectManager::addBoxDynamicRigidBody(std::string theName,int x, int y, int halfW, int halfH, bool isActive, physicsObject* gameObjectLink)
 {
+
+	if (gameObjectLink == NULL) return -1; 
+
 	gameObjectLink->shapeList = "Box";
 	gameObjectLink->isActive     = isActive; 
 	gameObjectLink->objectName   = theName; 
 	gameObjectLink->x = x;
 	gameObjectLink->y = y;
-	gameObjectLink->isDynamic = true;
+	gameObjectLink->isDynamic    = true;
+	gameObjectLink->isStatic     = false;
 	gameObjectLink->halfHeight = halfH;
 	gameObjectLink->halfWidth =  halfW;
 
@@ -40,12 +41,15 @@ int gameObjectManager::addBoxDynamicRigidBody(std::string theName,int x, int y, 
 // Add a game object that is not controlled by physics but reacts to collisions
 int gameObjectManager::addBoxNonDynamicRigidBody(std::string theName, int x, int y, int halfW, int halfH, bool isActive, physicsObject* gameObjectLink)
 {
+	
+	if (gameObjectLink == NULL) return -1;
 	gameObjectLink->shapeList = "Box";
 	gameObjectLink->isActive = isActive;
 	gameObjectLink->objectName = theName;
 	gameObjectLink->x = x;
 	gameObjectLink->y = y;
 	gameObjectLink->isDynamic = false;
+	gameObjectLink->isStatic = false;
 	gameObjectLink->halfHeight = halfH;
 	gameObjectLink->halfWidth = halfW;
 
@@ -57,12 +61,15 @@ int gameObjectManager::addBoxNonDynamicRigidBody(std::string theName, int x, int
 // Add a game object that is not controlled by physics but reacts to collisions
 int gameObjectManager::addBoxNonMovingRigidBody(std::string theName, int x, int y, int halfW, int halfH, bool isActive, physicsObject* gameObjectLink)
 {
+	if (gameObjectLink == NULL) return -1;
+	
 	gameObjectLink->shapeList = "Box";
 	gameObjectLink->isActive = isActive;
 	gameObjectLink->objectName = theName;
 	gameObjectLink->x = x;
 	gameObjectLink->y = y;
 	gameObjectLink->isDynamic = false;
+	gameObjectLink->isStatic  = true;
 	gameObjectLink->halfHeight = halfH;
 	gameObjectLink->halfWidth = halfW;
 
@@ -72,15 +79,36 @@ int gameObjectManager::addBoxNonMovingRigidBody(std::string theName, int x, int 
 }
 
 // Add a game object that is not controlled by physics but reacts to collisions
-int gameObjectManager::addPolygonDynamicRigidBody(std::string theName, int x, int y, int vertices[], bool isActive, physicsObject* gameObjectLink)
+int gameObjectManager::addPolygonDynamicRigidBody(std::string theName, int x, int y, std::vector<float32> vertices, bool isActive, physicsObject* gameObjectLink)
 {
-
+	if (gameObjectLink == NULL) return -1;
     gameObjectLink->shapeList = "Polygon";
+	gameObjectLink->shape = vertices;
+	gameObjectLink->isActive = isActive;
+	gameObjectLink->objectName = theName;
+	gameObjectLink->x = x;
+	gameObjectLink->y = y;
+	gameObjectLink->isDynamic = true;
+	gameObjectLink->isStatic = false;
+	gameObjectLink->halfHeight = 0;
+	gameObjectLink->halfWidth = 0;
+
+	gameManangerMap[theName] = gameObjectLink;
+
+	return 0;
+}
+
+int gameObjectManager::addPolygonNonDynamicRigidBody(std::string theName, int x, int y, std::vector<float32> vertices, bool isActive, physicsObject* gameObjectLink)
+{
+	if (gameObjectLink == NULL) return -1;
+	gameObjectLink->shapeList = "Polygon";
+	gameObjectLink->shape = vertices;
 	gameObjectLink->isActive = isActive;
 	gameObjectLink->objectName = theName;
 	gameObjectLink->x = x;
 	gameObjectLink->y = y;
 	gameObjectLink->isDynamic = false;
+	gameObjectLink->isStatic = false;
 	gameObjectLink->halfHeight = 0;
 	gameObjectLink->halfWidth = 0;
 
@@ -90,6 +118,24 @@ int gameObjectManager::addPolygonDynamicRigidBody(std::string theName, int x, in
 }
 
 
+int gameObjectManager::addPolygonNonMovingRigidBody(std::string theName, int x, int y, std::vector<float32> vertices, bool isActive, physicsObject* gameObjectLink)
+{
+	if (gameObjectLink == NULL) return -1;
+	gameObjectLink->shapeList = "Polygon";
+	gameObjectLink->shape = vertices;
+	gameObjectLink->isActive = isActive;
+	gameObjectLink->objectName = theName;
+	gameObjectLink->x = x;
+	gameObjectLink->y = y;
+	gameObjectLink->isDynamic = false;
+	gameObjectLink->isStatic = true;
+	gameObjectLink->halfHeight = 0;
+	gameObjectLink->halfWidth = 0;
+
+	gameManangerMap[theName] = gameObjectLink;
+
+	return 0;
+}
 
 
 // finds and returns a the instance of the object by name

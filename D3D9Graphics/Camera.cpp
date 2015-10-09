@@ -172,9 +172,9 @@ void Camera::update(float dt, float offsetHeight)
 // 	D3DXMatrixRotationAxis(&R, &vRigthWorld, pitch);
 // 	D3DXVec3TransformCoord(&vLlookWorld, &vLlookWorld, &R);
 // 	D3DXVec3TransformCoord(&vUpWorld, &vUpWorld, &R);
-
-
-	// Rotate camera axes about the world's y-axis.
+// 
+// 
+// 	// Rotate camera axes about the world's y-axis.
 // 	D3DXMatrixRotationY(&R, yAngle);
 // 	D3DXVec3TransformCoord(&vRigthWorld, &vRigthWorld, &R);
 // 	D3DXVec3TransformCoord(&vUpWorld, &vUpWorld, &R);

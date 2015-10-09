@@ -3,7 +3,6 @@
 #pragma once
 
 //d3d includes and libraries
-// SAM
 #include "D3DUtils.h"
 // #include <d3d9.h>
 // #include <d3dx9.h>
@@ -67,10 +66,8 @@ namespace GSP420
 		inline const D3DXVECTOR3& getVelocity() const;
 		inline const D3DXVECTOR3& getFixedRotation() const;
 		inline const D3DXVECTOR3& getScale() const;
-	//	inline int getHealth() const;
 		inline int getModelId() const;
 		inline int getTextureId() const;
-
 		//ABC(const ABC&);
 		virtual ~ABC() {}
 
@@ -89,7 +86,6 @@ namespace GSP420
 
 		bool	bEnabled;
 	};
-
 
 	const D3DXVECTOR3& GSP420::ABC::getPosition() const	{ return position; }
 	const D3DXVECTOR3& GSP420::ABC::getVelocity() const { return velocity; }

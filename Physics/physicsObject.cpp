@@ -3,12 +3,9 @@
 
 physicsObject::physicsObject() 
 { 
-	 
+ 
 	body      = NULL; 
     userData  = NULL; 
-	for (int indexLoop = 0; indexLoop < 16; indexLoop++) {
-		shape[indexLoop] = -1.0f;
-	}
 }
 
 

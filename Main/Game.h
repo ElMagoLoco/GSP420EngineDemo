@@ -53,13 +53,13 @@ public:
 	PickupManager pickups;
 	ProjectileManager projectiles;
 	Player player;
-	inline GAMESTATE getState() { return currentState; }
+	inline GAMESTATE getState() { return State; }
 protected:
 	//the one instance of the object
 	static Game* Singleton;
 	//constructor can't be called by nonmember functions
 	Game() : App(), paused(false) {}
-	inline GameState* getGameState() { return States; }
+	inline GAMESTATE getGameState() { return State; }
 	void changeState(GAMESTATE newstate);
 private:
 	//toggle the game being paused
@@ -72,10 +72,9 @@ private:
 	void render();//render all the visual elements of the game
 	void shutdown();//used upon game exit
 	//the present state of the game
-	GameState		States[NUM_STATES];
-	GAMESTATE		currentState;
-	/*****
+	GAMESTATE State;
 	GameState States[NUM_STATES];
+	/*****
 	AI gameAI;
 	Physics gamePhysics;
 	UI gameUI;
