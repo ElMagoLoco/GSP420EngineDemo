@@ -42,12 +42,12 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>$(VC_ProjectDir)SDL2-2.0.3\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(ProjectDir)Lib;$(ProjectDir)SDL2-2.0.3\lib\x86;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(ProjectDir)Lib\Debug;$(SolutionDir)Debug;$(ProjectDir)Lib;$(ProjectDir)SDL2-2.0.3\lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
     <IncludePath>$(VC_ProjectDir)SDL2-2.0.3\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(ProjectDir)SDL2-2.0.3\lib\x86;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(ProjectDir)Lib\;$(ProjectDir)Lib\Release;$(ProjectDir)SDL2-2.0.3\lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

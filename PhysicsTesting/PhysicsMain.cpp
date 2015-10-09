@@ -1,5 +1,6 @@
 #pragma comment(lib, "SDL2")
 #pragma comment(lib, "SDL2main")
+#pragma comment(lib, "Physics")
 
 #include <iostream> 
 #include <SDL.h>
@@ -7,7 +8,6 @@
 #include <string> 
 #include <cmath>
 #include "physics.h"
-
 
 //Screen dimension constants
 const int SCREEN_WIDTH = 800;
