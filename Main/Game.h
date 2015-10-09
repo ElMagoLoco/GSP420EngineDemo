@@ -73,8 +73,8 @@ private:
 	void shutdown();//used upon game exit
 	//the present state of the game
 	GAMESTATE State;
-	/*****
 	GameState States[NUM_STATES];
+	/*****
 	AI gameAI;
 	Physics gamePhysics;
 	UI gameUI;
