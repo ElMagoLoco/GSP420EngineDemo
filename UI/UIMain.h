@@ -29,7 +29,6 @@ protected:
 	vector<int> exitSpriteIDs;
 	int currentScore;
 	int missileAmmo;
-	DirectInput input;
 
 private:
 	bool spriteClicked(DirectInput &suppliedInput, int spriteID)
@@ -56,14 +55,14 @@ public:
 
 		// check for mouse input
 		int MOUSE_LEFT = 0;
-		if (input.MouseButtonDown(MOUSE_LEFT))
+		if (INPUT->MouseButtonDown(MOUSE_LEFT))
 		{
-			if (spriteClicked(input, menuSpriteIDs[START]))
+			if (spriteClicked(*INPUT, menuSpriteIDs[START]))
 			{
 				currentState = STATE_PLAY;
 			}
 
-			if (spriteClicked(input, menuSpriteIDs[CREDITS]))
+			if (spriteClicked(*INPUT, menuSpriteIDs[CREDITS]))
 			{
 				currentState = STATE_CREDIT;
 			}
@@ -101,7 +100,7 @@ public:
 		if (paused)
 		{
 			GFX->addToSpriteRenderList((int*)pauseSpriteIDs[0], pauseSpriteIDs.size());
-			if (spriteClicked(input, pauseSpriteIDs[BACK]))
+			if (spriteClicked(*INPUT, pauseSpriteIDs[BACK]))
 			{
 				//paused = false;
 			}
