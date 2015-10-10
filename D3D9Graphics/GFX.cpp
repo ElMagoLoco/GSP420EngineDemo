@@ -254,3 +254,13 @@ int GFXCore::Graphics::getSpriteHeight(const int id)
 
 }
 
+float GFXCore::Graphics::getSpritePosX(const int id)
+{
+	return sprites.getSprite(id).position.x;
+}
+
+float GFXCore::Graphics::getSpritePosY(const int id)
+{
+	return sprites.getSprite(id).position.y;
+}
+
