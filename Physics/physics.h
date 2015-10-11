@@ -1,9 +1,10 @@
 #pragma once 
-#pragma comment(lib, "Box2d")
 #include <iostream>
 #include <vector> 
 #include "gameObjectManager.h"
 #include "Box2D/Box2D.h"
+//#pragma warning(disable : 4006)
+#pragma comment(lib, "Box2d")
 const float M2P = 8.00;
 const float P2M = 1 / M2P;
 
