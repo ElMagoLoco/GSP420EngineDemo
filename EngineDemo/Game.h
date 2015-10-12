@@ -62,7 +62,7 @@ protected:
 	//the one instance of the object
 	static Game* Singleton;
 	//constructor can't be called by nonmember functions
-	Game() : App(), paused(false) {}
+	Game() : App(), paused(false), nPlayerModel(-1) {}
 	inline GAMESTATE getGameState() { return State; }
 	void changeState(GAMESTATE newstate);
 private:
@@ -75,9 +75,10 @@ private:
 	void update(const float);//update the scene every frame, anything that is not rendering goes here
 	void render();//render all the visual elements of the game
 	void shutdown();//used upon game exit
+
 	//the present state of the game
-	GAMESTATE State;
 	GameState States[NUM_STATES];
+	GAMESTATE State;
 	/*****
 	AI gameAI;
 	Physics gamePhysics;
@@ -86,5 +87,8 @@ private:
 	*****/
 	//is game play paused
 	bool paused;
+
+	// content handlers
+	int		nPlayerModel;
 };
 

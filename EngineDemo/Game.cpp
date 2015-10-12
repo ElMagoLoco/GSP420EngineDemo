@@ -92,6 +92,14 @@ void Game::init()
 	State = STATE_MENU;
 	QuitNow = false;
 
+	GFX->initModules();
+
+	nPlayerModel = GFX->loadModel(L"Content\\Models\\PlayerSpaceshipV2.x");
+	player.init(nPlayerModel, -1);
+	player.setPosition(D3DXVECTOR3(0.0f, 0.0f, 0.0f));
+	player.setFixedRotation(D3DXVECTOR3(0.0f, 0.0f, 0.0f));
+
+	GFX->cameraSetLens(GFX->windowWidth(), GFX->windowHeight(), -1000.0f, 1000.0f);
 }
 
 void Game::onLostDevice()
@@ -107,11 +115,15 @@ void Game::onResetDevice()
 void Game::update(const float dt)
 {
 	States[State].update(dt);
+	GFX->addToModelRenderList(&player);
+	GFX->updateModel(nPlayerModel, player.getPosition());
 }
 
 void Game::render()
 {
 	States[State].render();
+	GFX->updateModel(nPlayerModel, player.getPosition());
+	GFX->renderScene();
 }
 
 void Game::shutdown()

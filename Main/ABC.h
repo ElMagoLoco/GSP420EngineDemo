@@ -30,7 +30,7 @@ namespace GSP420
 	class ABC
 	{
 	public:
-		ABC() : bEnabled(true) {}
+		ABC() : bEnabled(true), position(0.0f, 0.0f, 0.0f), scale(1.0f, 1.0f, 1.0f), velocity(0.0f, 0.0f, 0.0f), fixedRotation(0.0f, 0.0f, 0.0f) {}
 		ABC(const ObjType t) : eType(t), bEnabled(true) {}
 		ABC(const D3DXVECTOR3 p, const ObjType t) :
 			position(p), eType(t), bEnabled(true), velocity(D3DXVECTOR3(0.f, 0.f, 0.f)) {}
