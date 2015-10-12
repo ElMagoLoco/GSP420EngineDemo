@@ -7,7 +7,7 @@
 //Physics:
 //	Size & position of buttons
 #pragma once
-#include "..\Main\GameState.h"
+#include "..\EngineDemo\GameState.h"
 #include "..\D3D9Graphics\GFX.h"
 #include "defines.h"
 #include <vector>

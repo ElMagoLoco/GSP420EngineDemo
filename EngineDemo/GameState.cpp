@@ -5,8 +5,8 @@
 //back to the main methods in Game
 
 #include "../D3D9Graphics/GFX.h"
-#include "DirectInput.h"
-#include "Logger.h"
+#include "../Main/DirectInput.h"
+#include "../Main/Logger.h"
 #include "Game.h"
 
 void InitState::init()

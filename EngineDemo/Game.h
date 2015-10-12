@@ -11,7 +11,7 @@
 
 
 //include state information
-#include "..\Main\GameState.h"
+#include "GameState.h"
 
 
 #include "AsteroidManager.h"
