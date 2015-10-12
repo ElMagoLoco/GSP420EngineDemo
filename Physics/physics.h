@@ -11,10 +11,10 @@ class CollissionCallBackListener : public b2ContactListener
 {
 
  public: 
-	void* listenerParentCallbackFunction;
+	void (*listenerParentCallbackFunction)(void*,void*);
 	void CollissionCallBackListener::BeginContact(b2Contact* contact);
 	void EndContact(b2Contact* contact);
-	void setCollisionFunction(void* theParentCollisionFunction);
+	void setCollisionFunction(void (*theParentCollisionFunction)(void*, void*) );
 };
 
 class physics 

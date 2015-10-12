@@ -20,6 +20,7 @@ physics::physics()
     gravity = b2Vec2(0.0f, 9.8f); // need to expose gravtiy in constuctor.
 	world = new b2World(gravity);
 	GameObjectManager = new gameObjectManager();
+	
 }
 
 
@@ -175,8 +176,16 @@ void CollissionCallBackListener::BeginContact(b2Contact* contact)
 	b2Fixture* fixtureB = contact->GetFixtureB();
 	b2Body* body1 = fixtureA->GetBody();
 	b2Body* body2 = fixtureB->GetBody();
-	physicsObject* poA = (physicsObject*)body1->GetUserData();
-	physicsObject* poB = (physicsObject*)body2->GetUserData();
+	//physicsObject* poA = (physicsObject*)body1->GetUserData();
+	//physicsObject* poB = (physicsObject*)body2->GetUserData();
+
+	 void* poA = body1->GetUserData();
+	 void* poB = body2->GetUserData();
+
+	if (listenerParentCallbackFunction != NULL)  {
+		listenerParentCallbackFunction(poA, poB);
+	}
+
 
 }
 
@@ -185,6 +194,6 @@ void CollissionCallBackListener::EndContact(b2Contact* contact)
 	std::cout << "Collission ended" << std::endl;
 }
 
-void CollissionCallBackListener::setCollisionFunction(void* theParentCollisionFunction) {
+void CollissionCallBackListener::setCollisionFunction(void(*theParentCollisionFunction)(void*, void*)) {
 	listenerParentCallbackFunction = theParentCollisionFunction;
 }
