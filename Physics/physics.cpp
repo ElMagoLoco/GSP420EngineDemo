@@ -179,19 +179,19 @@ void CollissionCallBackListener::BeginContact(b2Contact* contact)
 	//physicsObject* poA = (physicsObject*)body1->GetUserData();
 	//physicsObject* poB = (physicsObject*)body2->GetUserData();
 
-	 void* poA = body1->GetUserData();
-	 void* poB = body2->GetUserData();
-	 if ((poA != NULL) && (poB != NULL)) {  // make sure data is attached
+	 void* poA = (void*) body1->GetUserData();
+	 void* poB = (void*) body2->GetUserData();
+	 //if ((poA != NULL) && (poB != NULL)) {  // make sure data is attached
 		 if (listenerParentCallbackFunction != NULL)  { // make sure there is a call back attached.
 			 listenerParentCallbackFunction(poA, poB); //send the collided objects data to callback.
-		 }
+		// }
 	 } 
 
 }
 
 void CollissionCallBackListener::EndContact(b2Contact* contact)
 {
-	std::cout << "Collission ended" << std::endl;
+	//std::cout << "Collission ended" << std::endl;
 }
 
 void CollissionCallBackListener::setCollisionFunction(void(*theParentCollisionFunction)(void*, void*)) {
