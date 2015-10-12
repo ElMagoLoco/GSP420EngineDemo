@@ -81,63 +81,44 @@ void Game::Delete()
 void Game::init()
 {
 	App::init();
-	States[STATE_INIT] = new InitState();
-	States[STATE_MENU] = new MenuState();
-	States[STATE_CREDIT] = new CreditsState();
-	States[STATE_PLAY] = new PlayState();
-	States[STATE_EXIT] = new ExitState();
+	States[STATE_INIT] = InitState();
+	States[STATE_MENU] = MenuState();
+	States[STATE_CREDIT] = CreditsState();
+	States[STATE_PLAY] = PlayState();
+	States[STATE_EXIT] = ExitState();
 	//will always start with the Init and then Menu states
-	States[STATE_INIT]->init();
-	States[STATE_MENU]->init();
-	// change later to be STATE_MENU
-	State = STATE_PLAY;
+	States[STATE_INIT].init();
+	States[STATE_MENU].init();
+	State = STATE_MENU;
 	QuitNow = false;
 
-	GFX->initModules();
-
-	nPlayerModel = GFX->loadModel(L"Content\\Models\\PlayerSpaceshipV2.x");
-	player.init(nPlayerModel, -1);
-	player.setPosition(D3DXVECTOR3(0.0f, 0.0f, 0.0f));
-	player.setFixedRotation(D3DXVECTOR3(0.0f, 0.0f, 0.0f));
-	//player.toggleEnabled();
-
-	GFX->cameraSetLens(GFX->windowWidth(), GFX->windowHeight(), -1000.0f, 1000.0f);
 }
 
 void Game::onLostDevice()
 {
-	States[State]->onLostDevice();
+	States[State].onLostDevice();
 }
 
 void Game::onResetDevice()
 {
-	States[State]->onLostDevice();
+	States[State].onLostDevice();
 }
 
 void Game::update(const float dt)
 {
-	States[State]->update(dt);
-	GFX->addToModelRenderList(&player);
-	//GFX->updateModel(nPlayerModel, player.getPosition());
+	States[State].update(dt);
 }
 
 void Game::render()
 {
-	States[State]->render();
-//	GFX->updateModel(nPlayerModel, player.getPosition());
-//	GFX->renderScene();
+	States[State].render();
 }
 
 void Game::shutdown()
 {
 	//will always end by exiting through the menu state
-	States[STATE_MENU]->shutdown();
-	States[STATE_EXIT]->shutdown();
-
-	for (int i = 0; i < NUM_STATES; ++i) {
-		delete States[i];
-		States[i] = NULL;
-	}
+	States[STATE_MENU].shutdown();
+	States[STATE_EXIT].shutdown();
 
 }
 
@@ -145,9 +126,9 @@ void Game::changeState(GAMESTATE newstate)
 {
 	if(newstate != State)
 	{
-		States[State]->shutdown();
+		States[State].shutdown();
 		State = newstate;
-		States[State]->init();
+		States[State].init();
 		paused = false;
 	}
 }
