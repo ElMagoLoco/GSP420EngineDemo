@@ -1,3 +1,4 @@
+#pragma once
 // Sprite order
 #define BACKGROUND	 0
 #define TITLE		 1

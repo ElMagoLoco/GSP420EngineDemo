@@ -275,6 +275,9 @@ namespace GFXCore
 		//************************************
 		int getSpriteHeight(const int id);
 
+		float getSpritePosX(const int id);
+		float getSpritePosY(const int id);
+
 		//************************************
 		// Method:    cameraSetLens
 		// FullName:  GFXCore::Graphics::cameraSetLens
