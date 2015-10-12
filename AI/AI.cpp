@@ -1,5 +1,5 @@
 #include "AI.h"
-#include "../Main/Game.h"
+#include "../EngineDemo/Game.h"
 #include <math.h>
 
 AI::AI(void)

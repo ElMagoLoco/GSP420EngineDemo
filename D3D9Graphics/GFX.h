@@ -249,8 +249,8 @@ namespace GFXCore
 		//				access the sprite after loading it.
 		//************************************
 		int loadSprite(const wchar_t* fileName,
-							const bool centerIsTopLeft = true,
 							const D3DXVECTOR3& initPos = D3DXVECTOR3(0.0f, 0.0f, 0.0f),
+							const bool centerIsTopLeft = true,
 							D3DCOLOR initColor = D3DCOLOR_RGBA(255, 255, 255, 255),
 							RECT* clipRect = NULL);
 		//************************************

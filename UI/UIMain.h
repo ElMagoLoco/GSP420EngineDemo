@@ -91,9 +91,9 @@ public:
 		{
 			GFX->updateSprite(gameSpriteIDs.at(MISSILE), D3DXVECTOR3(310, 400, 0.0f)); //update the information
 		}
-		// Main has getHealth(), getMaxHealth(), and getMissileAmmo() functions that we can use. \
-		   They've also provided me with their code. I haven't uploaded it, but if you want to \
-		   see it, let me know.
+		// Main has getHealth(), getMaxHealth(), and getMissileAmmo() functions that we can use. 
+		//  They've also provided me with their code. I haven't uploaded it, but if you want to 
+		//  see it, let me know.
 	}
 
 	void updatePause(const bool paused) {

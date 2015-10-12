@@ -16,7 +16,6 @@
     <ClInclude Include="AsteroidManager.h" />
     <ClInclude Include="DirectInput.h" />
     <ClInclude Include="EnemyManager.h" />
-    <ClInclude Include="Game.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="Logger.h" />
     <ClInclude Include="PickupManager.h" />
@@ -28,7 +27,6 @@
     <ClCompile Include="AsteroidManager.cpp" />
     <ClCompile Include="DirectInput.cpp" />
     <ClCompile Include="EnemyManager.cpp" />
-    <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="Logger.cpp" />
     <ClCompile Include="PickupManager.cpp" />
@@ -72,14 +70,14 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\D3D9Graphics\;..\Physics\;$(DXSDK_DIR)\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Audio\;..\Audio\inc\;..\AI\;..\D3D9Graphics\;..\Physics\;..\EngineDemo\;..\UI\;$(DXSDK_DIR)\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Lib>
-      <AdditionalLibraryDirectories>..\Physics\</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\Physics\;..\Audio\lib</AdditionalLibraryDirectories>
     </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

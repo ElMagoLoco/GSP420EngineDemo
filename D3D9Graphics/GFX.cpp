@@ -74,7 +74,7 @@ bool GFXCore::Graphics::initGFX(const HINSTANCE hInst, const wchar_t* wndCaption
 	return d3d->initGfxCore(hInst, wndCaption, width, height, requestedDevtype, requestedVP);
 }
 
-int GFXCore::Graphics::loadSprite(const wchar_t* fileName, const bool centerIsTopLeft, const D3DXVECTOR3& initPos /*= D3DXVECTOR3(0.0f, 0.0f, 0.0f)*/, D3DCOLOR initColor /*= D3DCOLOR_RGBA(255, 255, 255, 255)*/, RECT* clipRect /*= NULL*/)
+int GFXCore::Graphics::loadSprite(const wchar_t* fileName, const D3DXVECTOR3& initPos /*= D3DXVECTOR3(0.0f, 0.0f, 0.0f)*/, const bool centerIsTopLeft /*= true*/, D3DCOLOR initColor /*= D3DCOLOR_RGBA(255, 255, 255, 255)*/, RECT* clipRect /*= NULL*/)
 {
 	return sprites.loadSprite(d3d->getDevice(), fileName, textures, initPos, centerIsTopLeft, initColor, clipRect);
 }
