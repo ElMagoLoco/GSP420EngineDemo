@@ -181,11 +181,11 @@ void CollissionCallBackListener::BeginContact(b2Contact* contact)
 
 	 void* poA = body1->GetUserData();
 	 void* poB = body2->GetUserData();
-
-	if (listenerParentCallbackFunction != NULL)  {
-		listenerParentCallbackFunction(poA, poB);
-	}
-
+	 if ((poA != NULL) && (poB != NULL)) {  // make sure data is attached
+		 if (listenerParentCallbackFunction != NULL)  { // make sure there is a call back attached.
+			 listenerParentCallbackFunction(poA, poB); //send the collided objects data to callback.
+		 }
+	 } 
 
 }
 
