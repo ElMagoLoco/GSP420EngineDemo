@@ -81,15 +81,16 @@ void Game::Delete()
 void Game::init()
 {
 	App::init();
-	States[STATE_INIT] = InitState();
-	States[STATE_MENU] = MenuState();
-	States[STATE_CREDIT] = CreditsState();
-	States[STATE_PLAY] = PlayState();
-	States[STATE_EXIT] = ExitState();
+	States[STATE_INIT] = new InitState();
+	States[STATE_MENU] = new MenuState();
+	States[STATE_CREDIT] = new CreditsState();
+	States[STATE_PLAY] = new PlayState();
+	States[STATE_EXIT] = new ExitState();
 	//will always start with the Init and then Menu states
-	States[STATE_INIT].init();
-	States[STATE_MENU].init();
-	State = STATE_MENU;
+	States[STATE_INIT]->init();
+	States[STATE_MENU]->init();
+	// change later to be STATE_MENU
+	State = STATE_PLAY;
 	QuitNow = false;
 
 	GFX->initModules();
@@ -104,33 +105,38 @@ void Game::init()
 
 void Game::onLostDevice()
 {
-	States[State].onLostDevice();
+	States[State]->onLostDevice();
 }
 
 void Game::onResetDevice()
 {
-	States[State].onLostDevice();
+	States[State]->onLostDevice();
 }
 
 void Game::update(const float dt)
 {
-	States[State].update(dt);
+	States[State]->update(dt);
 	GFX->addToModelRenderList(&player);
-	GFX->updateModel(nPlayerModel, player.getPosition());
+	//GFX->updateModel(nPlayerModel, player.getPosition());
 }
 
 void Game::render()
 {
-	States[State].render();
-	GFX->updateModel(nPlayerModel, player.getPosition());
-	GFX->renderScene();
+	States[State]->render();
+//	GFX->updateModel(nPlayerModel, player.getPosition());
+//	GFX->renderScene();
 }
 
 void Game::shutdown()
 {
 	//will always end by exiting through the menu state
-	States[STATE_MENU].shutdown();
-	States[STATE_EXIT].shutdown();
+	States[STATE_MENU]->shutdown();
+	States[STATE_EXIT]->shutdown();
+
+	for (int i = 0; i < NUM_STATES; ++i) {
+		delete States[i];
+		States[i] = NULL;
+	}
 
 }
 
@@ -138,9 +144,9 @@ void Game::changeState(GAMESTATE newstate)
 {
 	if(newstate != State)
 	{
-		States[State].shutdown();
+		States[State]->shutdown();
 		State = newstate;
-		States[State].init();
+		States[State]->init();
 		paused = false;
 	}
 }

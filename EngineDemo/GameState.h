@@ -27,8 +27,8 @@ public:
 	InitState() {}
 	~InitState() {}
 private:
-	void init();
-	void shutdown();
+	virtual void init();
+	virtual void shutdown();
 };
 
 class MenuState : public GameState
@@ -37,12 +37,12 @@ public:
 	MenuState() {}
 	~MenuState() {}
 private:
-	void init();
-	void update(const float);
-	void render();
-	void onLostDevice();
-	void onResetDevice();
-	void shutdown();
+	virtual void init();
+	virtual void update(const float);
+	virtual void render();
+	virtual void onLostDevice();
+	virtual void onResetDevice();
+	virtual void shutdown();
 };
 
 class CreditsState : public GameState
@@ -51,12 +51,12 @@ public:
 	CreditsState() {}
 	~CreditsState() {}
 private:
-	void init();
-	void update(const float);
-	void render();
-	void onLostDevice();
-	void onResetDevice();
-	void shutdown();
+	virtual void init();
+	virtual void update(const float);
+	virtual void render();
+	virtual void onLostDevice();
+	virtual void onResetDevice();
+	virtual void shutdown();
 };
 
 class PlayState : public GameState
@@ -65,12 +65,12 @@ public:
 	PlayState() {}
 	~PlayState() {}
 private:
-	void init();
-	void update(const float);
-	void render();
-	void onLostDevice();
-	void onResetDevice();
-	void shutdown();
+	virtual void init();
+	virtual void update(const float);
+	virtual void render();
+	virtual void onLostDevice();
+	virtual void onResetDevice();
+	virtual void shutdown();
 };
 
 class ExitState : public GameState
@@ -79,6 +79,6 @@ public:
 	ExitState() {}
 	~ExitState() {}
 private:
-	void init();
+	virtual void init();
 };
 
