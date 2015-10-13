@@ -61,7 +61,10 @@ int physicsObject::applyTorqueFromCenter(float32 x, float32 y)
 
 int physicsObject::setLinkedObject(void* linkedObject)
 {
-	userData = linkedObject;
+	userData = &linkedObject;
+	if (linkedObject != NULL) {
+		body->SetUserData(&userData);
+	}
 	return 0;
 }
 

@@ -147,12 +147,12 @@ void OnCollission(void* obj1, void* obj2) {
 	std::cout << "Collission occured" << std::endl; 
 	if (obj1 != NULL) {
 		physicsObject* theObject1 = (physicsObject*) obj1;
-		std::cout << "1:" <<  theObject1->objectName;
+		std::cout << "1:" << theObject1->objectName << std::endl;
 	}
 
 	if (obj2 != NULL) {
 		physicsObject* theObject2 = (physicsObject*) obj2;
-		std::cout << "2:" <<  theObject2->objectName;
+		std::cout << "2:" << theObject2->objectName << std::endl;
 	}
 
 }
@@ -210,15 +210,14 @@ int main(int argc, char *argv[]) {
 	//Physics->GameObjectManager->addPolygonDynamicRigidBody("Box03", 400, 50, myShape, true, Box03);
 
 
-
+	
 
 	// Start the world simulating.  
 
+	
+
 	Physics->startWorld();
-	Box01->setLinkedObject(Box01);
-	Box02->setLinkedObject(Box02);
-	Box03->setLinkedObject(Box03);
-	rectangle->setLinkedObject(rectangle);
+	
 	Physics->collissionCallBackListener.setCollisionFunction(OnCollission);
 
 	//Start up SDL and create window

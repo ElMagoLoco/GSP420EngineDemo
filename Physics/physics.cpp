@@ -85,9 +85,11 @@ int physics::updateWorld()
 
 			bodyDef.position.Set(P2M*gameObject->second->x, P2M*gameObject->second->y);
 
+
+
 			b2Body* body = world->CreateBody(&bodyDef);
 			
-			
+			body->SetUserData(gameObject->second);
 				
 			if (gameObject->second->shapeList == "Box") {
 				dynamicBox.SetAsBox(P2M*gameObject->second->halfHeight, P2M*gameObject->second->halfWidth);
