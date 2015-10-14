@@ -127,7 +127,7 @@ void PlayState::update(const float dt)
 		{
 			//listen for player input
 			//the cool down for bullet and missile firing is built into the player class
-			if(INPUT->KeyDown(DIK_RETURN))
+			if(INPUT->KeyDown(DIK_SPACE))
 				PLAYER.fireBullet();
 			if(INPUT->KeyDown(DIK_F))
 				PLAYER.fireMissile();

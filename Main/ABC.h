@@ -47,8 +47,6 @@ namespace GSP420
 		virtual void update(const float dt) {}
 		virtual void shutdown() {}
 
-		inline D3DXVECTOR3& getPosition() { return position; }
-		inline D3DXVECTOR3& getVelocity() { return velocity; }
 		inline int getHealth() { return nHealth; }
 		inline int getModelId() { return nModelId; }
 		inline int getTextureId() { return nTextureId; }

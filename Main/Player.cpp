@@ -8,7 +8,7 @@ void Player::fireBullet()
 	//create bullet with velocity and position
 	if(lastBullet <= 0)
 	{
-		Bullet b = Bullet(position, BULLET_START_DIRECTION * BULLET_SPEED, 
+		Bullet b = Bullet(position, BULLET_START_DIRECTION, 
 			OT_PLAYER_BULLET);
 		//b.init(1,1);//need to find out what ID to use from graphics
 		PROJECTILES.addBullet(b);

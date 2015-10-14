@@ -11,7 +11,10 @@ void ProjectileManager::update(const float dt)
 		if (!it1->isEnabled())
 			it1 = Bullets.erase(it1);
 		else
+		{	
+			it1->setPosition(it1->getPosition() + it1->getVelocity() * BULLET_SPEED * dt);
 			++it1;
+		}
 	}
 	std::list<Missile>::iterator it2 = Missiles.begin();
 	while (it2 != Missiles.end())
