@@ -31,15 +31,15 @@ namespace GSP420
 	{
 	public:
 		ABC() : bEnabled(true), position(0.0f, 0.0f, 0.0f), scale(1.0f, 1.0f, 1.0f), velocity(0.0f, 0.0f, 0.0f), fixedRotation(0.0f, 0.0f, 0.0f) {}
-		ABC(const ObjType t) : eType(t), bEnabled(true) {}
+		ABC(const ObjType t) : eType(t), bEnabled(true), position(0.0f, 0.0f, 0.0f), scale(1.0f, 1.0f, 1.0f), velocity(0.0f, 0.0f, 0.0f), fixedRotation(0.0f, 0.0f, 0.0f) {}
 		ABC(const D3DXVECTOR3 p, const ObjType t) :
-			position(p), eType(t), bEnabled(true), velocity(D3DXVECTOR3(0.f, 0.f, 0.f)) {}
+			position(p), eType(t), bEnabled(true), scale(1.0f, 1.0f, 1.0f), velocity(0.0f, 0.0f, 0.0f), fixedRotation(0.0f, 0.0f, 0.0f) {}
 		ABC(const D3DXVECTOR3 p, const D3DXVECTOR3 v, const ObjType t) :
-			position(p), velocity(v), eType(t), bEnabled(true) {}
+			position(p), velocity(v), eType(t), bEnabled(true), scale(1.0f, 1.0f, 1.0f), fixedRotation(0.0f, 0.0f, 0.0f) {}
 		ABC(const D3DXVECTOR3 p, const int h, const ObjType t) :
-			position(p), velocity(D3DXVECTOR3(0.f, 0.f, 0.f)), nHealth(h), eType(t), bEnabled(true) {}
+			position(p), velocity(D3DXVECTOR3(0.f, 0.f, 0.f)), nHealth(h), eType(t), bEnabled(true), scale(1.0f, 1.0f, 1.0f), fixedRotation(0.0f, 0.0f, 0.0f) {}
 		ABC(const D3DXVECTOR3 p, const D3DXVECTOR3 v, const int h, const ObjType t) :
-			position(p), velocity(v), nHealth(h), eType(t), bEnabled(true) {}
+			position(p), velocity(v), nHealth(h), eType(t), bEnabled(true), scale(1.0f, 1.0f, 1.0f), fixedRotation(0.0f, 0.0f, 0.0f) {}
 
 		virtual bool init(const int modelId, const int textureId) { 
 			nModelId = modelId; nTextureId = textureId;

@@ -27,7 +27,7 @@
 
 #pragma comment(lib, "Main.lib")
 #pragma comment(lib, "AI.lib")
-#pragma comment(lib, "D3D9GraphicsD.lib")
+//#pragma comment(lib, "D3D9GraphicsD.lib")
 #pragma comment(lib, "Physics.lib")
 #pragma comment(lib, "Audio.lib")
 

@@ -2,6 +2,7 @@
 #include "ProjectileManager.h"
 
 #include "Game.h"
+#include "GFX.h"
 
 void ProjectileManager::update(const float dt)
 {
@@ -13,6 +14,8 @@ void ProjectileManager::update(const float dt)
 		else
 		{	
 			it1->setPosition(it1->getPosition() + it1->getVelocity() * BULLET_SPEED * dt);
+			it1->init(nBulletModelId, nMissileModelId);
+			GFX->addToModelRenderList(&(*it1));
 			++it1;
 		}
 	}
@@ -37,5 +40,11 @@ void ProjectileManager::removeTarget(Enemy* targ)
 			it->setEnemyTarget(NULL);
 		}
 	}
+}
+
+void ProjectileManager::initProjectiles(const int modelId, const int textureId)
+{
+	nBulletModelId = modelId;
+	nBulletModelId = textureId;
 }
 

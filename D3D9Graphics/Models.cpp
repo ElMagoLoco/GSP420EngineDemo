@@ -269,11 +269,12 @@ void Models::render(IDirect3DDevice9* device, Textures& textures, const int id)
 	device->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
 	device->SetRenderState(D3DRS_AMBIENT, D3DCOLOR_ARGB(255, 255, 255, 255));
 	device->SetTransform(D3DTS_WORLD, &modelList[id].worldTranformMat);
-	device->SetMaterial(&modelList[id].materialList[0]);
-	device->SetTexture(0, textures.getTexture(modelList[id].textureList[0]));
+// 	if (modelList[id]->materialList[0])
+// 		device->SetMaterial(&modelList[id].materialList[0]);
+//	device->SetTexture(0, textures.getTexture(modelList[id].textureList[0]));
 	modelList[id].pMesh->DrawSubset(0);
 }
-
+ 
 void Models::shutdown()
 {
 	for (unsigned int i = 0; i < modelList.size(); ++i) {
