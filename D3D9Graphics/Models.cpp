@@ -31,6 +31,136 @@ bool GFXCore::Models::init(const int startNumModels /*= 10*/)
 	return true;
 }
 
+int GFXCore::Models::createBoxMesh(IDirect3DDevice9* device, const float width, const float height, const float depth)
+{
+	XModelData mesh;
+	memset(&mesh, NULL, sizeof(XModelData));
+
+	HR(D3DXCreateBox(device, width, height, depth, &mesh.pMesh, &mesh.pAdjacency));
+
+	DWORD* adj = new DWORD[mesh.pMesh->GetNumFaces() * 3];
+
+	HR(mesh.pMesh->GenerateAdjacency(1e-6f, adj));
+	HR(mesh.pMesh->OptimizeInplace(D3DXMESHOPT_VERTEXCACHE | D3DXMESHOPT_ATTRSORT, adj, NULL, NULL, NULL));
+
+ 	if (adj) {
+ 		delete[] adj;
+ 		adj = NULL;
+ 	}
+
+	return ++nIdGenerator;
+}
+
+int GFXCore::Models::createCylinderMesh(IDirect3DDevice9* device, const float radZNeg, const float radZPos, const float lenght, const float slices, const float stacks)
+{
+	XModelData mesh;
+	memset(&mesh, NULL, sizeof(XModelData));
+
+	HR(D3DXCreateCylinder(device, radZNeg, radZPos, lenght, slices, stacks, &mesh.pMesh, &mesh.pAdjacency));
+
+	DWORD* adj = new DWORD[mesh.pMesh->GetNumFaces() * 3];
+
+	HR(mesh.pMesh->GenerateAdjacency(1e-6f, adj));
+	HR(mesh.pMesh->OptimizeInplace(D3DXMESHOPT_VERTEXCACHE | D3DXMESHOPT_ATTRSORT, adj, NULL, NULL, NULL));
+
+	if (adj) {
+		delete[] adj;
+		adj = NULL;
+	}
+
+	modelList.push_back(mesh);
+
+	return ++nIdGenerator;
+}
+
+int GFXCore::Models::createPolyMesh(IDirect3DDevice9* device, const float lenght, const unsigned int sides)
+{
+	XModelData mesh;
+	memset(&mesh, NULL, sizeof(XModelData));
+
+	HR(D3DXCreatePolygon(device, lenght, sides, &mesh.pMesh, &mesh.pAdjacency));
+
+	DWORD* adj = new DWORD[mesh.pMesh->GetNumFaces() * 3];
+
+	HR(mesh.pMesh->GenerateAdjacency(1e-6f, adj));
+	HR(mesh.pMesh->OptimizeInplace(D3DXMESHOPT_VERTEXCACHE | D3DXMESHOPT_ATTRSORT, adj, NULL, NULL, NULL));
+
+	if (adj) {
+		delete[] adj;
+		adj = NULL;
+	}
+
+	modelList.push_back(mesh);
+
+	return ++nIdGenerator;
+}
+
+int GFXCore::Models::createSphereMesh(IDirect3DDevice9* device, const float radius, const float slices, const float stacks)
+{
+	XModelData mesh;
+	memset(&mesh, NULL, sizeof(XModelData));
+
+	HR(D3DXCreateSphere(device, radius, slices, stacks, &mesh.pMesh, &mesh.pAdjacency));
+
+	DWORD* adj = new DWORD[mesh.pMesh->GetNumFaces() * 3];
+
+	HR(mesh.pMesh->GenerateAdjacency(1e-6f, adj));
+	HR(mesh.pMesh->OptimizeInplace(D3DXMESHOPT_VERTEXCACHE | D3DXMESHOPT_ATTRSORT, adj, NULL, NULL, NULL));
+
+	if (adj) {
+		delete[] adj;
+		adj = NULL;
+	}
+
+	modelList.push_back(mesh);
+
+	return ++nIdGenerator;
+}
+
+int GFXCore::Models::createTeapotMesh(IDirect3DDevice9* device)
+{
+	XModelData mesh;
+	memset(&mesh, NULL, sizeof(XModelData));
+
+	HR(D3DXCreateTeapot(device, &mesh.pMesh, &mesh.pAdjacency));
+
+	DWORD* adj = new DWORD[mesh.pMesh->GetNumFaces() * 3];
+
+	HR(mesh.pMesh->GenerateAdjacency(1e-6f, adj));
+	HR(mesh.pMesh->OptimizeInplace(D3DXMESHOPT_VERTEXCACHE | D3DXMESHOPT_ATTRSORT, adj, NULL, NULL, NULL));
+
+	if (adj) {
+		delete[] adj;
+		adj = NULL;
+	}
+
+	modelList.push_back(mesh);
+
+	return ++nIdGenerator;
+}
+
+int GFXCore::Models::createTorusMesh(IDirect3DDevice9* device, const float innRadius, const float outRadius, const unsigned int sides, const unsigned int rings)
+{
+	XModelData mesh;
+	memset(&mesh, NULL, sizeof(XModelData));
+
+	HR(D3DXCreateTorus(device, innRadius, outRadius, sides, rings, &mesh.pMesh, &mesh.pAdjacency));
+
+	DWORD* adj = new DWORD[mesh.pMesh->GetNumFaces() * 3];
+
+	HR(mesh.pMesh->GenerateAdjacency(1e-6f, adj));
+	HR(mesh.pMesh->OptimizeInplace(D3DXMESHOPT_VERTEXCACHE | D3DXMESHOPT_ATTRSORT, adj, NULL, NULL, NULL));
+
+	if (adj) {
+		delete[] adj;
+		adj = NULL;
+	}
+
+	modelList.push_back(mesh);
+
+	return ++nIdGenerator;
+}
+
 int Models::loadModel(IDirect3DDevice9* device, const wchar_t* fileName,  
 								Textures& textures,
 								const D3DXVECTOR3& initPos, 

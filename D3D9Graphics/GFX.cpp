@@ -264,3 +264,33 @@ float GFXCore::Graphics::getSpritePosY(const int id)
 	return sprites.getSprite(id).position.y;
 }
 
+int GFXCore::Graphics::createBoxMesh(const float width, const float height, const float depth)
+{
+	return models.createBoxMesh(d3d->getDevice(), width, height, depth);
+}
+
+int GFXCore::Graphics::createCylinderMesh(const float radZNeg, const float radZPos, const float lenght, const float slices, const float stacks)
+{
+	return models.createCylinderMesh(d3d->getDevice(), radZNeg, radZPos, lenght, slices, stacks);
+}
+
+int GFXCore::Graphics::createPolyMesh(const float lenght, const unsigned int sides)
+{
+	return models.createPolyMesh(d3d->getDevice(), lenght, sides);
+}
+
+int GFXCore::Graphics::createSphereMesh(const float radius, const float slices, const float stacks)
+{
+	return models.createSphereMesh(d3d->getDevice(), radius, slices, stacks);
+}
+
+int GFXCore::Graphics::createTeapotMesh()
+{
+	return models.createTeapotMesh(d3d->getDevice());
+}
+
+int GFXCore::Graphics::createTorusMesh(const float innRadius, const float outRadius, const unsigned int sides, const unsigned int rings)
+{
+	return models.createTorusMesh(d3d->getDevice(), innRadius, outRadius, sides, rings);
+}
+
