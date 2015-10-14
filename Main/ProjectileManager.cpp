@@ -14,7 +14,7 @@ void ProjectileManager::update(const float dt)
 		else
 		{	
 			it1->setPosition(it1->getPosition() + it1->getVelocity() * BULLET_SPEED * dt);
-			it1->init(nBulletModelId, nMissileModelId);
+			it1->init(nBulletModelId, nBulletTextureId);
 			GFX->addToModelRenderList(&(*it1));
 			++it1;
 		}
@@ -42,9 +42,9 @@ void ProjectileManager::removeTarget(Enemy* targ)
 	}
 }
 
-void ProjectileManager::initProjectiles(const int modelId, const int textureId)
+void ProjectileManager::initBulletProjectiles(const int modelId, const int textureId)
 {
 	nBulletModelId = modelId;
-	nBulletModelId = textureId;
+	nBulletTextureId = textureId;
 }
 

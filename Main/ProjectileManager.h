@@ -48,7 +48,7 @@ class ProjectileManager
 	friend class D3DCore;
 	friend class Physics;
 public:
-	void initProjectiles(const int modelId, const int textureId);
+	void initBulletProjectiles(const int modelId, const int textureId);
 	inline void addBullet(Bullet b) { Bullets.push_front(b); }
 	inline void addMissile(Missile m) { Missiles.push_front(m); }
 	void update(const float);
@@ -58,7 +58,9 @@ public:
 
 	ProjectileManager() :
 		nMissileModelId(-1),
-		nBulletModelId(-1)
+		nBulletTextureId(-1),
+		nBulletModelId(-1),
+		nMissileTextureId(-1)
 	{}
 private:
 	inline std::list<Bullet>& getBullets() { return Bullets; }
@@ -67,5 +69,7 @@ private:
 	std::list<Missile> Missiles;
 
 	int nBulletModelId;
+	int nBulletTextureId;
 	int nMissileModelId;
+	int nMissileTextureId;
 };
