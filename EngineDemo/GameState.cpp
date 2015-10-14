@@ -127,16 +127,16 @@ void PlayState::update(const float dt)
 		{
 			//listen for player input
 			//the cool down for bullet and missile firing is built into the player class
-			if(INPUT->KeyDown(DIK_SPACE))
+			if(INPUT->KeyDown(DIK_RETURN))
 				PLAYER.fireBullet();
 			if(INPUT->KeyDown(DIK_F))
 				PLAYER.fireMissile();
 			//player movement
 			float x, y;
 			if(INPUT->KeyDown(DIK_W))
-				y = -1.f;
-			else if(INPUT->KeyDown(DIK_S))
 				y = 1.f;
+			else if(INPUT->KeyDown(DIK_S))
+				y = -1.f;
 			else
 				y = 0.f;
 			if(INPUT->KeyDown(DIK_A))
@@ -146,6 +146,7 @@ void PlayState::update(const float dt)
 			else
 				x = 0.f;
 			PLAYER.move(D3DXVECTOR3(x, y, 0.f));
+			PLAYER.setPosition(PLAYER.getPosition() + PLAYER.getVelocity() * dt * 100);
 			//update AI/physics first so they can flag objects
 			//GAMECLASS->gameAI.update(dt);
 			//GAMECLASS->gamePhysics.update(dt);
@@ -195,12 +196,14 @@ void PlayState::shutdown()
 
 void ExitState::init()
 {
+	
+	
 	LOGGER->close();
-	INPUT->shutdown();
 	//unload main graphics/UI/audio resources and then quit
 	//GAMECLASS->gameUI.shutdown();
 	//GAMECLASS->gameAudio.shutdown();
 	GFX->shutdown();
+	INPUT->shutdown();
 }
 
 
