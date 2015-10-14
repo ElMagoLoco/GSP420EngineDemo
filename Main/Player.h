@@ -13,7 +13,7 @@ const static int ENEMY_BOSS_SCORE = 250;
 const static int ASTEROID_SMALL_SCORE = 20;
 const static int ASTEROID_LARGE_SCORE = 20;
 const static float BULLET_COOL_DOWN = .5f;
-const static D3DXVECTOR3 BULLET_START_DIRECTION = D3DXVECTOR3(0.f, -1.f, 0.f);
+const static D3DXVECTOR3 BULLET_START_DIRECTION = D3DXVECTOR3(0.f, 1.f, 0.f);
 const static float MISSILE_COOL_DOWN = 1.f;
 const static float PLAYER_SPEED = 30.f;
 
