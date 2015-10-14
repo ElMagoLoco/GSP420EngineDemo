@@ -13,7 +13,7 @@ void ProjectileManager::update(const float dt)
 			it1 = Bullets.erase(it1);
 		else
 		{	
-			it1->setPosition(it1->getPosition() + it1->getVelocity() * BULLET_SPEED * dt);
+			it1->setPosition(it1->getPosition() - it1->getVelocity() * BULLET_SPEED * dt);
 			it1->init(nBulletModelId, nBulletTextureId);
 			GFX->addToModelRenderList(&(*it1));
 			++it1;
