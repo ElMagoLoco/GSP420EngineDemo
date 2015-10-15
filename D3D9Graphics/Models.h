@@ -45,12 +45,12 @@ namespace GFXCore
 		int createBoxMesh(IDirect3DDevice9* device, const float width, const float height, 
 									const float depth);
 		int createCylinderMesh(IDirect3DDevice9* device, const float radZNeg, 
-										const float radZPos, const float lenght, const float slices, 
-										const float stacks);
+										const float radZPos, const float lenght, const unsigned int slices, 
+										const unsigned int stacks);
 		int createPolyMesh(IDirect3DDevice9* device, const float lenght, 
 									const unsigned int sides);
 		int createSphereMesh(IDirect3DDevice9* device, const float radius, 
-										const float slices, const float stacks);
+										const unsigned int slices, const unsigned int stacks);
 		int createTeapotMesh(IDirect3DDevice9* device);
 		int createTorusMesh(IDirect3DDevice9* device, const float innRadius, 
 									const float outRadius, const unsigned int sides, const unsigned int rings);

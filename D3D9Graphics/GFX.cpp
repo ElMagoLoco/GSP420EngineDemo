@@ -12,6 +12,10 @@ using namespace GFXCore;
 
 Graphics* Graphics::pInstance = NULL;
 
+bool zOrder(const ABC* first, const ABC* second)
+{
+	return false;
+}
 
 GFXCore::Graphics::Graphics() :
 nModelListIndex(0),
@@ -202,6 +206,8 @@ void GFXCore::Graphics::addToTextRenderList(const int* idsToRender, const int co
 
 void GFXCore::Graphics::renderScene()
 {
+	// TODO: sort by Z
+	//modelRenderList.
 	d3d->beginScene(D3DCOLOR_XRGB(0, 0, 100));
 
 	for (int i = 0; i < nModelListIndex; ++i) {
@@ -269,7 +275,7 @@ int GFXCore::Graphics::createBoxMesh(const float width, const float height, cons
 	return models.createBoxMesh(d3d->getDevice(), width, height, depth);
 }
 
-int GFXCore::Graphics::createCylinderMesh(const float radZNeg, const float radZPos, const float lenght, const float slices, const float stacks)
+int GFXCore::Graphics::createCylinderMesh(const float radZNeg, const float radZPos, const float lenght, const unsigned int slices, const unsigned int stacks)
 {
 	return models.createCylinderMesh(d3d->getDevice(), radZNeg, radZPos, lenght, slices, stacks);
 }
@@ -279,7 +285,7 @@ int GFXCore::Graphics::createPolyMesh(const float lenght, const unsigned int sid
 	return models.createPolyMesh(d3d->getDevice(), lenght, sides);
 }
 
-int GFXCore::Graphics::createSphereMesh(const float radius, const float slices, const float stacks)
+int GFXCore::Graphics::createSphereMesh(const float radius, const unsigned int slices, const unsigned int stacks)
 {
 	return models.createSphereMesh(d3d->getDevice(), radius, slices, stacks);
 }

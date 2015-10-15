@@ -48,10 +48,21 @@ int GFXCore::Models::createBoxMesh(IDirect3DDevice9* device, const float width, 
  		adj = NULL;
  	}
 
+	D3DMATERIAL9 mat;
+	mat.Ambient = { 1.0f, 1.0f, 1.0f, 1.0f };
+	mat.Diffuse = { 1.0f, 1.0f, 1.0f, 1.0f };
+	mat.Emissive = { 1.0f, 1.0f, 1.0f, 1.0f };
+	mat.Specular = { 1.0f, 1.0f, 1.0f, 1.0f };
+	mat.Power = 1.0f;
+
+	mesh.materialList.push_back(mat);
+
+	modelList.push_back(mesh);
+
 	return ++nIdGenerator;
 }
 
-int GFXCore::Models::createCylinderMesh(IDirect3DDevice9* device, const float radZNeg, const float radZPos, const float lenght, const float slices, const float stacks)
+int GFXCore::Models::createCylinderMesh(IDirect3DDevice9* device, const float radZNeg, const float radZPos, const float lenght, const unsigned int slices, const unsigned int stacks)
 {
 	XModelData mesh;
 	memset(&mesh, NULL, sizeof(XModelData));
@@ -67,6 +78,15 @@ int GFXCore::Models::createCylinderMesh(IDirect3DDevice9* device, const float ra
 		delete[] adj;
 		adj = NULL;
 	}
+
+	D3DMATERIAL9 mat;
+	mat.Ambient = { 1.0f, 1.0f, 1.0f, 1.0f };
+	mat.Diffuse = { 1.0f, 1.0f, 1.0f, 1.0f };
+	mat.Emissive = { 1.0f, 1.0f, 1.0f, 1.0f };
+	mat.Specular = { 1.0f, 1.0f, 1.0f, 1.0f };
+	mat.Power = 1.0f;
+
+	mesh.materialList.push_back(mat);
 
 	modelList.push_back(mesh);
 
@@ -90,12 +110,21 @@ int GFXCore::Models::createPolyMesh(IDirect3DDevice9* device, const float lenght
 		adj = NULL;
 	}
 
+	D3DMATERIAL9 mat;
+	mat.Ambient = { 1.0f, 1.0f, 1.0f, 1.0f };
+	mat.Diffuse = { 1.0f, 1.0f, 1.0f, 1.0f };
+	mat.Emissive = { 1.0f, 1.0f, 1.0f, 1.0f };
+	mat.Specular = { 1.0f, 1.0f, 1.0f, 1.0f };
+	mat.Power = 1.0f;
+
+	mesh.materialList.push_back(mat);
+
 	modelList.push_back(mesh);
 
 	return ++nIdGenerator;
 }
 
-int GFXCore::Models::createSphereMesh(IDirect3DDevice9* device, const float radius, const float slices, const float stacks)
+int GFXCore::Models::createSphereMesh(IDirect3DDevice9* device, const float radius, const unsigned int slices, const unsigned int stacks)
 {
 	XModelData mesh;
 	memset(&mesh, NULL, sizeof(XModelData));
@@ -111,6 +140,15 @@ int GFXCore::Models::createSphereMesh(IDirect3DDevice9* device, const float radi
 		delete[] adj;
 		adj = NULL;
 	}
+
+	D3DMATERIAL9 mat;
+	mat.Ambient = { 0.0f, 1.0f, 0.0f, 1.0f };
+	mat.Diffuse = { 0.0f, 1.0f, 0.0f, 1.0f };
+	mat.Emissive = { 0.0f, 1.0f, 0.0f, 1.0f };
+	mat.Specular = { 0.0f, 1.0f, 0.0f, 1.0f };
+	mat.Power = 100.0f;
+
+	mesh.materialList.push_back(mat);
 
 	modelList.push_back(mesh);
 
@@ -134,6 +172,15 @@ int GFXCore::Models::createTeapotMesh(IDirect3DDevice9* device)
 		adj = NULL;
 	}
 
+	D3DMATERIAL9 mat;
+	mat.Ambient = { 1.0f, 1.0f, 1.0f, 1.0f };
+	mat.Diffuse = { 1.0f, 1.0f, 1.0f, 1.0f };
+	mat.Emissive = { 1.0f, 1.0f, 1.0f, 1.0f };
+	mat.Specular = { 1.0f, 1.0f, 1.0f, 1.0f };
+	mat.Power = 1.0f;
+
+	mesh.materialList.push_back(mat);
+
 	modelList.push_back(mesh);
 
 	return ++nIdGenerator;
@@ -155,6 +202,15 @@ int GFXCore::Models::createTorusMesh(IDirect3DDevice9* device, const float innRa
 		delete[] adj;
 		adj = NULL;
 	}
+
+	D3DMATERIAL9 mat;
+	mat.Ambient = { 1.0f, 1.0f, 1.0f, 1.0f };
+	mat.Diffuse = { 1.0f, 1.0f, 1.0f, 1.0f };
+	mat.Emissive = { 1.0f, 1.0f, 1.0f, 1.0f };
+	mat.Specular = { 1.0f, 1.0f, 1.0f, 1.0f };
+	mat.Power = 1.0f;
+
+	mesh.materialList.push_back(mat);
 
 	modelList.push_back(mesh);
 
@@ -267,11 +323,12 @@ void Models::render(IDirect3DDevice9* device, Textures& textures, const int id)
 	HR(device->SetSamplerState(1, D3DSAMP_MAGFILTER, D3DTEXF_LINEAR));
 	HR(device->SetSamplerState(1, D3DSAMP_MIPFILTER, D3DTEXF_LINEAR));
 	device->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
-	device->SetRenderState(D3DRS_AMBIENT, D3DCOLOR_ARGB(255, 255, 255, 255));
+	device->SetRenderState(D3DRS_AMBIENT, /*modelList[id].materialList[0].Ambient.a*/D3DCOLOR_ARGB(255, 255, 255, 255));
 	device->SetTransform(D3DTS_WORLD, &modelList[id].worldTranformMat);
 // 	if (modelList[id]->materialList[0])
-// 		device->SetMaterial(&modelList[id].materialList[0]);
-//	device->SetTexture(0, textures.getTexture(modelList[id].textureList[0]));
+	device->SetMaterial(&modelList[id].materialList[0]);
+	if (modelList[id].textureList.size())
+		device->SetTexture(0, textures.getTexture(modelList[id].textureList[0]));
 	modelList[id].pMesh->DrawSubset(0);
 }
  

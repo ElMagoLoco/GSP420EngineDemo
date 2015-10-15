@@ -49,6 +49,7 @@ class ProjectileManager
 	friend class Physics;
 public:
 	void initBulletProjectiles(const int modelId, const int textureId);
+	void initMissileProjectiles(const int modelId, const int textureId);
 	inline void addBullet(Bullet b) { Bullets.push_front(b); }
 	inline void addMissile(Missile m) { Missiles.push_front(m); }
 	void update(const float);

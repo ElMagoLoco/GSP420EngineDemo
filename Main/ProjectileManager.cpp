@@ -24,8 +24,12 @@ void ProjectileManager::update(const float dt)
 	{
 		if (!it2->isEnabled())
 			it2 = Missiles.erase(it2);
-		else
+		else {
+			it2->setPosition(it2->getPosition() + it2->getVelocity() * MISSILE_SPEED * dt);
+			it2->init(nMissileModelId, nMissileTextureId);
+			GFX->addToModelRenderList(&(*it2));
 			++it2;
+		}
 	}
 }
 
@@ -46,5 +50,11 @@ void ProjectileManager::initBulletProjectiles(const int modelId, const int textu
 {
 	nBulletModelId = modelId;
 	nBulletTextureId = textureId;
+}
+
+void ProjectileManager::initMissileProjectiles(const int modelId, const int textureId)
+{
+	nMissileModelId = modelId;
+	nMissileTextureId = textureId;
 }
 

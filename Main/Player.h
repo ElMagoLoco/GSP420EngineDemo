@@ -23,7 +23,8 @@ const static float HURT_INVULNERABILITY = 1.f;//how long player is invulnerable 
 class Player : public GSP420::ABC
 {
 public:
-	Player() : ABC(), missileAmmo(0), maxHealth(25), invulnerable(0.f), score(0), 
+	// TODO: change missile ammo back to 0, for testing only
+	Player() : ABC(), missileAmmo(5), maxHealth(25), invulnerable(0.f), score(0), 
 		lastBullet(0.f), lastMissile(0.f)
 		{ nHealth = 25; }
 	void fireBullet();

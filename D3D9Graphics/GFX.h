@@ -4,7 +4,7 @@
  * \author Sam Rivera
  * \date September 2015
  *
- * Last Revision: 10/13/15
+ * Last Revision: 10/14/15
  */
 #pragma once
 #include <list>
@@ -17,8 +17,6 @@
 #include "ABC.h"
 #include "Shaders.h"
 #include "Vertex.h"
-// TODO: remove later
-// #include "DirectInput.h"
 
 #pragma comment (lib, "D3D9GraphicsD.lib")
 
@@ -39,7 +37,7 @@
  *
  * \author Sam Rivera
  *
- * \version 1.0
+ * \version 1.5
  *
  * \date September 2015
  *
@@ -165,8 +163,8 @@ namespace GFXCore
 		//			Capture the returned int so that you can access the model after loading
 		//************************************
 		int createCylinderMesh(const float radZNeg,
-									 	 const float radZPos, const float lenght, const float slices,
-										 const float stacks);
+									 	 const float radZPos, const float lenght, const unsigned int slices,
+										 const unsigned int stacks);
 		
 		//************************************
 		// Method:    createPolyMesh
@@ -199,7 +197,7 @@ namespace GFXCore
 		//			Capture the returned int so that you can access the model after loading
 		//************************************
 		int createSphereMesh(const float radius,
-								       const float slices, const float stacks);
+								       const unsigned int slices, const unsigned int stacks);
 
 		//************************************
 		// Method:    createTeapotMesh

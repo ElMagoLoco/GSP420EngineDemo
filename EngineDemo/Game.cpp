@@ -101,7 +101,8 @@ void Game::init()
 	player.setFixedRotation(D3DXVECTOR3(0.0f, 0.0f, 0.0f));
 	//player.toggleEnabled();
 
-	PROJECTILES.initBulletProjectiles(GFX->createSphereMesh(15.0f, 15.0f, 15.0f), GFX->createCylinderMesh(5.0f, 5.0f, 5.0f, 5.0f, 5.0f));
+	PROJECTILES.initBulletProjectiles(GFX->createSphereMesh(5.0f, 25, 25), -1);
+	PROJECTILES.initMissileProjectiles(GFX->createCylinderMesh(5.0f, 15.0f, 5.0f, 25, 25), -1);
 
 	GFX->cameraSetLens(GFX->windowWidth(), GFX->windowHeight(), -1000.0f, 1000.0f);
 }
