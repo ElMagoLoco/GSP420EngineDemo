@@ -3,10 +3,8 @@
 #pragma once
 
 //d3d includes and libraries
-#include "../D3D9Graphics/D3DUtils.h"
-// #include <d3d9.h>
-// #include <d3dx9.h>
-// #pragma comment(lib, "d3d9.lib")
+#include "D3DUtils.h"
+#include "physics.h"
 
 namespace GSP420
 {
@@ -30,35 +28,29 @@ namespace GSP420
 	class ABC
 	{
 	public:
-		ABC() : bEnabled(true), position(0.0f, 0.0f, 0.0f), scale(1.0f, 1.0f, 1.0f), velocity(0.0f, 0.0f, 0.0f), fixedRotation(0.0f, 0.0f, 0.0f) {}
-		ABC(const ObjType t) : eType(t), bEnabled(true), position(0.0f, 0.0f, 0.0f), scale(1.0f, 1.0f, 1.0f), velocity(0.0f, 0.0f, 0.0f), fixedRotation(0.0f, 0.0f, 0.0f) {}
-		ABC(const D3DXVECTOR3 p, const ObjType t) :
-			position(p), eType(t), bEnabled(true), scale(1.0f, 1.0f, 1.0f), velocity(0.0f, 0.0f, 0.0f), fixedRotation(0.0f, 0.0f, 0.0f) {}
-		ABC(const D3DXVECTOR3 p, const D3DXVECTOR3 v, const ObjType t) :
-			position(p), velocity(v), eType(t), bEnabled(true), scale(1.0f, 1.0f, 1.0f), fixedRotation(0.0f, 0.0f, 0.0f) {}
-		ABC(const D3DXVECTOR3 p, const int h, const ObjType t) :
-			position(p), velocity(D3DXVECTOR3(0.f, 0.f, 0.f)), nHealth(h), eType(t), bEnabled(true), scale(1.0f, 1.0f, 1.0f), fixedRotation(0.0f, 0.0f, 0.0f) {}
-		ABC(const D3DXVECTOR3 p, const D3DXVECTOR3 v, const int h, const ObjType t) :
-			position(p), velocity(v), nHealth(h), eType(t), bEnabled(true), scale(1.0f, 1.0f, 1.0f), fixedRotation(0.0f, 0.0f, 0.0f) {}
+		inline ABC();
+		inline ABC(const ObjType t);
+		inline ABC(const D3DXVECTOR3 p, const ObjType t);
+		inline ABC(const D3DXVECTOR3 p, const D3DXVECTOR3 v, const ObjType t);
+		inline ABC(const D3DXVECTOR3 p, const int h, const ObjType t);
+		inline ABC(const D3DXVECTOR3 p, const D3DXVECTOR3 v, const int h, const ObjType t);
 
-		virtual bool init(const int modelId, const int textureId) { 
-			nModelId = modelId; nTextureId = textureId;
-			return true; }
-		virtual void update(const float dt) {}
-		virtual void shutdown() {}
+		virtual inline bool init(const int modelId, const int textureId);
+		virtual inline void update(const float dt);
+		virtual inline void shutdown();
 
-		inline int getHealth() { return nHealth; }
-		inline int getModelId() { return nModelId; }
-		inline int getTextureId() { return nTextureId; }
-		inline ObjType getObjectType() { return eType; }
-		inline bool isEnabled() { return bEnabled; }
-		inline void setPosition(const D3DXVECTOR3& pos) { position = pos; }
-		inline void setVelocity(const D3DXVECTOR3& velo) { velocity = velo; }
-		inline void setFixedRotation(const D3DXVECTOR3& rot) { fixedRotation = rot; }
-		inline void setHealth(const int health) { nHealth = health; }
-		inline void toggleEnabled() { bEnabled = !bEnabled; }
-		inline void setEnabled(const bool enabled) { bEnabled = enabled; }
-		inline void setObjectType(ObjType t) { eType = t; }
+		inline int getHealth();
+		inline int getModelId();
+		inline int getTextureId();
+		inline ObjType getObjectType();
+		inline bool isEnabled();
+		inline void setPosition(const D3DXVECTOR3& pos);
+		inline void setVelocity(const D3DXVECTOR3& velo);
+		inline void setFixedRotation(const D3DXVECTOR3& rot);
+		inline void setHealth(const int health);
+		inline void toggleEnabled();
+		inline void setEnabled(const bool enabled);
+		inline void setObjectType(ObjType t);
 
 		inline const D3DXVECTOR3& getPosition() const;
 		inline const D3DXVECTOR3& getVelocity() const;
@@ -67,13 +59,15 @@ namespace GSP420
 		inline int getModelId() const;
 		inline int getTextureId() const;
 		//ABC(const ABC&);
-		virtual ~ABC() {}
+		virtual inline ~ABC();
 
 	protected:
 		D3DXVECTOR3		position;
 		D3DXVECTOR3		velocity;
 		D3DXVECTOR3		fixedRotation;
 		D3DXVECTOR3		scale;
+
+		physicsObject*		pPhysObj;
 
 		ObjType		eType;
 
@@ -85,10 +79,112 @@ namespace GSP420
 		bool	bEnabled;
 	};
 
+	GSP420::ABC::ABC() : 
+		bEnabled(true), 
+		position(0.0f, 0.0f, 0.0f), 
+		scale(1.0f, 1.0f, 1.0f), 
+		velocity(0.0f, 0.0f, 0.0f), 
+		fixedRotation(0.0f, 0.0f, 0.0f) 
+	{
+		pPhysObj = new physicsObject();
+	}
+	GSP420::ABC::ABC(const ObjType t) : 
+		eType(t), 
+		bEnabled(true),
+		position(0.0f, 0.0f, 0.0f), 
+		scale(1.0f, 1.0f, 1.0f), 
+		velocity(0.0f, 0.0f, 0.0f), 
+		fixedRotation(0.0f, 0.0f, 0.0f) 
+	{
+		pPhysObj = new physicsObject();
+	}
+	GSP420::ABC::ABC(const D3DXVECTOR3 p, const ObjType t) :
+		position(p), 
+		eType(t), 
+		bEnabled(true), 
+		scale(1.0f, 1.0f, 1.0f), 
+		velocity(0.0f, 0.0f, 0.0f), 
+		fixedRotation(0.0f, 0.0f, 0.0f) 
+	{
+		pPhysObj = new physicsObject();
+	}
+	GSP420::ABC::ABC(const D3DXVECTOR3 p, const D3DXVECTOR3 v, const ObjType t) :
+		position(p),
+		velocity(v), 
+		eType(t),
+		bEnabled(true), 
+		scale(1.0f, 1.0f, 1.0f), 
+		fixedRotation(0.0f, 0.0f, 0.0f) 
+	{
+		pPhysObj = new physicsObject();
+	}
+	GSP420::ABC::ABC(const D3DXVECTOR3 p, const int h, const ObjType t) :
+		position(p), 
+		velocity(D3DXVECTOR3(0.f, 0.f, 0.f)), 
+		nHealth(h), 
+		eType(t), 
+		bEnabled(true), 
+		scale(1.0f, 1.0f, 1.0f), 
+		fixedRotation(0.0f, 0.0f, 0.0f) 
+	{
+		pPhysObj = new physicsObject();
+	}
+	GSP420::ABC::ABC(const D3DXVECTOR3 p, const D3DXVECTOR3 v, const int h, const ObjType t) :
+		position(p), 
+		velocity(v), 
+		nHealth(h), 
+		eType(t), 
+		bEnabled(true), 
+		scale(1.0f, 1.0f, 1.0f), 
+		fixedRotation(0.0f, 0.0f, 0.0f) 
+	{
+		pPhysObj = new physicsObject();
+	}
+
+	GSP420::ABC::~ABC()
+	{
+		if (pPhysObj) {
+			delete pPhysObj;
+			pPhysObj = NULL;
+		}
+	}
+
+	bool GSP420::ABC::init(const int modelId, const int textureId)
+	{
+		nModelId = modelId; nTextureId = textureId;
+		return true;
+	}
+	void GSP420::ABC::update(const float dt) 
+	{
+		position.x = pPhysObj->x + pPhysObj->linearVelocityX * dt;
+		position.y = pPhysObj->y + pPhysObj->linearVelocityY * dt;
+	}
+	void GSP420::ABC::shutdown() 
+	{
+		if (pPhysObj) {
+			delete pPhysObj;
+			pPhysObj = NULL;
+		}
+	}
+
 	const D3DXVECTOR3& GSP420::ABC::getPosition() const	{ return position; }
 	const D3DXVECTOR3& GSP420::ABC::getVelocity() const { return velocity; }
 	const D3DXVECTOR3& GSP420::ABC::getFixedRotation() const { return fixedRotation; }
 	const D3DXVECTOR3& GSP420::ABC::getScale() const { return scale; }
+
 	int GSP420::ABC::getModelId() const	{ return nModelId; }
 	int GSP420::ABC::getTextureId() const { return nTextureId; }
+	int GSP420::ABC::getHealth() { return nHealth; }
+	int GSP420::ABC::getModelId() { return nModelId; }
+	int GSP420::ABC::getTextureId() { return nTextureId; }
+	ObjType GSP420::ABC::getObjectType() { return eType; }
+	bool GSP420::ABC::isEnabled() { return bEnabled; }
+
+	void GSP420::ABC::setPosition(const D3DXVECTOR3& pos) { position = pos; }
+	void GSP420::ABC::setVelocity(const D3DXVECTOR3& velo) { velocity = velo; }
+	void GSP420::ABC::setFixedRotation(const D3DXVECTOR3& rot) { fixedRotation = rot; }
+	void GSP420::ABC::setHealth(const int health) { nHealth = health; }
+	void GSP420::ABC::toggleEnabled() { bEnabled = !bEnabled; }
+	void GSP420::ABC::setEnabled(const bool enabled) { bEnabled = enabled; }
+	void GSP420::ABC::setObjectType(ObjType t) { eType = t; }
 }
