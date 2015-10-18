@@ -13,6 +13,7 @@ void InitState::init()
 {
 	LOGGER->open();
 	INPUT->init(DISCL_NONEXCLUSIVE | DISCL_FOREGROUND, DISCL_NONEXCLUSIVE | DISCL_FOREGROUND);
+
 //	GAMECLASS->gameAudio.init();
 //	GAMECLASS->gameUI.init();
 }
@@ -31,6 +32,7 @@ void MenuState::update(const float dt)
 {
 	//	GAMECLASS->gameAudio.update(dt);
 	INPUT->Poll();
+	// PHYSICS: add update
 	//GAMECLASS->gameUI.update(dt, STATE_MENU);
 	//GAMECLASS->changeState(GAMECLASS->gameUI.checkStateChanges());
 }
@@ -65,6 +67,7 @@ void CreditsState::init()
 void CreditsState::update(const float dt)
 {
 	INPUT->Poll();
+	// PHYSICS: add update
 	//GAMECLASS->gameAudio.update(dt);
 	//GAMECLASS->gameUI.update(dt, STATE_CREDIT);
 	//GAMECLASS->changeState(GAMECLASS->gameUI.checkStateChanges());
@@ -97,15 +100,18 @@ void PlayState::init()
 	//GAMECLASS->gameAI.init();
 	//GAMECLASS->gamePhysics.init();
 	GAMECLASS->player = Player();
+	PLAYER.init(GAMECLASS->nPlayerModel, -1);
 	//load model/texture resources
 	//init player
-	PLAYER.init(1,1);//need to get what IDs to use from graphics
+	//PLAYER.init(1,1);//need to get what IDs to use from graphics
 	//init graphics textures for ui and pause menu
 }
 
 void PlayState::update(const float dt)
 {
 	INPUT->Poll();
+	GAMECLASS->gamePhysics.updateWorld();
+
 	static float pausecooldown = 0.f;
 	if(pausecooldown > 0.f)
 		pausecooldown -= dt;
@@ -145,8 +151,12 @@ void PlayState::update(const float dt)
 				x = 1.f;
 			else
 				x = 0.f;
-			PLAYER.move(D3DXVECTOR3(x, y, 0.f));
-			PLAYER.setPosition(PLAYER.getPosition() + PLAYER.getVelocity() * dt * 100);
+			PLAYER.getPhys().applyForceFromCenter(x, y);
+			D3DXVECTOR3 pos;
+			pos.x = PLAYER.getPhys().x  * dt * 100;
+			pos.y = PLAYER.getPhys().y  * dt * 100;
+			pos.z = 0.0f;
+			PLAYER.setPosition(pos/*PLAYER.getPosition() + PLAYER.getVelocity() * dt * 100*/);
 			//update AI/physics first so they can flag objects
 			//GAMECLASS->gameAI.update(dt);
 			//GAMECLASS->gamePhysics.update(dt);
@@ -203,7 +213,8 @@ void ExitState::init()
 	//GAMECLASS->gameUI.shutdown();
 	//GAMECLASS->gameAudio.shutdown();
 	GFX->shutdown();
-	INPUT->shutdown();
+	INPUT->shutdown(); 
+	GAMECLASS->gamePhysics.endWorld();
 }
 
 

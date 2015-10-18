@@ -39,6 +39,7 @@ namespace GSP420
 		virtual inline void update(const float dt);
 		virtual inline void shutdown();
 
+		inline physicsObject& getPhys();
 		inline int getHealth();
 		inline int getModelId();
 		inline int getTextureId();
@@ -61,13 +62,13 @@ namespace GSP420
 		//ABC(const ABC&);
 		virtual inline ~ABC();
 
+		physicsObject			physObj;
 	protected:
 		D3DXVECTOR3		position;
 		D3DXVECTOR3		velocity;
 		D3DXVECTOR3		fixedRotation;
 		D3DXVECTOR3		scale;
 
-		physicsObject*		pPhysObj;
 
 		ObjType		eType;
 
@@ -86,7 +87,7 @@ namespace GSP420
 		velocity(0.0f, 0.0f, 0.0f), 
 		fixedRotation(0.0f, 0.0f, 0.0f) 
 	{
-		pPhysObj = new physicsObject();
+		//pPhysObj = new physicsObject();
 	}
 	GSP420::ABC::ABC(const ObjType t) : 
 		eType(t), 
@@ -96,7 +97,7 @@ namespace GSP420
 		velocity(0.0f, 0.0f, 0.0f), 
 		fixedRotation(0.0f, 0.0f, 0.0f) 
 	{
-		pPhysObj = new physicsObject();
+		//pPhysObj = new physicsObject();
 	}
 	GSP420::ABC::ABC(const D3DXVECTOR3 p, const ObjType t) :
 		position(p), 
@@ -106,7 +107,7 @@ namespace GSP420
 		velocity(0.0f, 0.0f, 0.0f), 
 		fixedRotation(0.0f, 0.0f, 0.0f) 
 	{
-		pPhysObj = new physicsObject();
+		//pPhysObj = new physicsObject();
 	}
 	GSP420::ABC::ABC(const D3DXVECTOR3 p, const D3DXVECTOR3 v, const ObjType t) :
 		position(p),
@@ -116,7 +117,7 @@ namespace GSP420
 		scale(1.0f, 1.0f, 1.0f), 
 		fixedRotation(0.0f, 0.0f, 0.0f) 
 	{
-		pPhysObj = new physicsObject();
+		//pPhysObj = new physicsObject();
 	}
 	GSP420::ABC::ABC(const D3DXVECTOR3 p, const int h, const ObjType t) :
 		position(p), 
@@ -127,7 +128,7 @@ namespace GSP420
 		scale(1.0f, 1.0f, 1.0f), 
 		fixedRotation(0.0f, 0.0f, 0.0f) 
 	{
-		pPhysObj = new physicsObject();
+	//	pPhysObj = new physicsObject();
 	}
 	GSP420::ABC::ABC(const D3DXVECTOR3 p, const D3DXVECTOR3 v, const int h, const ObjType t) :
 		position(p), 
@@ -138,34 +139,38 @@ namespace GSP420
 		scale(1.0f, 1.0f, 1.0f), 
 		fixedRotation(0.0f, 0.0f, 0.0f) 
 	{
-		pPhysObj = new physicsObject();
+	//	pPhysObj = new physicsObject();
 	}
 
 	GSP420::ABC::~ABC()
 	{
-		if (pPhysObj) {
-			delete pPhysObj;
-			pPhysObj = NULL;
-		}
+// 		if (pPhysObj) {
+// 			delete pPhysObj;
+// 			pPhysObj = NULL;
+// 		}
 	}
 
 	bool GSP420::ABC::init(const int modelId, const int textureId)
 	{
-		nModelId = modelId; nTextureId = textureId;
+		nModelId = modelId;
+		nTextureId = textureId;
+		physObj = physicsObject();
 		return true;
 	}
 	void GSP420::ABC::update(const float dt) 
 	{
-		position.x = pPhysObj->x + pPhysObj->linearVelocityX * dt;
-		position.y = pPhysObj->y + pPhysObj->linearVelocityY * dt;
+		position.x = physObj.x + physObj.linearVelocityX * dt;
+		position.y = physObj.y + physObj.linearVelocityY * dt;
 	}
 	void GSP420::ABC::shutdown() 
 	{
-		if (pPhysObj) {
-			delete pPhysObj;
-			pPhysObj = NULL;
-		}
+// 		if (pPhysObj) {
+// 			delete pPhysObj;
+// 			pPhysObj = NULL;
+// 		}
 	}
+
+	physicsObject& GSP420::ABC::getPhys()		{ return physObj; }
 
 	const D3DXVECTOR3& GSP420::ABC::getPosition() const	{ return position; }
 	const D3DXVECTOR3& GSP420::ABC::getVelocity() const { return velocity; }

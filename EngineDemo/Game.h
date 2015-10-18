@@ -76,13 +76,13 @@ private:
 	void render();//render all the visual elements of the game
 	void shutdown();//used upon game exit
 
+	physics gamePhysics;
 	//the present state of the game
 	GameState* States[NUM_STATES];
 	//GameState States[NUM_STATES];
 	GAMESTATE State;
 	/*****
 	AI gameAI;
-	Physics gamePhysics;
 	UI gameUI;
 	Audio gameAudio;
 	*****/
