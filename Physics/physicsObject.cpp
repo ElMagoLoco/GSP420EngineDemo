@@ -51,10 +51,10 @@ int physicsObject::applyImpulseFromCenter(float32 x, float32 y)
 }
 
 //applies force from the center of an object
-int physicsObject::applyTorqueFromCenter(float32 x, float32 y)
+int physicsObject::applyTorqueFromCenter(float32 rotation)
 {
 	b2Vec2 theforce(x, y);
-	body->ApplyForce(theforce, body->GetWorldCenter(), true);
+	body->ApplyTorque(rotation, true);
 	return 0;
 }
 
