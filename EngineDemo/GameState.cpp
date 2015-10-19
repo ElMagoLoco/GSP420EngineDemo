@@ -140,21 +140,22 @@ void PlayState::update(const float dt)
 			//player movement
 			float x, y;
 			if(INPUT->KeyDown(DIK_W))
-				y = 10.f;
+				y = 5.0;
 			else if(INPUT->KeyDown(DIK_S))
-				y = -10.f;
+				y = -5.0;
 			else
 				y = 0.f;
 			if(INPUT->KeyDown(DIK_A))
-				x = -10.f;
+				x = -5.0;
 			else if(INPUT->KeyDown(DIK_D))
-				x = 10.f;
+				x = 5.0;
 			else
 				x = 0.f;
+
 			PLAYER.getPhys().applyForceFromCenter(x, y);
 			D3DXVECTOR3 pos;
-			pos.x = PLAYER.getPhys().x;
-			pos.y = PLAYER.getPhys().y;
+			pos.x = (float)PLAYER.getPhys().x;
+			pos.y = (float)PLAYER.getPhys().y;
 			pos.z = 0.0f;
 			PLAYER.setPosition(pos/*PLAYER.getPosition() + PLAYER.getVelocity() * dt * 100*/);
 			//update AI/physics first so they can flag objects

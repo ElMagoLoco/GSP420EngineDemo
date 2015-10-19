@@ -16,9 +16,9 @@ namespace GFXCore
 {
 	struct SpriteData {
 		wchar_t				strFileName[MAX_FILE_NAME];
+		RECT					clipRect;
 		D3DXVECTOR3	center;
 		D3DXVECTOR3	position;
-		RECT					clipRect;
 		D3DCOLOR			color;
 		int						nTextureId;
 		bool					bHasClipRect;
