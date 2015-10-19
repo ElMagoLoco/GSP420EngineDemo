@@ -13,6 +13,7 @@
 #include <vector>
 #include "..\Main\DirectInput.h"
 #include "..\Main\Player.h"
+#include <d3d.h>
 using namespace std;
 using GFXCore::SpriteData;
 
@@ -87,10 +88,9 @@ public:
 			}
 		}
 		//Missle Bar Update
-		if(currAmmo < player->getMissileAmmo()) // if current ammo is less than its maximum supply
-		{
-			GFX->updateSprite(gameSpriteIDs.at(MISSILE), D3DXVECTOR3(310, 400, 0.0f)); //update the information
-		}
+		//for (int i = 0; i < )
+		//GFX->text->updateText(currAmmogetMissile//update the information
+		
 		// Main has getHealth(), getMaxHealth(), and getMissileAmmo() functions that we can use. 
 		//  They've also provided me with their code. I haven't uploaded it, but if you want to 
 		//  see it, let me know.
