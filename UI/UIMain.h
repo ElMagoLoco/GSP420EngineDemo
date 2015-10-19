@@ -47,7 +47,7 @@ private:
 public:
 
 	UIMain(): currentState(STATE_INIT), currentScore(0), missileAmmo(0) {}
-	~UIMain();
+	~UIMain() {}
 
 	
 	void updateMenu() {
@@ -84,7 +84,8 @@ public:
 		{
 			for(healthSize; healthSize > player->getHealth(); --healthSize) //reduce the health bar size from the difference.
 			{
-				GFX->updateSprite(gameSpriteIDs.at(HEALTH), D3DXVECTOR3(350, 400, 0.0f)); // update the information
+				RECT temp;
+				GFX->updateSprite(gameSpriteIDs.at(HEALTH), D3DXVECTOR3(350, 400, 0.0f), temp); // update the information
 			}
 		}
 		//Missle Bar Update
