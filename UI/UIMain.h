@@ -84,7 +84,7 @@ public:
 		{
 			for(healthSize; healthSize > player->getHealth(); --healthSize) //reduce the health bar size from the difference.
 			{
-				RECT temp;
+				RECT temp; // TODO: fix me
 				GFX->updateSprite(gameSpriteIDs.at(HEALTH), D3DXVECTOR3(350, 400, 0.0f), temp); // update the information
 			}
 		}
