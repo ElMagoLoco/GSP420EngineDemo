@@ -15,7 +15,7 @@ void InitState::init()
 	INPUT->init(DISCL_NONEXCLUSIVE | DISCL_FOREGROUND, DISCL_NONEXCLUSIVE | DISCL_FOREGROUND);
 
 //	GAMECLASS->gameAudio.init();
-	GAMECLASS->gameUI.init();
+//	GAMECLASS->gameUI.init();
 }
 
 void InitState::shutdown()
@@ -33,7 +33,7 @@ void MenuState::update(const float dt)
 	//	GAMECLASS->gameAudio.update(dt);
 	INPUT->Poll();
 	// PHYSICS: add update
-	GAMECLASS->gameUI.update(dt, STATE_MENU, GAMECLASS->paused);
+//	GAMECLASS->gameUI.update(dt, STATE_MENU, GAMECLASS->paused);
 	//GAMECLASS->changeState(GAMECLASS->gameUI.checkStateChanges());
 }
 
@@ -167,7 +167,7 @@ void PlayState::update(const float dt)
 			ENEMIES.update(dt);
 			PICKUPS.update(dt);
 			PROJECTILES.update(dt);
-			GAMECLASS->gameUI.update(dt, STATE_PLAY, GAMECLASS->paused);
+//			GAMECLASS->gameUI.update(dt, STATE_PLAY, GAMECLASS->paused);
 		}
 	}
 	//after updating, check for any state changes due to UI things
