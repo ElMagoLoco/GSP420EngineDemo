@@ -110,7 +110,7 @@ void PlayState::init()
 void PlayState::update(const float dt)
 {
 	INPUT->Poll();
-	GAMECLASS->gamePhysics.updateWorld();
+	GAMECLASS->gamePhysics.updateWorld(dt);
 
 	static float pausecooldown = 0.f;
 	if(pausecooldown > 0.f)
@@ -140,15 +140,15 @@ void PlayState::update(const float dt)
 			//player movement
 			float x, y;
 			if(INPUT->KeyDown(DIK_W))
-				y = 5.0;
+				y = PLAYER_SPEED;
 			else if(INPUT->KeyDown(DIK_S))
-				y = -5.0;
+				y = -PLAYER_SPEED;
 			else
 				y = 0.f;
 			if(INPUT->KeyDown(DIK_A))
-				x = -5.0;
+				x = -PLAYER_SPEED;
 			else if(INPUT->KeyDown(DIK_D))
-				x = 5.0;
+				x = PLAYER_SPEED;
 			else
 				x = 0.f;
 
