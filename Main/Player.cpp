@@ -2,6 +2,7 @@
 #include "Player.h"
 
 #include "Game.h"
+#include "GFX.h"
 
 void Player::fireBullet()
 {
@@ -68,12 +69,21 @@ void Player::endGame()
 
 void Player::update(const float dt)
 {
+	//make sure we don't go offscreen
+	int screenRadX = (GFX->windowWidth()) / 2 - 20;
+	int screenRadY = (GFX->windowHeight()) / 2 - 20;
+	if (position.x < -screenRadX)	position.x = -screenRadX;
+	if (position.x > screenRadX)	position.x = screenRadX;
+	if (position.y < -screenRadY)	position.y = -screenRadY;
+	if (position.y > screenRadY)	position.y = screenRadY;
+	//count timers
 	if (invulnerable > 0.f)
 		invulnerable -= dt;
 	if (lastBullet > 0.f)
 		lastBullet -= dt;
 	if(lastMissile > 0.f)
 		lastMissile -= dt;
+
 }
 
 void Player::shutdown()
