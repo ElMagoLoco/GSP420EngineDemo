@@ -135,8 +135,8 @@ void Game::onResetDevice()
 
 void Game::update(const float dt)
 {
-	States[State]->update(dt);
 	gamePhysics.updateWorld(dt);
+	States[State]->update(dt);
 	GFX->addToModelRenderList(&player);
 	//GFX->updateModel(nPlayerModel, player.getPosition());
 }
