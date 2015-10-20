@@ -41,7 +41,7 @@ public:
 	int remove();
 	int applyForceFromCenter(float32 x, float32 y);
 	int applyImpulseFromCenter(float32 x, float32 y);
-	int applyTorqueFromCenter(float32 rotation);
+	int applyTorqueFromCenter(float32 x, float32 y);
 	int setLinkedObject(void* linkedObject);
 	int setBounceAmount(float32 ba);
 	int setCollissionMask(uint16 cm);
