@@ -25,6 +25,7 @@ class Player : public GSP420::ABC
 public:
 	inline Player();
 	void fireBullet();
+	void resetBulletTime() { lastBullet = 0.0f; }
 	void fireMissile();
 	void heal(int);
 	void hurt(int);

@@ -115,7 +115,7 @@ void PlayState::update(const float dt)
 //	if (fixedtime >= 0.016666666667f)
 	{
 		//fixedtime -= 0.016666666667f;
-		fixedtime = 0.0f;
+		//fixedtime = 0.0f;
 		INPUT->Poll();
 		//	GAMECLASS->gamePhysics.updateWorld(dt);
 
@@ -142,6 +142,8 @@ void PlayState::update(const float dt)
 				//the cool down for bullet and missile firing is built into the player class
 				if (INPUT->KeyDown(DIK_SPACE))
 					PLAYER.fireBullet();
+				else
+					PLAYER.resetBulletTime();
 				if (INPUT->KeyDown(DIK_F))
 					PLAYER.fireMissile();
 				//player movement
