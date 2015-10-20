@@ -117,7 +117,8 @@ void Game::init()
 	GFX->cameraSetLens(GFX->windowWidth(), GFX->windowHeight(), -1000.0f, 1000.0f);
 
 	gamePhysics.GameObjectManager->addBoxDynamicRigidBody("player", 0, 0, 25, 25, true, &PLAYER.physObj);
-
+	PLAYER.physObj.setCollissionCategory((uint16) gameObjectCollissionCategory::gocPLAYER); // I am a player
+	PLAYER.physObj.setCollissionMask((uint16) gocPLAYER || gocMISSLE || gocPICKUP ||gocBOUNDARY || gocENEMY); // i can collide with 
 	gamePhysics.startWorld();
 
 }
