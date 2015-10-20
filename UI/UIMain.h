@@ -20,7 +20,7 @@ using GFXCore::SpriteData;
 
 class UIMain {
 protected:
-	//Player * player;
+	Player * player;
 	GAMESTATE currentState;
 	//GFXCore::Graphics gfx;
 	// Stores the position of sprites that LoadSprite loads into an array so that they can be accessed later
@@ -30,6 +30,7 @@ protected:
 	vector<int> exitSpriteIDs;
 	int currentScore;
 	int missileAmmo;
+	RECT hpBarSize;
 
 private:
 	bool spriteClicked(DirectInput &suppliedInput, int spriteID)
@@ -46,7 +47,13 @@ private:
 	
 public:
 
-	UIMain(): currentState(STATE_INIT), currentScore(0), missileAmmo(0) {}
+	UIMain(): currentState(STATE_INIT), currentScore(0), missileAmmo(0) {
+//		player = &(PLAYER);//Instance()->player);
+		hpBarSize.top = 350;
+		hpBarSize.bottom = 400;
+		hpBarSize.left = 100;
+		hpBarSize.right = 500;
+	}
 	~UIMain() {}
 
 	
@@ -71,39 +78,20 @@ public:
 	}
 
 	void updateGame() {
-<<<<<<< HEAD
 //		int healthSize = PLAYER.getMaxHealth();
 //		int currAmmo = PLAYER.getMissileAmmo();
-=======
-		int healthSize = PLAYER.getMaxHealth();
-		int currAmmo = PLAYER.getMissileAmmo();
->>>>>>> origin/master
-
 		// tells graphics what to draw
 		GFX->addToSpriteRenderList((int*)gameSpriteIDs[0], gameSpriteIDs.size());
 
 		// update health bar and number of missiles
 
 		//Health bar update
-<<<<<<< HEAD
-//		if(healthSize > PLAYER.getHealth()) // if current health is less than maximum health
-//		{
-//			for(healthSize; healthSize > PLAYER.getHealth(); --healthSize) //reduce the health bar size from the difference.
-//			{
-//				RECT temp; // TODO: fix me
-//				GFX->updateSprite(gameSpriteIDs.at(HEALTH), D3DXVECTOR3(350, 400, 0.0f), temp); // update the information
-//			}
-//		}
-=======
-		if(healthSize > PLAYER.getHealth()) // if current health is less than maximum health
+//		for(healthSize; healthSize > PLAYER.getHealth(); --healthSize) //reduce the health bar size from the difference.
 		{
-			for(healthSize; healthSize > PLAYER.getHealth(); --healthSize) //reduce the health bar size from the difference.
-			{
-				RECT temp; // TODO: fix me
-				GFX->updateSprite(gameSpriteIDs.at(HEALTH), D3DXVECTOR3(350, 400, 0.0f), temp); // update the information
-			}
+//			hpBarSize.right = 500 * (healthSize / 100);
+			GFX->updateSprite(gameSpriteIDs.at(HEALTH), D3DXVECTOR3(350, 400, 0.0f), hpBarSize); // update the information
 		}
->>>>>>> origin/master
+
 		//Missle Bar Update
 		//for (int i = 0; i < )
 		//GFX->text->updateText(currAmmogetMissile//update the information

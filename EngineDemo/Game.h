@@ -76,11 +76,7 @@ private:
 	void render();//render all the visual elements of the game
 	void shutdown();//used upon game exit
 
-<<<<<<< HEAD
-	//UI_Interface gameUI();
-=======
 	UI_Interface gameUI();
->>>>>>> origin/master
 	physics gamePhysics;
 	//the present state of the game
 	GameState* States[NUM_STATES];
