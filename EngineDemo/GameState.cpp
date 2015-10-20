@@ -110,7 +110,7 @@ void PlayState::init()
 void PlayState::update(const float dt)
 {
 	INPUT->Poll();
-	GAMECLASS->gamePhysics.updateWorld(dt);
+//	GAMECLASS->gamePhysics.updateWorld(dt);
 
 	static float pausecooldown = 0.f;
 	if(pausecooldown > 0.f)
@@ -215,7 +215,7 @@ void ExitState::init()
 	//GAMECLASS->gameAudio.shutdown();
 	GFX->shutdown();
 	INPUT->shutdown(); 
-	GAMECLASS->gamePhysics.endWorld();
+//	GAMECLASS->gamePhysics.endWorld();
 }
 
 

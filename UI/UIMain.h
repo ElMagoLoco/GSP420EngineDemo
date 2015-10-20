@@ -13,14 +13,14 @@
 #include <vector>
 #include "..\Main\DirectInput.h"
 #include "..\Main\Player.h"
-#include <d3d.h>
+#include "..\EngineDemo\Game.h"
 using namespace std;
 using GFXCore::SpriteData;
 
 
 class UIMain {
 protected:
-	Player * player;
+	//Player * player;
 	GAMESTATE currentState;
 	//GFXCore::Graphics gfx;
 	// Stores the position of sprites that LoadSprite loads into an array so that they can be accessed later
@@ -71,8 +71,8 @@ public:
 	}
 
 	void updateGame() {
-		int healthSize = player->getMaxHealth();
-		int currAmmo = player->getMissileAmmo();
+//		int healthSize = PLAYER.getMaxHealth();
+//		int currAmmo = PLAYER.getMissileAmmo();
 
 		// tells graphics what to draw
 		GFX->addToSpriteRenderList((int*)gameSpriteIDs[0], gameSpriteIDs.size());
@@ -80,14 +80,14 @@ public:
 		// update health bar and number of missiles
 
 		//Health bar update
-		if(healthSize > player->getHealth()) // if current health is less than maximum health
-		{
-			for(healthSize; healthSize > player->getHealth(); --healthSize) //reduce the health bar size from the difference.
-			{
-				RECT temp; // TODO: fix me
-				GFX->updateSprite(gameSpriteIDs.at(HEALTH), D3DXVECTOR3(350, 400, 0.0f), temp); // update the information
-			}
-		}
+//		if(healthSize > PLAYER.getHealth()) // if current health is less than maximum health
+//		{
+//			for(healthSize; healthSize > PLAYER.getHealth(); --healthSize) //reduce the health bar size from the difference.
+//			{
+//				RECT temp; // TODO: fix me
+//				GFX->updateSprite(gameSpriteIDs.at(HEALTH), D3DXVECTOR3(350, 400, 0.0f), temp); // update the information
+//			}
+//		}
 		//Missle Bar Update
 		//for (int i = 0; i < )
 		//GFX->text->updateText(currAmmogetMissile//update the information
