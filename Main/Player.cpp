@@ -72,10 +72,10 @@ void Player::update(const float dt)
 	//make sure we don't go offscreen
 	int screenRadX = (GFX->windowWidth()) / 2 - 20;
 	int screenRadY = (GFX->windowHeight()) / 2 - 20;
-	if (position.x < -screenRadX)	position.x = -screenRadX;
-	if (position.x > screenRadX)	position.x = screenRadX;
-	if (position.y < -screenRadY)	position.y = -screenRadY;
-	if (position.y > screenRadY)	position.y = screenRadY;
+	if (physObj.x < -screenRadX)	physObj.x = -screenRadX;
+	if (physObj.x > screenRadX)		physObj.x = screenRadX;
+	if (physObj.y < -screenRadY)	physObj.y = -screenRadY;
+	if (physObj.y > screenRadY)		physObj.y = screenRadY;
 	//count timers
 	if (invulnerable > 0.f)
 		invulnerable -= dt;

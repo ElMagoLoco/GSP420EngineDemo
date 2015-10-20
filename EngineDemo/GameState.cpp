@@ -112,9 +112,10 @@ void PlayState::update(const float dt)
 	static float fixedtime = 0.0f;
 	fixedtime += dt;
 
-	if (fixedtime >= 0.016666666667f)
+//	if (fixedtime >= 0.016666666667f)
 	{
-		fixedtime -= 0.016666666667f;
+		//fixedtime -= 0.016666666667f;
+		fixedtime = 0.0f;
 		INPUT->Poll();
 		//	GAMECLASS->gamePhysics.updateWorld(dt);
 

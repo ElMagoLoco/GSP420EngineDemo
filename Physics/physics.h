@@ -37,7 +37,7 @@ public:
 	b2PolygonShape groundBox;
 	
 	
-	const float32 timeStep = 1.0f / 60.0f;
+	float32 timeStep = 1.0f / 30.0f;
 	const int32 velocityIterations = 10;
 	const int32 positionIterations = 6;
 

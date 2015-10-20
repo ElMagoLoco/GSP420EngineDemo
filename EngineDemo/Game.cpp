@@ -135,7 +135,14 @@ void Game::onResetDevice()
 
 void Game::update(const float dt)
 {
-	gamePhysics.updateWorld(dt);
+	static float counter = 0.0f;
+	counter += dt;
+	if (counter >= 0.033333333334f)
+	{
+		gamePhysics.updateWorld(dt);
+		counter = 0.0f;
+	}
+	
 	States[State]->update(dt);
 	GFX->addToModelRenderList(&player);
 	//GFX->updateModel(nPlayerModel, player.getPosition());
