@@ -69,6 +69,8 @@ int physics::updateWorld(float dt)
 
 			b2BodyDef bodyDef;
 
+		
+
 			if (gameObject->second->isDynamic)  {
 				bodyDef.type = b2_dynamicBody;
 			}
@@ -86,7 +88,7 @@ int physics::updateWorld(float dt)
 			bodyDef.position.Set(P2M*gameObject->second->x, P2M*gameObject->second->y);
 
 
-
+			
 			b2Body* body = world->CreateBody(&bodyDef);
 			
 			body->SetUserData(gameObject->second);
@@ -138,7 +140,11 @@ int physics::updateWorld(float dt)
 
 			// Override the default friction.
 			fixtureDef.friction = 0.9800f;
-
+			 
+			if ((gameObject->second->collissionCategory != 0) && (gameObject->second->collissionMask != 0)) {
+				fixtureDef.filter.categoryBits = gameObject->second->collissionCategory;
+				fixtureDef.filter.maskBits = gameObject->second->collissionMask;
+			} 
 			// Add the shape to the body.
 			body->CreateFixture(&fixtureDef);
 

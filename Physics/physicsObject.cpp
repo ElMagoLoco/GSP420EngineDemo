@@ -6,6 +6,8 @@ physicsObject::physicsObject()
  
 	body      = NULL; 
     userData  = NULL; 
+	collissionCategory = 0; //Im a thing
+	collissionMask = 0;     // I collide with everything.
 }
 
 
@@ -73,5 +75,20 @@ int physicsObject::setBounceAmount(float32 ba)
 	bounceAmount = ba; // track locally for convenience.
 	body->GetFixtureList()->SetDensity(ba);
 	body->ResetMassData();
+	return 0;
+}
+
+int physicsObject::setCollissionMask(uint16 cm)
+{
+	collissionMask = cm; // track locally for convenience.
+	//Can only be used when the object is created for the first time. 
+	return 0;
+}
+
+int physicsObject::setCollissionCategory(uint16 cm)
+{
+	collissionMask = cm; // track locally for convenience.
+
+	//Can only be used when the object is created for the first time. 
 	return 0;
 }
