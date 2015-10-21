@@ -286,7 +286,7 @@ int main(int argc, char *argv[]) {
 
 
 				//Update screen
-				Physics->updateWorld(1.0f);
+				Physics->updateWorld(100.0f);
 
 			
 

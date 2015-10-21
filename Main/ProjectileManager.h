@@ -29,9 +29,7 @@ class Missile : public GSP420::ABC
 {
 public:
 	//initial velocity is 0 because that will be set after it's target is set
-	Missile(const D3DXVECTOR3 pos, const ObjType t, Enemy* targ = NULL) :
-		ABC(pos, D3DXVECTOR3(0.f, 0.f, 0.f), t), target(targ)
-	{}
+	Missile(const D3DXVECTOR3 pos, const ObjType t, Enemy* targ = NULL);
 	void update(const float) {}
 	//bool init(const int modelId, const int textureId) { return true; }
 	void shutdown() {}
@@ -74,3 +72,4 @@ private:
 	int nMissileModelId;
 	int nMissileTextureId;
 };
+

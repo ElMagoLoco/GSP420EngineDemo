@@ -30,8 +30,9 @@ void ProjectileManager::update(const float dt)
 		if (!it2->isEnabled())
 			it2 = Missiles.erase(it2);
 		else {
-			it2->setPosition(it2->getPosition() + it2->getVelocity() * MISSILE_SPEED * dt);
-			it2->init(nMissileModelId, nMissileTextureId);
+			it2->setPosition(D3DXVECTOR3(it2->getPhys().x, it2->getPhys().y, 0.0f));
+// 			it2->setPosition(it2->getPosition() + it2->getVelocity() * MISSILE_SPEED * dt);
+ 			it2->init(nMissileModelId, nMissileTextureId);
 			GFX->addToModelRenderList(&(*it2));
 			++it2;
 		}
@@ -63,3 +64,16 @@ void ProjectileManager::initMissileProjectiles(const int modelId, const int text
 	nMissileTextureId = textureId;
 }
 
+Missile::Missile(const D3DXVECTOR3 pos, const ObjType t, Enemy* targ/* = NULL*/) :
+ABC(pos, D3DXVECTOR3(0.f, 0.f, 0.f), t), target(targ)
+{
+	physObj.x = pos.x;
+	physObj.y = pos.y;
+
+	GAMECLASS->GetPhysics().GameObjectManager->addBoxDynamicRigidBody("missile", 0, 0, 5, 5, true, &physObj);
+
+	physObj.setCollissionCategory((uint16)gameObjectCollissionCategory::gocMISSLE); // I am a missile
+	physObj.setCollissionMask((uint16)gocBOUNDARY || gocENEMY); // i can collide with 
+
+	physObj.applyForceFromCenter(0.0f, MISSILE_SPEED);
+}

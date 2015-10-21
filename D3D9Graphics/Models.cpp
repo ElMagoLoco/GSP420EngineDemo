@@ -257,7 +257,7 @@ int Models::loadModel(IDirect3DDevice9* device, const wchar_t* fileName,
 			int len = 0;
 			wchar_t wstr[MAX_FILE_NAME] = L"";
 			// TODO: change this to actual directory when all cores combined
-			char append[MAX_FILE_NAME] = "..\\GraphicsTesting\\Assets\\";
+			char append[MAX_FILE_NAME] = "..\\EngineDemo\\Content\\Models\\";
 			strcat_s(append, modelMats[i].pTextureFilename);
 			size_t inputBuff;
 			mbstowcs_s(&inputBuff, wstr, append, MAX_FILE_NAME);

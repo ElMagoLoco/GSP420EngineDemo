@@ -59,7 +59,8 @@ public:
 	
 	void updateMenu() {
 		// tells graphics what to draw
-		GFX->addToSpriteRenderList((int*)menuSpriteIDs[0], menuSpriteIDs.size());
+		//for (unsigned int i = 0; i < menuSpriteIDs.size())
+		GFX->addToSpriteRenderList(&(menuSpriteIDs[0]), menuSpriteIDs.size());
 
 		// check for mouse input
 		int MOUSE_LEFT = 0;

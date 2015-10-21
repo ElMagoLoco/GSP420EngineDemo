@@ -99,11 +99,7 @@ void Game::init()
 
 	GFX->initModules();
 
-//	gamePhysics = physics();
-	
-
-	
-	
+//	gamePhysics = physics();	
 
 	nPlayerModel = GFX->loadModel(L"Content\\Models\\PlayerSpaceshipV2.x");
 	player.init(nPlayerModel, -1);
@@ -121,6 +117,7 @@ void Game::init()
 	PLAYER.physObj.setCollissionMask((uint16) gocPLAYER || gocMISSLE || gocPICKUP ||gocBOUNDARY || gocENEMY); // i can collide with 
 	gamePhysics.startWorld();
 
+	gameUI.init();
 }
 
 void Game::onLostDevice()
@@ -142,9 +139,10 @@ void Game::update(const float dt)
 		gamePhysics.updateWorld(dt);
 		counter = 0.0f;
 	}
+	gameUI.update(dt, STATE_MENU, false);
 	
-	States[State]->update(dt);
-	GFX->addToModelRenderList(&player);
+ 	States[State]->update(dt);
+ 	GFX->addToModelRenderList(&player);
 	//GFX->updateModel(nPlayerModel, player.getPosition());
 }
 
