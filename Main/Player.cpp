@@ -7,13 +7,17 @@
 void Player::fireBullet()
 {
 	//create bullet with velocity and position
-	if(lastBullet <= 0)
+	if (lastBullet <= 0)
 	{
-		// for Z ordering
-		position.z = 10.0f;
-		Bullet b = Bullet(position, BULLET_START_DIRECTION, 
-			OT_PLAYER_BULLET);
-		//b.init(1,1);//need to find out what ID to use from graphics
+		Bullet b = Bullet(OT_PLAYER_BULLET);
+		static int id = 0;
+		++id;
+		string name = "PlayerBullet" + to_string(id);
+		GAMECLASS->getPhysics().GameObjectManager->addBoxDynamicRigidBody(name,
+			physObj.x, physObj.y, BULLET_SIZE, BULLET_SIZE, true, &b.physObj);
+		b.physObj.setCollissionCategory((uint16)gameObjectCollissionCategory::gocMISSLE);
+		b.physObj.setCollissionMask((uint16)gocENEMY | gocBOUNDARY);
+		b.physObj.applyImpulseFromCenter(BULLET_START_DIRECTION.x, BULLET_START_DIRECTION.y);
 		PROJECTILES.addBullet(b);
 		lastBullet = BULLET_COOL_DOWN;
 	}

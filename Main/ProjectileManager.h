@@ -10,6 +10,7 @@ static const int BULLET_DAMAGE = 1;
 static const int MISSILE_DAMAGE = 2;
 static const int COLLISION_DAMAGE = 1;
 static const int MISSILE_RADIUS = 50;
+static const int BULLET_SIZE = 2;
 
 const static float BULLET_SPEED = 500.f;
 const static float MISSILE_SPEED = 40.f;
@@ -17,7 +18,7 @@ const static float MISSILE_SPEED = 40.f;
 class Bullet : public GSP420::ABC
 {
 public:
-	Bullet(const D3DXVECTOR3 pos, const D3DXVECTOR3 vel, const ObjType t) : ABC(pos, vel, t) {}
+	Bullet(const ObjType t) : ABC(t) {}
 	void update(const float) {}
 	bool init(const int modelId, const int textureId) { this->nModelId = modelId; this->nTextureId = textureId; return true; }
 	void shutdown() {}

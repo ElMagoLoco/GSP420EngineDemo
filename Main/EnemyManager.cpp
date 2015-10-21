@@ -31,8 +31,16 @@ Enemy::Enemy(D3DXVECTOR3 pos, ObjType t) : ABC(pos, t), damage(0),
 
 void Enemy::fireBullet(D3DXVECTOR3 vel)
 {
+	Bullet b = Bullet(OT_ENEMY_BULLET);
+	ENEMIES.incNextBulletID();
+	string name = "EnemyBullet" + to_string(ENEMIES.getNextBulletID());
+	GAMECLASS->getPhysics().GameObjectManager->addBoxDynamicRigidBody(name,
+		physObj.x, physObj.y, BULLET_SIZE, BULLET_SIZE, true, &b.physObj);
+	b.physObj.setCollissionCategory((uint16)gameObjectCollissionCategory::gocMISSLE);
+	b.physObj.setCollissionMask((uint16)gocPLAYER | gocBOUNDARY);
+	b.physObj.applyImpulseFromCenter(vel.x, vel.y);
 	//create projectile starting at current position
-	PROJECTILES.addBullet(Bullet(position, vel, OT_ENEMY_BULLET));
+	PROJECTILES.addBullet(b);
 }
 
 //Created by Darrell Smith and Brent Spector

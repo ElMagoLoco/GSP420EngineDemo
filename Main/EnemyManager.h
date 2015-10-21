@@ -45,11 +45,15 @@ class EnemyManager
 	friend class D3DCore;
 	friend class Physics;
 public:
+	EnemyManager() : NextBulletID(0) {}
 	void add(Enemy);
 	void update(const float);
 	inline void clear() { Enemies.clear(); }
+	void incNextBulletID() { ++NextBulletID; }
+	int getNextBulletID() { return NextBulletID; }
 private:
 	std::list<Enemy> Enemies;
 	inline std::list<Enemy>& getEnemies() { return Enemies; }
+	int NextBulletID;
 };
 

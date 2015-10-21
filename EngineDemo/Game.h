@@ -59,6 +59,7 @@ public:
 	ProjectileManager projectiles;
 	Player player;
 	inline GAMESTATE getState() { return State; }
+	physics getPhysics() { return gamePhysics; }
 protected:
 	//the one instance of the object
 	static Game* Singleton;
