@@ -98,7 +98,8 @@ void Game::init()
 	QuitNow = false;
 	GFX->initModules();
 
-
+//	gamePhysics = physics();
+	
 	nPlayerModel = GFX->loadModel(L"Content\\Models\\PlayerSpaceshipV2.x");
 	player.init(nPlayerModel, -1);
 	player.setPosition(D3DXVECTOR3(0.0f, 0.0f, 0.0f));
@@ -139,8 +140,8 @@ void Game::update(const float dt)
 	}
 	gameUI.update(dt, STATE_MENU, false);
 	
- 	States[State]->update(dt);
- 	GFX->addToModelRenderList(&player);
+	States[State]->update(dt);
+	GFX->addToModelRenderList(&player);
 	//GFX->updateModel(nPlayerModel, player.getPosition());
 	gameUI.update(dt, State, paused);
 }
