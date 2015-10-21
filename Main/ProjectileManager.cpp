@@ -30,6 +30,7 @@ void ProjectileManager::update(const float dt)
 		if (!it2->isEnabled())
 			it2 = Missiles.erase(it2);
 		else {
+			it2->getPhys().applyForceFromCenter(0.0f, MISSILE_SPEED);
 			it2->setPosition(D3DXVECTOR3(it2->getPhys().x, it2->getPhys().y, 0.0f));
 // 			it2->setPosition(it2->getPosition() + it2->getVelocity() * MISSILE_SPEED * dt);
  			it2->init(nMissileModelId, nMissileTextureId);
@@ -75,5 +76,4 @@ ABC(pos, D3DXVECTOR3(0.f, 0.f, 0.f), t), target(targ)
 	physObj.setCollissionCategory((uint16)gameObjectCollissionCategory::gocMISSLE); // I am a missile
 	physObj.setCollissionMask((uint16)gocBOUNDARY || gocENEMY); // i can collide with 
 
-	physObj.applyForceFromCenter(0.0f, MISSILE_SPEED);
 }
