@@ -59,8 +59,9 @@ public:
 	
 	void updateMenu() {
 		// tells graphics what to draw
-		//for (unsigned int i = 0; i < menuSpriteIDs.size())
-		GFX->addToSpriteRenderList(&(menuSpriteIDs[0]), menuSpriteIDs.size());
+
+		GFX->addToSpriteRenderList(&menuSpriteIDs[0], menuSpriteIDs.size());
+
 
 		// check for mouse input
 		int MOUSE_LEFT = 0;
@@ -82,7 +83,7 @@ public:
 //		int healthSize = PLAYER.getMaxHealth();
 //		int currAmmo = PLAYER.getMissileAmmo();
 		// tells graphics what to draw
-		GFX->addToSpriteRenderList((int*)gameSpriteIDs[0], gameSpriteIDs.size());
+		GFX->addToSpriteRenderList(&gameSpriteIDs[0], gameSpriteIDs.size());
 
 		// update health bar and number of missiles
 
@@ -105,7 +106,7 @@ public:
 	void updatePause(const bool paused) {
 		if (paused)
 		{
-			GFX->addToSpriteRenderList((int*)pauseSpriteIDs[0], pauseSpriteIDs.size());
+			GFX->addToSpriteRenderList(&pauseSpriteIDs[0], pauseSpriteIDs.size());
 			if (spriteClicked(*INPUT, pauseSpriteIDs[BACK]))
 			{
 				//paused = false;
@@ -114,7 +115,7 @@ public:
 	}
 	void updateExit() {
 		// tell Graphics which sprites to draw
-		GFX->addToSpriteRenderList((int*)exitSpriteIDs[0], exitSpriteIDs.size());
+		GFX->addToSpriteRenderList(&exitSpriteIDs[0], exitSpriteIDs.size());
 		currentState = STATE_EXIT;
 	}
 };
