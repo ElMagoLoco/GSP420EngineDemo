@@ -33,7 +33,7 @@ void MenuState::update(const float dt)
 	//	GAMECLASS->gameAudio.update(dt);
 	INPUT->Poll();
 	// PHYSICS: add update
-//	GAMECLASS->gameUI.update(dt, STATE_MENU, GAMECLASS->paused);
+	GAMECLASS->gameUI.update(dt, STATE_MENU, GAMECLASS->paused);
 	//GAMECLASS->changeState(GAMECLASS->gameUI.checkStateChanges());
 }
 
@@ -69,7 +69,7 @@ void CreditsState::update(const float dt)
 	INPUT->Poll();
 	// PHYSICS: add update
 	//GAMECLASS->gameAudio.update(dt);
-	//GAMECLASS->gameUI.update(dt, STATE_CREDIT);
+	//GAMECLASS->gameUI.update(dt, STATE_CREDIT, GAMECLASS->paused);
 	//GAMECLASS->changeState(GAMECLASS->gameUI.checkStateChanges());
 }
 
@@ -124,14 +124,14 @@ void PlayState::update(const float dt)
 			pausecooldown -= dt;
 		//GAMECLASS->gameAudio.update(dt);
 		//listen for input
-		if (INPUT->KeyDown(DIK_ESCAPE) && pausecooldown <= 0.f)
+		if (INPUT->KeyDown(DIK_P) && pausecooldown <= 0.f)
 		{
 			GAMECLASS->togglePause();
 			pausecooldown = .5f;
 		}
 		if (GAMECLASS->paused)
 		{
-			//GAMECLASS->gameUI.update(dt, STATE_PLAY, true);
+			GAMECLASS->gameUI.update(dt, STATE_PLAY, true);
 		}
 		else
 		{
@@ -171,12 +171,13 @@ void PlayState::update(const float dt)
 				//GAMECLASS->gameAI.update(dt);
 				//GAMECLASS->gamePhysics.update(dt);
 				//then we update the objects to see which are flagged
+				GAMECLASS->gameUI.update(dt, STATE_PLAY, GAMECLASS->paused);
 				PLAYER.update(dt);
 				ASTEROIDS.update(dt);
 				ENEMIES.update(dt);
 				PICKUPS.update(dt);
 				PROJECTILES.update(dt);
-				//			GAMECLASS->gameUI.update(dt, STATE_PLAY, GAMECLASS->paused);
+				//GAMECLASS->gameUI.update(dt, STATE_PLAY, GAMECLASS->paused);
 			}
 		}
 		//after updating, check for any state changes due to UI things

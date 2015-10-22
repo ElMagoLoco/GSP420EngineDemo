@@ -105,10 +105,6 @@ public:
 		if (paused)
 		{
 			GFX->addToSpriteRenderList(&pauseSpriteIDs[0], pauseSpriteIDs.size());
-			if (spriteClicked(*INPUT, pauseSpriteIDs[BACK]))
-			{
-				//paused = false;
-			}
 		}
 	}
 	void updateExit() {
