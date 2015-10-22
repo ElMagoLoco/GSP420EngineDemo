@@ -34,7 +34,7 @@ void Enemy::fireBullet(D3DXVECTOR3 vel)
 	Bullet b = Bullet(OT_ENEMY_BULLET);
 	ENEMIES.incNextBulletID();
 	string name = "EnemyBullet" + to_string(ENEMIES.getNextBulletID());
-	GAMECLASS->getPhysics().GameObjectManager->addBoxDynamicRigidBody(name,
+	GAMECLASS->GetPhysics().GameObjectManager->addBoxDynamicRigidBody(name,
 		physObj.x, physObj.y, BULLET_SIZE, BULLET_SIZE, true, &b.physObj);
 	b.physObj.setCollissionCategory((uint16)gameObjectCollissionCategory::gocMISSLE);
 	b.physObj.setCollissionMask((uint16)gocPLAYER | gocBOUNDARY);

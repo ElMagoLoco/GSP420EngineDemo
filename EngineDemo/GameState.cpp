@@ -117,7 +117,6 @@ void PlayState::update(const float dt)
 		//fixedtime -= 0.016666666667f;
 		fixedtime = 0.0f;
 		INPUT->Poll();
-		//	GAMECLASS->gamePhysics.updateWorld(dt);
 
 		static float pausecooldown = 0.f;
 		if (pausecooldown > 0.f)

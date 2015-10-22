@@ -1,5 +1,4 @@
 #include "physics.h"
-#include "physicsObject.h"
 
 
 
@@ -56,104 +55,104 @@ int physics::updateWorld(float dt)
 	// Lets Loop through and create all our objects.
 	std::map<std::string, physicsObject*>::iterator gameObject;
 
-	for (gameObject = GameObjectManager->gameManangerMap.begin(); gameObject != GameObjectManager->gameManangerMap.end(); gameObject++)
+	for (gameObject = GameObjectManager->gameManangerMap.begin(); gameObject != GameObjectManager->gameManangerMap.end(); ++gameObject)
 	{
 
-		b2PolygonShape dynamicBox;
-
-		if (gameObject->second->body == NULL) // Has the object been created yet ? If not create it. 
-
-		{
-
-			// Define the dynamic body. We set its position and call the body factory.
-
-			b2BodyDef bodyDef;
-
-		
-
-			if (gameObject->second->isDynamic)  {
-				bodyDef.type = b2_dynamicBody;
-			}
-			else {
-				bodyDef.type = b2_kinematicBody;
-			}
-
-			// but if static change 
-
-			if (gameObject->second->isStatic)  {
-				bodyDef.type = b2_staticBody;
-			}
-
-
-			bodyDef.position.Set(P2M*gameObject->second->x, P2M*gameObject->second->y);
-
-
-			
-			b2Body* body = world->CreateBody(&bodyDef);
-			
-			body->SetUserData(gameObject->second);
-				
-			if (gameObject->second->shapeList == "Box") {
-				dynamicBox.SetAsBox(P2M*gameObject->second->halfHeight, P2M*gameObject->second->halfWidth);
-			}
-			else // we can assume polygon for now unless we add circles later.
-			{ 
-				
-				
-				// count the vertices 
-				int vertexCount = gameObject->second->shape.size() / 2;
-
-				//convert to an array. 
-				float32* verticeArray = &gameObject->second->shape[0];
-			
-			    //create a vector of b2vec2
-				std::vector<b2Vec2> vertices;
-				
-				//init it
-				vertices.resize(vertexCount);
-
-				//stuff it with the vertices
-				for (int loopIndex = 0; loopIndex < vertexCount; loopIndex++) {
-
-					vertices[loopIndex].Set(verticeArray[loopIndex], verticeArray[loopIndex + 1]);
-
-				}
-
-				// flatten to an array
-				b2Vec2* b2vArray = &vertices[0];
-
-				//Yep I know it says box but it is a type of polygonshape.
-				dynamicBox.Set(b2vArray, vertexCount); //pass array to the shape
-
-			
-
-				}
-	
-
-			b2FixtureDef fixtureDef;
-			fixtureDef.shape = &dynamicBox;
-
-			// Set the box density to be non-zero, so it will be dynamic.
-			fixtureDef.density = 1.0f;
-
-			fixtureDef.restitution = 0.949875f;
-
-			// Override the default friction.
-			fixtureDef.friction = 0.9800f;
-			 
-			if ((gameObject->second->collissionCategory != 0) && (gameObject->second->collissionMask != 0)) {
-				fixtureDef.filter.categoryBits = gameObject->second->collissionCategory;
-				fixtureDef.filter.maskBits = gameObject->second->collissionMask;
-			} 
-			// Add the shape to the body.
-			body->CreateFixture(&fixtureDef);
-
-			gameObject->second->body = body;
-
-
-
-		}
-		else  // need to update the objects information..
+// 		b2PolygonShape dynamicBox;
+// 
+// 		if (gameObject->second->body == NULL) // Has the object been created yet ? If not create it. 
+// 
+// 		{
+// 
+// 			// Define the dynamic body. We set its position and call the body factory.
+// 
+// 			b2BodyDef bodyDef;
+// 
+// 		
+// 
+// 			if (gameObject->second->isDynamic)  {
+// 				bodyDef.type = b2_dynamicBody;
+// 			}
+// 			else {
+// 				bodyDef.type = b2_kinematicBody;
+// 			}
+// 
+// 			// but if static change 
+// 
+// 			if (gameObject->second->isStatic)  {
+// 				bodyDef.type = b2_staticBody;
+// 			}
+// 
+// 
+// 			bodyDef.position.Set(P2M*gameObject->second->x, P2M*gameObject->second->y);
+// 
+// 
+// 			
+// 			b2Body* body = world->CreateBody(&bodyDef);
+// 			
+// 			body->SetUserData(gameObject->second);
+// 				
+// 			if (gameObject->second->shapeList == "Box") {
+// 				dynamicBox.SetAsBox(P2M*gameObject->second->halfHeight, P2M*gameObject->second->halfWidth);
+// 			}
+// 			else // we can assume polygon for now unless we add circles later.
+// 			{ 
+// 				
+// 				
+// 				// count the vertices 
+// 				int vertexCount = gameObject->second->shape.size() / 2;
+// 
+// 				//convert to an array. 
+// 				float32* verticeArray = &gameObject->second->shape[0];
+// 			
+// 			    //create a vector of b2vec2
+// 				std::vector<b2Vec2> vertices;
+// 				
+// 				//init it
+// 				vertices.resize(vertexCount);
+// 
+// 				//stuff it with the vertices
+// 				for (int loopIndex = 0; loopIndex < vertexCount; loopIndex++) {
+// 
+// 					vertices[loopIndex].Set(verticeArray[loopIndex], verticeArray[loopIndex + 1]);
+// 
+// 			}
+// 
+// 				// flatten to an array
+// 				b2Vec2* b2vArray = &vertices[0];
+// 
+// 				//Yep I know it says box but it is a type of polygonshape.
+// 				dynamicBox.Set(b2vArray, vertexCount); //pass array to the shape
+// 
+// 			
+// 
+// 			}
+// 	
+// 
+// 			b2FixtureDef fixtureDef;
+// 			fixtureDef.shape = &dynamicBox;
+// 
+// 			// Set the box density to be non-zero, so it will be dynamic.
+// 			fixtureDef.density = 1.0f;
+// 
+// 			fixtureDef.restitution = 0.949875f;
+// 
+// 			// Override the default friction.
+// 			fixtureDef.friction = 0.9800f;
+// 			 
+// 			if ((gameObject->second->collissionCategory != 0) && (gameObject->second->collissionMask != 0)) {
+// 				fixtureDef.filter.categoryBits = gameObject->second->collissionCategory;
+// 				fixtureDef.filter.maskBits = gameObject->second->collissionMask;
+// 			} 
+// 			// Add the shape to the body.
+// 			body->CreateFixture(&fixtureDef);
+// 
+// 			gameObject->second->body = body;
+// 
+// 
+// 
+// 		}
+// 		else  // need to update the objects information..
 		{
 
 			//*** To do ****
@@ -173,6 +172,80 @@ int physics::updateWorld(float dt)
 
 
 
+
+	return 0;
+}
+
+int physics::initBody(physicsObject* pBody)
+{
+	if (NULL == pBody)
+		return -1;
+
+	b2PolygonShape dynamicBox;
+
+	b2BodyDef bodyDef;
+
+	if (pBody->isDynamic)  {
+		bodyDef.type = b2_dynamicBody;
+	} 
+	else {
+		bodyDef.type = b2_kinematicBody;
+	}
+
+	// but if static change 
+
+	if (pBody->isStatic)  
+		bodyDef.type = b2_staticBody;
+	
+	bodyDef.position.Set(P2M*pBody->x, P2M*pBody->y);
+	
+	b2Body* body = world->CreateBody(&bodyDef);
+
+	body->SetUserData(pBody);
+
+	if (pBody->shapeList == "Box") {
+		dynamicBox.SetAsBox(P2M*pBody->halfHeight, P2M*pBody->halfWidth);
+	}
+	else { // we can assume polygon for now unless we add circles later.
+		// count the vertices 
+		int vertexCount = pBody->shape.size() / 2;
+		//convert to an array. 
+		float32* verticeArray = &pBody->shape[0];
+		//create a vector of b2vec2
+		std::vector<b2Vec2> vertices;
+		//init it
+		vertices.resize(vertexCount);
+
+		//stuff it with the vertices
+		for (int loopIndex = 0; loopIndex < vertexCount; loopIndex++)
+			vertices[loopIndex].Set(verticeArray[loopIndex], verticeArray[loopIndex + 1]);
+
+		// flatten to an array
+		b2Vec2* b2vArray = &vertices[0];
+
+		//Yep I know it says box but it is a type of polygonshape.
+		dynamicBox.Set(b2vArray, vertexCount); //pass array to the shape
+	}
+
+	b2FixtureDef fixtureDef;
+	fixtureDef.shape = &dynamicBox;
+
+	// Set the box density to be non-zero, so it will be dynamic.
+	fixtureDef.density = 1.0f;
+
+	fixtureDef.restitution = 0.949875f;
+
+	// Override the default friction.
+	fixtureDef.friction = 0.9800f;
+
+	if ((pBody->collissionCategory != 0) && (pBody->collissionMask != 0)) {
+		fixtureDef.filter.categoryBits = pBody->collissionCategory;
+		fixtureDef.filter.maskBits = pBody->collissionMask;
+	}
+	// Add the shape to the body.
+	body->CreateFixture(&fixtureDef);
+
+	pBody->body = body;
 
 	return 0;
 }

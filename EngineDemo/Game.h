@@ -38,6 +38,8 @@
 #define PROJECTILES Game::Instance()->projectiles
 #define PLAYER Game::Instance()->player
 
+void OnCollision(void* pObj1, void* pObj2); //collision 
+
 //this inherits from the base class App and adds things that are specific to this game or demo
 class Game : public App
 {
@@ -50,7 +52,7 @@ public:
 	void Run();
 	static Game* Instance();
 	inline bool GetPaused() { return paused; }
-	physics GetPhysics()	{ return gamePhysics; }
+	physics& GetPhysics()	{ return gamePhysics; }
 	void Delete();
 	//managers
 	AsteroidManager asteroids;
@@ -59,7 +61,6 @@ public:
 	ProjectileManager projectiles;
 	Player player;
 	inline GAMESTATE getState() { return State; }
-	physics getPhysics() { return gamePhysics; }
 protected:
 	//the one instance of the object
 	static Game* Singleton;

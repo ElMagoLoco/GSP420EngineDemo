@@ -11,13 +11,18 @@
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE, PSTR, int)
 {
-	Game::Instance();
+//	Game::Instance();
 	srand((unsigned)time(NULL));
 	if (!GFX->initGFX(hInstance, L"Space Game"))
 		LOGGER->Write(L"WinMain: Could not initialized graphics core", true);
 	Game::Instance()->Run();
 	Game::Instance()->Delete();
 	return 1;
+}
+
+void OnCollision(void* pObj1, void* pObj2)
+{
+	return;
 }
 
 void Game::Run()
@@ -111,9 +116,13 @@ void Game::init()
 
 	GFX->cameraSetLens(GFX->windowWidth(), GFX->windowHeight(), -1000.0f, 1000.0f);
 
-	gamePhysics.GameObjectManager->addBoxDynamicRigidBody("player", 0, 0, 25, 25, true, &PLAYER.physObj);
-	PLAYER.physObj.setCollissionCategory((uint16) gameObjectCollissionCategory::gocPLAYER); // I am a player
+	gamePhysics.GameObjectManager->addBoxDynamicRigidBody("player", 0, 0, 25, 25, true, &PLAYER.getPhys());
+	//gamePhysics.initBody(&PLAYER.getPhys());
+	
+	PLAYER.physObj.setCollissionCategory((uint16)gameObjectCollissionCategory::gocPLAYER); // I am a player
 	PLAYER.physObj.setCollissionMask((uint16) gocPLAYER || gocMISSLE || gocPICKUP ||gocBOUNDARY || gocENEMY); // i can collide with 
+
+	gamePhysics.collissionCallBackListener.setCollisionFunction(OnCollision);
 	gamePhysics.startWorld();
 
 	gameUI.init();
@@ -133,12 +142,12 @@ void Game::update(const float dt)
 {
 	static float counter = 0.0f;
 	counter += dt;
-	if (counter >= 0.033333333334f)
+//	if (counter >= 0.033333333334f)
 	{
 		gamePhysics.updateWorld(dt);
 		counter = 0.0f;
 	}
-	gameUI.update(dt, STATE_MENU, false);
+	//gameUI.update(dt, STATE_MENU, false);
 	
 	States[State]->update(dt);
 	GFX->addToModelRenderList(&player);

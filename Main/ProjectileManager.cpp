@@ -72,7 +72,7 @@ ABC(pos, D3DXVECTOR3(0.f, 0.f, 0.f), t), target(targ)
 	physObj.y = pos.y;
 
 	GAMECLASS->GetPhysics().GameObjectManager->addBoxDynamicRigidBody("missile", 0, 0, 5, 5, true, &physObj);
-
+	//GAMECLASS->GetPhysics().initBody(&physObj);
 	physObj.setCollissionCategory((uint16)gameObjectCollissionCategory::gocMISSLE); // I am a missile
 	physObj.setCollissionMask((uint16)gocBOUNDARY || gocENEMY); // i can collide with 
 

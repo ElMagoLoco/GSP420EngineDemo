@@ -13,8 +13,9 @@ void Player::fireBullet()
 		static int id = 0;
 		++id;
 		string name = "PlayerBullet" + to_string(id);
-		GAMECLASS->getPhysics().GameObjectManager->addBoxDynamicRigidBody(name,
+		GAMECLASS->GetPhysics().GameObjectManager->addBoxDynamicRigidBody(name,
 			physObj.x, physObj.y, BULLET_SIZE, BULLET_SIZE, true, &b.physObj);
+	//	GAMECLASS->GetPhysics().initBody(&b.physObj);
 		b.physObj.setCollissionCategory((uint16)gameObjectCollissionCategory::gocMISSLE);
 		b.physObj.setCollissionMask((uint16)gocENEMY | gocBOUNDARY);
 		b.physObj.applyImpulseFromCenter(BULLET_START_DIRECTION.x, BULLET_START_DIRECTION.y);
