@@ -4,10 +4,10 @@
 #define TITLE		 1
 #define START		 2
 #define CREDITS		 3
-#define MISSILE		 0
-#define HPBACKGROUND 1
-#define HEALTH		 2
-#define SCORE		 3
-#define PAUSED		 0
-#define BACK		 1
+#define MISSILE		 1
+#define HPBACKGROUND 2
+#define HEALTH		 3
+#define SCORE		 4
+#define PAUSED		 1
+#define BACK		 2
 #define GAMEOVER     0
