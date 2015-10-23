@@ -14,6 +14,7 @@
 #include "..\Main\DirectInput.h"
 #include "..\Main\Player.h"
 #include "..\EngineDemo\Game.h"
+#include "..\EngineDemo\GameState.h"
 using namespace std;
 using GFXCore::SpriteData;
 
@@ -33,11 +34,11 @@ protected:
 	RECT hpBarSize;
 
 private:
-	bool spriteClicked(DirectInput &suppliedInput, int spriteID)
+	bool spriteClicked(int spriteID)
 	{
-		if (suppliedInput.MouseDX() >  GFX->getSpritePosX(spriteID) && suppliedInput.MouseDX() < GFX->getSpritePosX(spriteID) + GFX->getSpriteWidth(spriteID)) 
+		if (INPUT->MouseDX() >  GFX->getSpritePosX(spriteID) && INPUT->MouseDX() < GFX->getSpritePosX(spriteID) + GFX->getSpriteWidth(spriteID))
 		{
-			if (suppliedInput.MouseDY() > GFX->getSpritePosY(spriteID) && suppliedInput.MouseDY() < GFX->getSpritePosY(spriteID) + GFX->getSpriteHeight(spriteID))
+			if (INPUT->MouseDY() > GFX->getSpritePosY(spriteID) && INPUT->MouseDY() < GFX->getSpritePosY(spriteID) + GFX->getSpriteHeight(spriteID))
 			{
 				return true;
 			}
@@ -65,12 +66,12 @@ public:
 		int MOUSE_LEFT = 0;
 		if (INPUT->MouseButtonDown(MOUSE_LEFT))
 		{
-			if (spriteClicked(*INPUT, menuSpriteIDs[START]))
+			if (spriteClicked(menuSpriteIDs[START]))
 			{
 				currentState = STATE_PLAY;
 			}
 
-			if (spriteClicked(*INPUT, menuSpriteIDs[CREDITS]))
+			if (spriteClicked(menuSpriteIDs[CREDITS]))
 			{
 				currentState = STATE_CREDIT;
 			}
@@ -78,8 +79,8 @@ public:
 	}
 
 	void updateGame() {
-//		int healthSize = PLAYER.getMaxHealth();
-//		int currAmmo = PLAYER.getMissileAmmo();
+		//int healthSize = PLAYER.getMaxHealth();
+		//int currAmmo = PLAYER.getMissileAmmo();
 		// tells graphics what to draw
 		GFX->addToSpriteRenderList(&gameSpriteIDs[0], gameSpriteIDs.size());
 
@@ -88,9 +89,9 @@ public:
 		//Health bar update
 //		for(healthSize; healthSize > PLAYER.getHealth(); --healthSize) //reduce the health bar size from the difference.
 		{
-//			hpBarSize.right = 500 * (healthSize / 100);
+			//hpBarSize.right = 500 * (healthSize / 100);
 			// TODO: SAM: commented out tillI fix the background issue
-		//	GFX->updateSprite(gameSpriteIDs.at(HEALTH), D3DXVECTOR3(350, 400, 0.0f), hpBarSize); // update the information
+			//GFX->updateSprite(gameSpriteIDs.at(HEALTH), D3DXVECTOR3(350, 400, 0.0f), hpBarSize); // update the information
 		}
 
 		//Missle Bar Update
