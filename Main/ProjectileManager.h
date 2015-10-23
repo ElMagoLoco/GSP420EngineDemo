@@ -49,12 +49,12 @@ class ProjectileManager
 public:
 	void initBulletProjectiles(const int modelId, const int textureId);
 	void initMissileProjectiles(const int modelId, const int textureId);
-	inline void addBullet(Bullet b) { Bullets.push_front(b); }
+	inline void addBullet(Bullet* b) { Bullets.push_front(b); }
 	inline void addMissile(Missile m) { Missiles.push_front(m); }
 	void update(const float);
-	inline void clear() { Bullets.clear(); Missiles.clear(); }
+	void clear();
 	void removeTarget(Enemy*);//if any missiles are targeting that enemy, set their targets to NULL instead
-	const std::list<Bullet>& getBullets() const { return Bullets; }
+	const std::list<Bullet*>& getBullets() const { return Bullets; }
 
 	ProjectileManager() :
 		nMissileModelId(-1),
@@ -63,8 +63,8 @@ public:
 		nMissileTextureId(-1)
 	{}
 private:
-	inline std::list<Bullet>& getBullets() { return Bullets; }
-	std::list<Bullet> Bullets;
+	inline std::list<Bullet*>& getBullets() { return Bullets; }
+	std::list<Bullet*> Bullets;
 	inline std::list<Missile>& getMissiles() { return Missiles; }
 	std::list<Missile> Missiles;
 

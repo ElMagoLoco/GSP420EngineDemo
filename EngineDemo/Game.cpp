@@ -147,7 +147,7 @@ void Game::update(const float dt)
 	States[State]->update(dt);
 	if (counter >= 0.033333333334f)
 	{
-		//gamePhysics->updateWorld(dt);
+		gamePhysics->updateWorld(dt);
 		counter = 0.0f;
 	}
 	//gameUI.update(dt, STATE_MENU, false);

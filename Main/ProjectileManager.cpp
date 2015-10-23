@@ -9,18 +9,20 @@ void ProjectileManager::update(const float dt)
 	int screenRadX = (GFX->windowWidth()) / 2 + 10;
 	int screenRadY = (GFX->windowHeight()) / 2 + 10;
 
-	std::list<Bullet>::iterator it1 = Bullets.begin();
+	std::list<Bullet*>::iterator it1 = Bullets.begin();
 	while (it1 != Bullets.end())
 	{
-		if (!it1->isEnabled() )
+		if (!(*it1)->isEnabled() )
 		{
+			delete *it1;
+			*it1 = NULL;
 			it1 = Bullets.erase(it1);
 		}
 		else
 		{	
-			it1->setPosition(D3DXVECTOR3(it1->getPhys().x, it1->getPhys().y, 0.0f)/*it1->getPhys().x + it1->getVelocity() * BULLET_SPEED * dt*/);
-			it1->init(nBulletModelId, nBulletTextureId);
-			GFX->addToModelRenderList(&(*it1));
+			(*it1)->setPosition(D3DXVECTOR3((*it1)->getPhys().x, (*it1)->getPhys().y, 0.0f)/*it1->getPhys().x + it1->getVelocity() * BULLET_SPEED * dt*/);
+			(*it1)->init(nBulletModelId, nBulletTextureId);
+			GFX->addToModelRenderList(*it1);
 			++it1;
 		}
 	}
@@ -63,6 +65,19 @@ void ProjectileManager::initMissileProjectiles(const int modelId, const int text
 {
 	nMissileModelId = modelId;
 	nMissileTextureId = textureId;
+}
+
+void ProjectileManager::clear()
+{
+	std::list<Bullet*>::iterator bItr;
+	for (bItr = Bullets.begin(); bItr != Bullets.end(); ++bItr) {
+		if (*bItr) {
+			delete *bItr;
+			*bItr = NULL;
+		}
+	}
+	Bullets.clear(); 
+	Missiles.clear(); 
 }
 
 Missile::Missile(const D3DXVECTOR3 pos, const ObjType t, Enemy* targ/* = NULL*/) :

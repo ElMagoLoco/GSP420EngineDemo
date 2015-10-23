@@ -49,7 +49,7 @@ int physics::startWorld()
 // update the simulation by calling this in the main loop.
 int physics::updateWorld(float dt)
 {
-	timeStep = dt; // TODO: for now as we fix
+	//timeStep = dt; // TODO: for now as we fix
 	world->Step(timeStep, velocityIterations, positionIterations);
 
 	// Lets Loop through and create all our objects.
