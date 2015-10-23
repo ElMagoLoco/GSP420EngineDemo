@@ -87,6 +87,9 @@ void Game::Delete()
 void Game::init()
 {
 	App::init();
+
+	nPlayerModel = GFX->loadModel(L"Content\\Models\\PlayerSpaceshipV2.x");
+
 	States[STATE_INIT] = new InitState();
 	States[STATE_MENU] = new MenuState();
 	States[STATE_CREDIT] = new CreditsState();
@@ -96,7 +99,7 @@ void Game::init()
 	States[STATE_INIT]->init();
 	States[STATE_MENU]->init();
 // 	States[STATE_CREDIT]->init();
-// 	States[STATE_PLAY]->init();
+ 	States[STATE_PLAY]->init();
 // 	States[STATE_EXIT]->init();
 	// TODO: change later to be STATE_MENU
 	State = STATE_PLAY;
@@ -105,25 +108,24 @@ void Game::init()
 
 //	gamePhysics = physics();
 	
-	nPlayerModel = GFX->loadModel(L"Content\\Models\\PlayerSpaceshipV2.x");
-	player.init(nPlayerModel, -1);
-	player.setPosition(D3DXVECTOR3(0.0f, 0.0f, 0.0f));
-	player.setFixedRotation(D3DXVECTOR3(0.0f, 0.0f, 0.0f));
-	//player.toggleEnabled();
-
-	PROJECTILES.initBulletProjectiles(GFX->createSphereMesh(5.0f, 25, 25), -1);
-	PROJECTILES.initMissileProjectiles(GFX->createCylinderMesh(5.0f, 15.0f, 5.0f, 25, 25), -1);
-
-	GFX->cameraSetLens(GFX->windowWidth(), GFX->windowHeight(), -1000.0f, 1000.0f);
-
-	gamePhysics.GameObjectManager->addBoxDynamicRigidBody("player", 0, 0, 25, 25, true, &PLAYER.getPhys());
+// 	player.init(nPlayerModel, -1);
+// 	player.setPosition(D3DXVECTOR3(0.0f, 0.0f, 0.0f));
+// 	player.setFixedRotation(D3DXVECTOR3(0.0f, 0.0f, 0.0f));
+// 	//player.toggleEnabled();
+// 
+// 	PROJECTILES.initBulletProjectiles(GFX->createSphereMesh(5.0f, 25, 25), -1);
+// 	PROJECTILES.initMissileProjectiles(GFX->createCylinderMesh(5.0f, 15.0f, 5.0f, 25, 25), -1);
+// 
+// 	GFX->cameraSetLens(GFX->windowWidth(), GFX->windowHeight(), -1000.0f, 1000.0f);
+// 
+// 	gamePhysics->GameObjectManager->addBoxDynamicRigidBody("player", 0, 0, 25, 25, true, &PLAYER.getPhys());
 	//gamePhysics.initBody(&PLAYER.getPhys());
 	
-	PLAYER.physObj.setCollissionCategory((uint16)gameObjectCollissionCategory::gocPLAYER); // I am a player
-	PLAYER.physObj.setCollissionMask((uint16) gocPLAYER || gocMISSLE || gocPICKUP ||gocBOUNDARY || gocENEMY); // i can collide with 
+// 	PLAYER.physObj.setCollissionCategory((uint16)gameObjectCollissionCategory::gocPLAYER); // I am a player
+// 	PLAYER.physObj.setCollissionMask((uint16) gocPLAYER || gocMISSLE || gocPICKUP ||gocBOUNDARY || gocENEMY); // i can collide with 
 
-	gamePhysics.collissionCallBackListener.setCollisionFunction(OnCollision);
-	gamePhysics.startWorld();
+	gamePhysics->collissionCallBackListener.setCollisionFunction(OnCollision);
+	gamePhysics->startWorld();
 
 	gameUI.init();
 }
@@ -142,15 +144,15 @@ void Game::update(const float dt)
 {
 	static float counter = 0.0f;
 	counter += dt;
-//	if (counter >= 0.033333333334f)
+	States[State]->update(dt);
+	if (counter >= 0.033333333334f)
 	{
-		gamePhysics.updateWorld(dt);
+		//gamePhysics->updateWorld(dt);
 		counter = 0.0f;
 	}
 	//gameUI.update(dt, STATE_MENU, false);
 	
-	States[State]->update(dt);
-	GFX->addToModelRenderList(&player);
+	//GFX->addToModelRenderList(&player);
 	//GFX->updateModel(nPlayerModel, player.getPosition());
 	gameUI.update(dt, State, paused);
 }

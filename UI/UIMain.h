@@ -89,7 +89,8 @@ public:
 //		for(healthSize; healthSize > PLAYER.getHealth(); --healthSize) //reduce the health bar size from the difference.
 		{
 //			hpBarSize.right = 500 * (healthSize / 100);
-			GFX->updateSprite(gameSpriteIDs.at(HEALTH), D3DXVECTOR3(350, 400, 0.0f), hpBarSize); // update the information
+			// TODO: SAM: commented out tillI fix the background issue
+		//	GFX->updateSprite(gameSpriteIDs.at(HEALTH), D3DXVECTOR3(350, 400, 0.0f), hpBarSize); // update the information
 		}
 
 		//Missle Bar Update

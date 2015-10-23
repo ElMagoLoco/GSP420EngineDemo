@@ -61,7 +61,7 @@ int gameObjectManager::addBoxDynamicRigidBody(std::string theName,int x, int y, 
 
 	bodyDef.position.Set(P2M*gameObjectLink->x, P2M*gameObjectLink->y);
 
-	b2Body* body = GAMECLASS->GetPhysics().world->CreateBody(&bodyDef);
+	b2Body* body = GAMECLASS->GetPhysics()->world->CreateBody(&bodyDef);
 
 	body->SetUserData(gameObjectLink);
 
@@ -216,7 +216,7 @@ int gameObjectManager::addPolygonNonMovingRigidBody(std::string theName, int x, 
 // finds and returns a the instance of the object by name
 physicsObject* gameObjectManager::findByName(std::string name)
 {
-	return (physicsObject*) gameManangerMap[name];
+	return (physicsObject*) &gameManangerMap[name];
 }
 
 

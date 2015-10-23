@@ -18,7 +18,7 @@ void ProjectileManager::update(const float dt)
 		}
 		else
 		{	
-			it1->setPosition(it1->getPosition() + it1->getVelocity() * BULLET_SPEED * dt);
+			it1->setPosition(D3DXVECTOR3(it1->getPhys().x, it1->getPhys().y, 0.0f)/*it1->getPhys().x + it1->getVelocity() * BULLET_SPEED * dt*/);
 			it1->init(nBulletModelId, nBulletTextureId);
 			GFX->addToModelRenderList(&(*it1));
 			++it1;
@@ -71,8 +71,8 @@ ABC(pos, D3DXVECTOR3(0.f, 0.f, 0.f), t), target(targ)
 	physObj.x = pos.x;
 	physObj.y = pos.y;
 
-	GAMECLASS->GetPhysics().GameObjectManager->addBoxDynamicRigidBody("missile", 0, 0, 5, 5, true, &physObj);
-	//GAMECLASS->GetPhysics().initBody(&physObj);
+	GAMECLASS->GetPhysics()->GameObjectManager->addBoxDynamicRigidBody("missile", 0, 0, 5, 5, true, &physObj);
+	//GAMECLASS->GetPhysics()->initBody(&physObj);
 	physObj.setCollissionCategory((uint16)gameObjectCollissionCategory::gocMISSLE); // I am a missile
 	physObj.setCollissionMask((uint16)gocBOUNDARY || gocENEMY); // i can collide with 
 

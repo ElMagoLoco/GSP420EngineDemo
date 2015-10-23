@@ -9,6 +9,8 @@
 const float M2P = 8.00;
 const float P2M = 1 / M2P;
 
+#define gamePhysics	physics::getInstance()
+
 enum gameObjectCollissionCategory{
 	gocBOUNDARY      = 0x0001,
 	gocPLAYER        = 0x0002,
@@ -42,13 +44,21 @@ public:
 	const int32 velocityIterations = 10;
 	const int32 positionIterations = 6;
 
-	physics();
-
-	physics(float32 gravityX, float32 gravityY);
-
-	~physics();
-
 	gameObjectManager* GameObjectManager; 
+
+	// SAM
+	static physics* getInstance() {
+		if (NULL == pInstance)
+			pInstance = new physics;
+		return pInstance;
+	}
+
+	static void deleteInstance() {
+		if (pInstance) {
+			delete pInstance;
+			pInstance = NULL;
+		}
+	}
 
 	// 
 	//int onStartCollission(void* object1, void* object2);
@@ -61,6 +71,16 @@ public:
 	int startWorld();
 	// update the simulation by calling this in the main loop.
 	int updateWorld(float dt);
+
+private:
+	// SAM : Singleton
+	static physics* pInstance;
+
+	physics();
+
+	physics(float32 gravityX, float32 gravityY);
+
+	~physics();
 };
 
 

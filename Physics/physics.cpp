@@ -1,11 +1,11 @@
 #include "physics.h"
 
-
+physics* physics::pInstance = NULL;
 
 physics::physics(float32 gravityX, float32 gravityY) 
 {
 
-	gravity = b2Vec2(gravityX, gravityY); // need to expose gravtiy in constuctor.
+	gravity = b2Vec2(gravityX, gravityY); // need to expose gravity in constructor.
 	world = new b2World(gravity);
 	GameObjectManager = new gameObjectManager();
 }
@@ -16,7 +16,7 @@ physics::physics(float32 gravityX, float32 gravityY)
 physics::physics()
 {
 	
-    gravity = b2Vec2(0.0f, -0.0f); // need to expose gravtiy in constuctor.
+    gravity = b2Vec2(0.0f, -0.0f); // need to expose gravity in constructor.
 	world = new b2World(gravity);
 	GameObjectManager = new gameObjectManager();
 	
@@ -30,7 +30,7 @@ physics::~physics()
 }
 
 
-// clean up and get rid of any traces of our world phyiscs world
+// clean up and get rid of any traces of our world physics world
 int physics::endWorld()
 {
 	return 0;
@@ -49,13 +49,13 @@ int physics::startWorld()
 // update the simulation by calling this in the main loop.
 int physics::updateWorld(float dt)
 {
-//	timeStep = dt;
+	timeStep = dt; // TODO: for now as we fix
 	world->Step(timeStep, velocityIterations, positionIterations);
 
 	// Lets Loop through and create all our objects.
-	std::map<std::string, physicsObject*>::iterator gameObject;
+	std::map<std::string, physicsObject*>::reverse_iterator gameObject;
 
-	for (gameObject = GameObjectManager->gameManangerMap.begin(); gameObject != GameObjectManager->gameManangerMap.end(); ++gameObject)
+	for (gameObject = GameObjectManager->gameManangerMap.rbegin(); gameObject != GameObjectManager->gameManangerMap.rend(); gameObject++)
 	{
 
 // 		b2PolygonShape dynamicBox;
@@ -158,7 +158,6 @@ int physics::updateWorld(float dt)
 			//*** To do ****
 			//Need to check if object was added or removed after the world was created
 			//and do create or remove it.
-
 			b2Vec2 position = gameObject->second->body->GetPosition();
 			gameObject->second->x = int(position.x*M2P);
 			gameObject->second->y = int(position.y*M2P);
@@ -223,7 +222,7 @@ int physics::initBody(physicsObject* pBody)
 		// flatten to an array
 		b2Vec2* b2vArray = &vertices[0];
 
-		//Yep I know it says box but it is a type of polygonshape.
+		//Yep I know it says box but it is a type of polygon shape.
 		dynamicBox.Set(b2vArray, vertexCount); //pass array to the shape
 	}
 

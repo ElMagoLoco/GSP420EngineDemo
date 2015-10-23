@@ -52,7 +52,7 @@ public:
 	void Run();
 	static Game* Instance();
 	inline bool GetPaused() { return paused; }
-	physics& GetPhysics()	{ return gamePhysics; }
+	physics* GetPhysics()	{ return gamePhysics; }
 	void Delete();
 	//managers
 	AsteroidManager asteroids;
@@ -80,7 +80,7 @@ private:
 	void shutdown();//used upon game exit
 
 	UI_Interface gameUI;
-	physics gamePhysics;
+	//physics gamePhysics;
 	//the present state of the game
 	GameState* States[NUM_STATES];
 	GAMESTATE State;

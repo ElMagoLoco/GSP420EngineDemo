@@ -101,6 +101,20 @@ void PlayState::init()
 	//GAMECLASS->gamePhysics.init();
 	GAMECLASS->player = Player();
 	PLAYER.init(GAMECLASS->nPlayerModel, -1);
+	//PLAYER.init(nPlayerModel, -1);
+	PLAYER.setPosition(D3DXVECTOR3(0.0f, 0.0f, 0.0f));
+	PLAYER.setFixedRotation(D3DXVECTOR3(0.0f, 0.0f, 0.0f));
+	//player.toggleEnabled();
+
+	PROJECTILES.initBulletProjectiles(GFX->createSphereMesh(5.0f, 25, 25), -1);
+	PROJECTILES.initMissileProjectiles(GFX->createCylinderMesh(5.0f, 15.0f, 5.0f, 25, 25), -1);
+
+	GFX->cameraSetLens(GFX->windowWidth(), GFX->windowHeight(), -1000.0f, 1000.0f);
+
+	gamePhysics->GameObjectManager->addBoxDynamicRigidBody("player1", 0, 0, 25, 25, true, &PLAYER.getPhys());
+	gamePhysics->GameObjectManager->addBoxDynamicRigidBody("player2", 20, 20, 25, 25, true, &PLAYER.getPhys());
+	gamePhysics->GameObjectManager->addBoxDynamicRigidBody("player3", 300, 300, 25, 25, true, &PLAYER.getPhys());
+	gamePhysics->GameObjectManager->addBoxDynamicRigidBody("player4", 200, 200, 25, 25, true, &PLAYER.getPhys());
 	//load model/texture resources
 	//init player
 	//PLAYER.init(1,1);//need to get what IDs to use from graphics
@@ -177,7 +191,9 @@ void PlayState::update(const float dt)
 				PICKUPS.update(dt);
 				PROJECTILES.update(dt);
 				//GAMECLASS->gameUI.update(dt, STATE_PLAY, GAMECLASS->paused);
+				GFX->addToModelRenderList(&PLAYER);
 			}
+			gamePhysics->updateWorld(dt);
 		}
 		//after updating, check for any state changes due to UI things
 		//GAMECLASS->changeState(GAMECLASS->gameUI.checkStateChanges());
