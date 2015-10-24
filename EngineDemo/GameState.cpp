@@ -150,6 +150,15 @@ void PlayState::update(const float dt)
 			{
 				//listen for player input
 				//the cool down for bullet and missile firing is built into the player class
+				
+
+				// Z AND X Rotate the ship. need code to make allow it to move and face the correct direction : Darrel Hidle.
+				if (INPUT->KeyDown(DIK_Z))
+					PLAYER.physObj.applyTorqueFromCenter(-PLAYER_SPEED/10);
+
+				if (INPUT->KeyDown(DIK_X))
+					PLAYER.physObj.applyTorqueFromCenter(PLAYER_SPEED/10);
+				
 				if (INPUT->KeyDown(DIK_SPACE))
 					PLAYER.fireBullet();
 				else
@@ -177,6 +186,8 @@ void PlayState::update(const float dt)
 				pos.y = (float)PLAYER.getPhys().y;
 				pos.z = 0.0f;
 				PLAYER.setPosition(pos/*PLAYER.getPosition() + PLAYER.getVelocity() * dt * 100*/);
+				PLAYER.setFixedRotation(D3DXVECTOR3(0.0, 0.0, PLAYER.physObj.body->GetAngularVelocity()));
+			
 				//update AI/physics first so they can flag objects
 				//GAMECLASS->gameAI.update(dt);
 				//GAMECLASS->gamePhysics.update(dt);
