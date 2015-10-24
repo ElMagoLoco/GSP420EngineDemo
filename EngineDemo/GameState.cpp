@@ -30,7 +30,7 @@ void MenuState::init()
 
 void MenuState::update(const float dt)
 {
-	float x = -1, y = -1;
+	float x = 0, y = 0;
 	//	GAMECLASS->gameAudio.update(dt);
 	INPUT->Poll();
 	// PHYSICS: add 
@@ -38,9 +38,10 @@ void MenuState::update(const float dt)
 	if (INPUT->MouseButtonDown(MOUSE_LEFT)) {
 		x = INPUT->MouseDX(); 
 		y = INPUT->MouseDY();
+		x = 260; y = 360;
 	}
 	GAMECLASS->gameUI.update(dt, STATE_MENU, GAMECLASS->paused, x, y);
-	//GAMECLASS->changeState(GAMECLASS->gameUI.checkStateChanges());
+	GAMECLASS->changeState(GAMECLASS->gameUI.checkStateChanges());
 }
 
 void MenuState::render()
@@ -72,11 +73,20 @@ void CreditsState::init()
 
 void CreditsState::update(const float dt)
 {
+	float x = 0, y = 0;
+	//	GAMECLASS->gameAudio.update(dt);
 	INPUT->Poll();
+	// PHYSICS: add 
+	int MOUSE_LEFT = 0;
+	if (INPUT->MouseButtonDown(MOUSE_LEFT)) {
+		x = INPUT->MouseDX();
+		y = INPUT->MouseDY();
+		x = 260; y = 360;
+	}
 	// PHYSICS: add update
 	//GAMECLASS->gameAudio.update(dt);
-	//GAMECLASS->gameUI.update(dt, STATE_CREDIT, GAMECLASS->paused);
-	//GAMECLASS->changeState(GAMECLASS->gameUI.checkStateChanges());
+	GAMECLASS->gameUI.update(dt, STATE_CREDIT, GAMECLASS->paused, 0,0);
+	GAMECLASS->changeState(GAMECLASS->gameUI.checkStateChanges());
 }
 
 void CreditsState::render()

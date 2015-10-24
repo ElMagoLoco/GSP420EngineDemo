@@ -85,7 +85,7 @@ public:
 			currentState = STATE_PLAY;
 		}
 
-		if (spriteClicked(x, y, menuSpriteIDs[2]))
+		if (spriteClicked(x, y, menuSpriteIDs[3]))
 		{
 			currentState = STATE_CREDIT;
 		}
@@ -122,9 +122,18 @@ public:
 			GFX->addToSpriteRenderList(&pauseSpriteIDs[0], pauseSpriteIDs.size());
 		}
 	}
-	void updateExit() {
+	void updateCredits(float x, float y) {
 		// tell Graphics which sprites to draw
 		GFX->addToSpriteRenderList(&exitSpriteIDs[0], exitSpriteIDs.size());
+		currentState = STATE_CREDIT;
+
+		if (spriteClicked(x, y, exitSpriteIDs[0])) {
+			currentState = STATE_MENU;
+		}
+	}
+	void updateExit() {
+		// tell Graphics which sprites to draw
+		//GFX->addToSpriteRenderList(&exitSpriteIDs[0], exitSpriteIDs.size());
 		currentState = STATE_EXIT;
 	}
 };

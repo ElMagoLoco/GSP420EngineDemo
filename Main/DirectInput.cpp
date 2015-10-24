@@ -115,7 +115,7 @@ float DirectInput::MouseDX()
 }
 //the amount the mouse moved in the y direction this frame
 float DirectInput::MouseDY()
-{
+{ 
 	return (float)MouseState.lY;
 }
 //the amount the mouse moved in the z direction this frame

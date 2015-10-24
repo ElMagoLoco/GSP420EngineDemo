@@ -16,7 +16,7 @@ public:
 		pauseSpriteIDs.push_back(GFX->loadSprite(L"..\\EngineDemo\\Content\\Sprites\\Background.jpg", D3DXVECTOR3(0.0f, 0.0f, 0.0f)));
  		pauseSpriteIDs.push_back(GFX->loadSprite(L"..\\EngineDemo\\Content\\Sprites\\Paused.jpg", D3DXVECTOR3(300, 100, 0.0f)));
  		//pauseSpriteIDs.push_back(GFX->loadSprite(L"..\\EngineDemoContent\\Sprites\\Back.jpg", D3DXVECTOR3(350, 400, 0.0f)));
-		//exitSpriteIDs.push_back(GFX->loadSprite(L"..\\EngineDemo\\Content\\Sprites\\Gameover.jpg", D3DXVECTOR3(0.0f, 0.0f, 0.0f)));
+		exitSpriteIDs.push_back(GFX->loadSprite(L"..\\EngineDemo\\Content\\Sprites\\Back.jpg", D3DXVECTOR3( 700, 700, 0.0f)));
 
 	}
 
@@ -33,6 +33,9 @@ public:
 				break;
 			case STATE_PLAY:
 				updateGame();
+				break;
+			case STATE_CREDIT:
+				updateCredits(x,y);
 				break;
 			case STATE_EXIT:
 				updateExit();

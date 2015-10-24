@@ -155,7 +155,7 @@ void Game::update(const float dt)
 	
 	//GFX->addToModelRenderList(&player);
 	//GFX->updateModel(nPlayerModel, player.getPosition());
-	gameUI.update(dt, State, paused, 0, 0);
+	//gameUI.update(dt, State, paused, 0, 0);
 }
 
 void Game::render()
