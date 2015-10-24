@@ -26,17 +26,18 @@ void ProjectileManager::update(const float dt)
 			++it1;
 		}
 	}
-	std::list<Missile>::iterator it2 = Missiles.begin();
+	std::list<Missile*>::iterator it2 = Missiles.begin();
 	while (it2 != Missiles.end())
 	{
-		if (!it2->isEnabled())
+		if (!(*it2)->isEnabled()) {
+			delete *it2;
+			*it2 = NULL;
 			it2 = Missiles.erase(it2);
+		}
 		else {
-			it2->getPhys().applyForceFromCenter(0.0f, MISSILE_SPEED);
-			it2->setPosition(D3DXVECTOR3(it2->getPhys().x, it2->getPhys().y, 0.0f));
-// 			it2->setPosition(it2->getPosition() + it2->getVelocity() * MISSILE_SPEED * dt);
- 			it2->init(nMissileModelId, nMissileTextureId);
-			GFX->addToModelRenderList(&(*it2));
+			(*it2)->setPosition(D3DXVECTOR3((*it2)->getPhys().x, (*it2)->getPhys().y, 0.0f));
+			(*it2)->init(nMissileModelId, nMissileTextureId);
+			GFX->addToModelRenderList(*it2);
 			++it2;
 		}
 	}
@@ -44,13 +45,13 @@ void ProjectileManager::update(const float dt)
 
 void ProjectileManager::removeTarget(Enemy* targ)
 {
-	for (std::list<Missile>::iterator it = Missiles.begin(), end = Missiles.end();
+	for (std::list<Missile*>::iterator it = Missiles.begin(), end = Missiles.end();
 	it != end; ++it)
 	{
 		//if it is a player missile and has a matching target, set the target to NULL instead
-		if (it->getEnemyTarget() == targ)
+		if ((*it)->getEnemyTarget() == targ)
 		{
-			it->setEnemyTarget(NULL);
+			(*it)->setEnemyTarget(NULL);
 		}
 	}
 }
@@ -76,19 +77,31 @@ void ProjectileManager::clear()
 			*bItr = NULL;
 		}
 	}
+
+	std::list<Missile*>::iterator mItr;
+	for (mItr = Missiles.begin(); mItr != Missiles.end(); ++mItr) {
+		if (*mItr) {
+			delete *mItr;
+			*mItr = NULL;
+		}
+	}
+
 	Bullets.clear(); 
+	Bullets.resize(0);
 	Missiles.clear(); 
+	Missiles.resize(0);
 }
 
 Missile::Missile(const D3DXVECTOR3 pos, const ObjType t, Enemy* targ/* = NULL*/) :
 ABC(pos, D3DXVECTOR3(0.f, 0.f, 0.f), t), target(targ)
 {
-	physObj.x = pos.x;
-	physObj.y = pos.y;
-
-	GAMECLASS->GetPhysics()->GameObjectManager->addBoxDynamicRigidBody("missile", 0, 0, 5, 5, true, &physObj);
-	//GAMECLASS->GetPhysics()->initBody(&physObj);
-	physObj.setCollissionCategory((uint16)gameObjectCollissionCategory::gocMISSLE); // I am a missile
-	physObj.setCollissionMask((uint16)gocBOUNDARY || gocENEMY); // i can collide with 
+// 	static int id = 0;
+// 	physObj.x = pos.x;
+// 	physObj.y = pos.y;
+// 	std::string missileNme = "PlayerMissile" + to_string(id);
+// 	++id;
+// 	GAMECLASS->GetPhysics()->GameObjectManager->addBoxDynamicRigidBody(missileNme, 0, 0, 5, 5, true, &physObj);
+// 	physObj.setCollissionCategory((uint16)gameObjectCollissionCategory::gocMISSLE); // I am a missile
+// 	physObj.setCollissionMask((uint16)gocBOUNDARY || gocENEMY); // i can collide with 
 
 }

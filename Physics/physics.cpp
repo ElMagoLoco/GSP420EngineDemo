@@ -53,9 +53,9 @@ int physics::updateWorld(float dt)
 	world->Step(timeStep, velocityIterations, positionIterations);
 
 	// Lets Loop through and create all our objects.
-	std::map<std::string, physicsObject*>::reverse_iterator gameObject;
+	std::map<std::string, physicsObject*>::iterator gameObject;
 
-	for (gameObject = GameObjectManager->gameManangerMap.rbegin(); gameObject != GameObjectManager->gameManangerMap.rend(); gameObject++)
+	for (gameObject = GameObjectManager->gameManangerMap.begin(); gameObject != GameObjectManager->gameManangerMap.end(); gameObject++)
 	{
 
 // 		b2PolygonShape dynamicBox;

@@ -44,20 +44,20 @@ void AI::update(const float dt, GSP420::ABC *player)
 		enemyIt++;
 	}
 
-	// Iterate through the list of projectiles and updtae their AI based on their type
-	std::list<Missile> missiles = PROJECTILES.getMissiles();
-	std::list<Missile>::iterator missileIt = missiles.begin();
+	// Iterate through the list of projectiles and update their AI based on their type
+	std::list<Missile*> missiles = PROJECTILES.getMissiles();
+	std::list<Missile*>::iterator missileIt = missiles.begin();
 	while (missileIt != missiles.end())
 	{
-		switch (missileIt->getObjectType())
+		switch ((*missileIt)->getObjectType())
 		{
 		case OT_PLAYER_MISSILE:
 		{
-			playerMissUpdate(*missileIt, &enemies, player);
+			playerMissUpdate(*(*missileIt), &enemies, player);
 		} break;
 		case OT_ENEMY_MISSILE:
 		{
-			enemyMissUpdate(*missileIt, player, dt);
+			enemyMissUpdate(*(*missileIt), player, dt);
 		} break;
 		}
 

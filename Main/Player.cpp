@@ -13,12 +13,12 @@ void Player::fireBullet()
 		static int id = 0;
 		++id;
 		string name = "PlayerBullet" + to_string(id);
-		GAMECLASS->GetPhysics()->GameObjectManager->addBoxDynamicRigidBody(name,
+		gamePhysics->GameObjectManager->addBoxDynamicRigidBody(name,
 			physObj.x, physObj.y, BULLET_SIZE, BULLET_SIZE, true, &b->physObj);
-	//	GAMECLASS->GetPhysics()->initBody(&b.physObj);
 	//	b.physObj.setCollissionCategory((uint16)gameObjectCollissionCategory::gocMISSLE);
 	//	b.physObj.setCollissionMask((uint16)gocENEMY | gocBOUNDARY);
-		b->physObj.applyForceFromCenter(BULLET_START_DIRECTION.x, BULLET_START_DIRECTION.y);
+		b->physObj.applyImpulseFromCenter(BULLET_START_DIRECTION.x, BULLET_START_DIRECTION.y);
+
 		PROJECTILES.addBullet(b);
 		lastBullet = BULLET_COOL_DOWN;
 	}
@@ -29,8 +29,17 @@ void Player::fireMissile()
 	if (lastMissile <= 0 && missileAmmo > 0)
 	{
 		//create missile with velocity, position, and target
-		Missile m = Missile(position, OT_PLAYER_MISSILE);
+		Missile* m = new Missile(position, OT_PLAYER_MISSILE);
 		//m.init(1, 1); need to find out what to use for IDs from graphics
+		static int id = 0;
+		std::string missileNme = "PlayerMissile" + to_string(id);
+		++id;
+		gamePhysics->GameObjectManager->addBoxDynamicRigidBody(missileNme,
+												physObj.x, physObj.y, MISSILE_RADIUS, MISSILE_RADIUS, true, &m->physObj);
+// 		m->physObj.setCollissionCategory((uint16)gameObjectCollissionCategory::gocMISSLE); // I am a missile
+// 		m->physObj.setCollissionMask((uint16)gocBOUNDARY || gocENEMY); // i can collide with 
+		m->physObj.applyImpulseFromCenter(0.0f, MISSILE_SPEED);
+
 		PROJECTILES.addMissile(m);
 		--missileAmmo;
 		lastMissile = MISSILE_COOL_DOWN;

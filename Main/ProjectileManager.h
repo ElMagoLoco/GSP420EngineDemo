@@ -9,7 +9,7 @@
 static const int BULLET_DAMAGE = 1;
 static const int MISSILE_DAMAGE = 2;
 static const int COLLISION_DAMAGE = 1;
-static const int MISSILE_RADIUS = 50;
+static const int MISSILE_RADIUS = 5;
 static const int BULLET_SIZE = 2;
 
 const static float BULLET_SPEED = 500.f;
@@ -50,7 +50,7 @@ public:
 	void initBulletProjectiles(const int modelId, const int textureId);
 	void initMissileProjectiles(const int modelId, const int textureId);
 	inline void addBullet(Bullet* b) { Bullets.push_front(b); }
-	inline void addMissile(Missile m) { Missiles.push_front(m); }
+	inline void addMissile(Missile* m) { Missiles.push_front(m); }
 	void update(const float);
 	void clear();
 	void removeTarget(Enemy*);//if any missiles are targeting that enemy, set their targets to NULL instead
@@ -65,8 +65,8 @@ public:
 private:
 	inline std::list<Bullet*>& getBullets() { return Bullets; }
 	std::list<Bullet*> Bullets;
-	inline std::list<Missile>& getMissiles() { return Missiles; }
-	std::list<Missile> Missiles;
+	inline std::list<Missile*>& getMissiles() { return Missiles; }
+	std::list<Missile*> Missiles;
 
 	int nBulletModelId;
 	int nBulletTextureId;
