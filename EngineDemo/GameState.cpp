@@ -158,15 +158,15 @@ void PlayState::update(const float dt)
 					PLAYER.fireMissile();
 				//player movement
 				float x, y;
-				if (INPUT->KeyDown(DIK_W))
+				if (INPUT->KeyDown(DIK_W) || INPUT->KeyDown(DIK_UP))
 					y = PLAYER_SPEED;
-				else if (INPUT->KeyDown(DIK_S))
+				else if (INPUT->KeyDown(DIK_S) || INPUT->KeyDown(DIK_DOWN))
 					y = -PLAYER_SPEED;
 				else
 					y = 0.f;
-				if (INPUT->KeyDown(DIK_A))
+				if (INPUT->KeyDown(DIK_A) || INPUT->KeyDown(DIK_LEFT))
 					x = -PLAYER_SPEED;
-				else if (INPUT->KeyDown(DIK_D))
+				else if (INPUT->KeyDown(DIK_D) || INPUT->KeyDown(DIK_RIGHT))
 					x = PLAYER_SPEED;
 				else
 					x = 0.f;
