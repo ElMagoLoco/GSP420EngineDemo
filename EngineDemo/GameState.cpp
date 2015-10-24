@@ -34,7 +34,8 @@ void MenuState::update(const float dt)
 	//	GAMECLASS->gameAudio.update(dt);
 	INPUT->Poll();
 	// PHYSICS: add 
-	if (INPUT->MouseButtonDown(DIMOFS_BUTTON5)) {
+	int MOUSE_LEFT = 0;
+	if (INPUT->MouseButtonDown(MOUSE_LEFT)) {
 		x = INPUT->MouseDX(); 
 		y = INPUT->MouseDY();
 	}
