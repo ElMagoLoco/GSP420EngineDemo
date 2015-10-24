@@ -24,12 +24,12 @@ public:
 		return currentState;
 	}
 
-	void update(const float dt, const GAMESTATE state, const bool paused) {
+	void update(const float dt, const GAMESTATE state, const bool paused, float x, float y) {
 		currentState = state;
 		if (!paused) {
 			switch(state) {
 			case STATE_MENU:
-				updateMenu();
+				updateMenu(x,y);
 				break;
 			case STATE_PLAY:
 				updateGame();

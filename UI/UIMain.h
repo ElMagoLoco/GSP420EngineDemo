@@ -34,18 +34,34 @@ protected:
 	RECT hpBarSize;
 
 private:
-	bool spriteClicked(int spriteID)
+	//bool spriteClicked(DirectInput *suppliedInput, int spriteID)
+	//{
+	//	if (suppliedInput->MouseDX() >  GFXCore::Graphics::get()->getSpritePosX(spriteID) 
+	//		&& suppliedInput->MouseDX() < GFXCore::Graphics::get()->getSpritePosX(spriteID) 
+	//		+ GFXCore::Graphics::get()->getSpriteWidth(spriteID))
+	//	{
+	//		if (suppliedInput->MouseDY() > GFXCore::Graphics::get()->getSpritePosY(spriteID) 
+	//			&& suppliedInput->MouseDY() < GFXCore::Graphics::get()->getSpritePosY(spriteID) 
+	//			+ GFXCore::Graphics::get()->getSpriteHeight(spriteID))
+	//		{
+	//			return true;
+	//		}
+	//	}
+	//	return false;
+	//}
+	bool spriteClicked(float x, float y, int spriteID)
 	{
-		if (INPUT->MouseDX() >  GFX->getSpritePosX(spriteID) && INPUT->MouseDX() < GFX->getSpritePosX(spriteID) + GFX->getSpriteWidth(spriteID))
+		if (x >  GFXCore::Graphics::get()->getSpritePosX(spriteID) 
+			&& x < GFXCore::Graphics::get()->getSpritePosX(spriteID) + GFXCore::Graphics::get()->getSpriteWidth(spriteID))
 		{
-			if (INPUT->MouseDY() > GFX->getSpritePosY(spriteID) && INPUT->MouseDY() < GFX->getSpritePosY(spriteID) + GFX->getSpriteHeight(spriteID))
+			if (y > GFXCore::Graphics::get()->getSpritePosY(spriteID)
+				&& y < GFXCore::Graphics::get()->getSpritePosY(spriteID) + GFXCore::Graphics::get()->getSpriteHeight(spriteID))
 			{
 				return true;
 			}
 		}
 		return false;
 	}
-	
 public:
 
 	UIMain(): currentState(STATE_INIT), currentScore(0), missileAmmo(0) {
@@ -58,23 +74,20 @@ public:
 	~UIMain() {}
 
 	
-	void updateMenu() {
+	void updateMenu(float x, float y) {
 		// tells graphics what to draw
 		GFX->addToSpriteRenderList(&menuSpriteIDs[0], menuSpriteIDs.size());
 
 		// check for mouse input
 		int MOUSE_LEFT = 0;
-		if (INPUT->MouseButtonDown(MOUSE_LEFT))
+		if(spriteClicked(x, y, menuSpriteIDs[2]))
 		{
-			if (spriteClicked(menuSpriteIDs[START]))
-			{
-				currentState = STATE_PLAY;
-			}
+			currentState = STATE_PLAY;
+		}
 
-			if (spriteClicked(menuSpriteIDs[CREDITS]))
-			{
-				currentState = STATE_CREDIT;
-			}
+		if (spriteClicked(x, y, menuSpriteIDs[2]))
+		{
+			currentState = STATE_CREDIT;
 		}
 	}
 

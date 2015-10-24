@@ -103,7 +103,7 @@ void Game::init()
 // 	States[STATE_EXIT]->init();
 	// TODO: change later to be STATE_MENU
 	//State = STATE_MENU;
-	State = STATE_PLAY;
+	State = STATE_MENU;
 	QuitNow = false;
 	GFX->initModules();
 
@@ -155,7 +155,7 @@ void Game::update(const float dt)
 	
 	//GFX->addToModelRenderList(&player);
 	//GFX->updateModel(nPlayerModel, player.getPosition());
-	gameUI.update(dt, State, paused);
+	gameUI.update(dt, State, paused, 0, 0);
 }
 
 void Game::render()

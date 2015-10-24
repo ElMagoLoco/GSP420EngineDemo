@@ -30,10 +30,15 @@ void MenuState::init()
 
 void MenuState::update(const float dt)
 {
+	float x = -1, y = -1;
 	//	GAMECLASS->gameAudio.update(dt);
 	INPUT->Poll();
-	// PHYSICS: add update
-	GAMECLASS->gameUI.update(dt, STATE_MENU, GAMECLASS->paused);
+	// PHYSICS: add 
+	if (INPUT->MouseButtonDown(DIMOFS_BUTTON5)) {
+		x = INPUT->MouseDX(); 
+		y = INPUT->MouseDY();
+	}
+	GAMECLASS->gameUI.update(dt, STATE_MENU, GAMECLASS->paused, x, y);
 	//GAMECLASS->changeState(GAMECLASS->gameUI.checkStateChanges());
 }
 
@@ -141,7 +146,7 @@ void PlayState::update(const float dt)
 		}
 		if (GAMECLASS->paused)
 		{
-			GAMECLASS->gameUI.update(dt, STATE_PLAY, true);
+			GAMECLASS->gameUI.update(dt, STATE_PLAY, true, 0,0);
 		}
 		else
 		{
@@ -192,13 +197,13 @@ void PlayState::update(const float dt)
 				//GAMECLASS->gameAI.update(dt);
 				//GAMECLASS->gamePhysics.update(dt);
 				//then we update the objects to see which are flagged
-				GAMECLASS->gameUI.update(dt, STATE_PLAY, GAMECLASS->paused);
+				GAMECLASS->gameUI.update(dt, STATE_PLAY, GAMECLASS->paused, 0,0);
 				PLAYER.update(dt);
 				ASTEROIDS.update(dt);
 				ENEMIES.update(dt);
 				PICKUPS.update(dt);
 				PROJECTILES.update(dt);
-				//GAMECLASS->gameUI.update(dt, STATE_PLAY, GAMECLASS->paused);
+				//GAMECLASS->gameUI.update(dt, STATE_PLAY, GAMECLASS->paused, *INPUT);
 				GFX->addToModelRenderList(&PLAYER);
 			}
 		}
