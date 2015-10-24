@@ -224,7 +224,7 @@ physicsObject* gameObjectManager::findByName(std::string name)
 int gameObjectManager::removeByName(std::string name)
 {
 	
-	
+	gameManangerMap[name]->markedForDeath = true;
 	return 0;
 }
 

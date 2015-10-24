@@ -158,14 +158,17 @@ int physics::updateWorld(float dt)
 			//*** To do ****
 			//Need to check if object was added or removed after the world was created
 			//and do create or remove it.
-			b2Vec2 position = gameObject->second->body->GetPosition();
-			gameObject->second->x = int(position.x*M2P);
-			gameObject->second->y = int(position.y*M2P);
-			float32 theAngle = gameObject->second->body->GetAngle();
-			gameObject->second->angle = theAngle;
+			if (gameObject->second->body != NULL) {
+				b2Vec2 localposition = gameObject->second->body->GetPosition();
+				gameObject->second->x = int(localposition.x*M2P);
+				gameObject->second->y = int(localposition.y*M2P);
+				float32 theAngle = gameObject->second->body->GetAngle();
+				gameObject->second->angle = theAngle;
 
-			if (gameObject->second->markedForDeath) {
-				gameObject->second->body->GetWorld()->DestroyBody(gameObject->second->body);
+				if (gameObject->second->markedForDeath) {
+					gameObject->second->body->GetWorld()->DestroyBody(gameObject->second->body);
+				}
+
 			}
 
 		}
