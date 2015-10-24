@@ -40,7 +40,7 @@ void MenuState::update(const float dt)
 		y = INPUT->MouseDY();
 		x = 260; y = 360;
 	}
-	GAMECLASS->gameUI.update(dt, STATE_MENU, GAMECLASS->paused, x, y);
+	GAMECLASS->gameUI.update(PLAYER, STATE_MENU, GAMECLASS->paused, x, y);
 	GAMECLASS->changeState(GAMECLASS->gameUI.checkStateChanges());
 }
 
@@ -85,7 +85,7 @@ void CreditsState::update(const float dt)
 	}
 	// PHYSICS: add update
 	//GAMECLASS->gameAudio.update(dt);
-	GAMECLASS->gameUI.update(dt, STATE_CREDIT, GAMECLASS->paused, 0,0);
+	GAMECLASS->gameUI.update(PLAYER, STATE_CREDIT, GAMECLASS->paused, 0,0);
 	GAMECLASS->changeState(GAMECLASS->gameUI.checkStateChanges());
 }
 
@@ -157,7 +157,7 @@ void PlayState::update(const float dt)
 		}
 		if (GAMECLASS->paused)
 		{
-			GAMECLASS->gameUI.update(dt, STATE_PLAY, true, 0,0);
+			GAMECLASS->gameUI.update(PLAYER, STATE_PLAY, true, 0,0);
 		}
 		else
 		{
@@ -208,7 +208,7 @@ void PlayState::update(const float dt)
 				//GAMECLASS->gameAI.update(dt);
 				//GAMECLASS->gamePhysics.update(dt);
 				//then we update the objects to see which are flagged
-				GAMECLASS->gameUI.update(dt, STATE_PLAY, GAMECLASS->paused, 0,0);
+				GAMECLASS->gameUI.update(PLAYER, STATE_PLAY, GAMECLASS->paused, 0,0);
 				PLAYER.update(dt);
 				ASTEROIDS.update(dt);
 				ENEMIES.update(dt);

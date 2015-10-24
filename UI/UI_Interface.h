@@ -1,3 +1,4 @@
+// UI_Interface written by Chris Randall unless otherwise noted
 #pragma once
 #include "UIMain.h"
 
@@ -24,7 +25,7 @@ public:
 		return currentState;
 	}
 
-	void update(const float dt, const GAMESTATE state, const bool paused, float x, float y) {
+	void update(Player & player, const GAMESTATE state, const bool paused, float x, float y) {
 		currentState = state;
 		if (!paused) {
 			switch(state) {
@@ -32,7 +33,7 @@ public:
 				updateMenu(x,y);
 				break;
 			case STATE_PLAY:
-				updateGame();
+				updateGame(player);
 				break;
 			case STATE_CREDIT:
 				updateCredits(x,y);

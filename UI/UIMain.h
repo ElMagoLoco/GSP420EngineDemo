@@ -1,11 +1,5 @@
-//Who needs what?
-//Main:
-//	update functions
-//	gamestate change
-//Graphics:
-//	position & filename of sprites
-//Physics:
-//	Size & position of buttons
+// UIMain.h
+// Written by Chris Randall unless otherwise noted
 #pragma once
 #include "..\EngineDemo\GameState.h"
 #include "..\D3D9Graphics\GFX.h"
@@ -34,21 +28,7 @@ protected:
 	RECT hpBarSize;
 
 private:
-	//bool spriteClicked(DirectInput *suppliedInput, int spriteID)
-	//{
-	//	if (suppliedInput->MouseDX() >  GFXCore::Graphics::get()->getSpritePosX(spriteID) 
-	//		&& suppliedInput->MouseDX() < GFXCore::Graphics::get()->getSpritePosX(spriteID) 
-	//		+ GFXCore::Graphics::get()->getSpriteWidth(spriteID))
-	//	{
-	//		if (suppliedInput->MouseDY() > GFXCore::Graphics::get()->getSpritePosY(spriteID) 
-	//			&& suppliedInput->MouseDY() < GFXCore::Graphics::get()->getSpritePosY(spriteID) 
-	//			+ GFXCore::Graphics::get()->getSpriteHeight(spriteID))
-	//		{
-	//			return true;
-	//		}
-	//	}
-	//	return false;
-	//}
+	//Pseudocode written by Aaron Vienneau
 	bool spriteClicked(float x, float y, int spriteID)
 	{
 		if (x >  GFXCore::Graphics::get()->getSpritePosX(spriteID) 
@@ -91,29 +71,22 @@ public:
 		}
 	}
 
-	void updateGame() {
-		//int healthSize = PLAYER.getMaxHealth();
-		//int currAmmo = PLAYER.getMissileAmmo();
+	// Game update written by Bill Bowden
+	void updateGame(Player & player) {
+		int healthSize = player.getMaxHealth();
+		int currAmmo = player.getMissileAmmo();
 		// tells graphics what to draw
 		GFX->addToSpriteRenderList(&gameSpriteIDs[0], gameSpriteIDs.size());
 
-		// update health bar and number of missiles
-
 		//Health bar update
-//		for(healthSize; healthSize > PLAYER.getHealth(); --healthSize) //reduce the health bar size from the difference.
+		for (healthSize; healthSize > player.getHealth(); --healthSize) //reduce the health bar size from the difference.
 		{
-			//hpBarSize.right = 500 * (healthSize / 100);
+			hpBarSize.right = 500 * (healthSize / 100);
 			// TODO: SAM: commented out tillI fix the background issue
-			//GFX->updateSprite(gameSpriteIDs.at(HEALTH), D3DXVECTOR3(350, 400, 0.0f), hpBarSize); // update the information
+			GFX->updateSprite(gameSpriteIDs.at(3), D3DXVECTOR3(350, 400, 0.0f), hpBarSize); // update the information
 		}
 
 		//Missle Bar Update
-		//for (int i = 0; i < )
-		//GFX->text->updateText(currAmmogetMissile//update the information
-		
-		// Main has getHealth(), getMaxHealth(), and getMissileAmmo() functions that we can use. 
-		//  They've also provided me with their code. I haven't uploaded it, but if you want to 
-		//  see it, let me know.
 	}
 
 	void updatePause(const bool paused) {
