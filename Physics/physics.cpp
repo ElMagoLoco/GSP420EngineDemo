@@ -164,6 +164,10 @@ int physics::updateWorld(float dt)
 			float32 theAngle = gameObject->second->body->GetAngle();
 			gameObject->second->angle = theAngle;
 
+			if (gameObject->second->markedForDeath) {
+				gameObject->second->body->GetWorld()->DestroyBody(gameObject->second->body);
+			}
+
 		}
 
 		

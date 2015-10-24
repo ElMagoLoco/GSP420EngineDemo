@@ -23,6 +23,7 @@ public:
 	bool   isColliding; 
 	bool   isDynamic;
 	bool   isStatic; 
+	bool   markedForDeath;
 	int    x; 
 	int    y; 
 	int    halfHeight; 
@@ -38,7 +39,7 @@ public:
 	// turn off the physics object but not remove it. It will not react to physics or collisions
 	int deactivate();
 	// remove this object from the game manager. This is  stub method that will call the gameManagers remove method
-	int remove();
+	int markForDeath();
 	int applyForceFromCenter(float32 x, float32 y);
 	int applyImpulseFromCenter(float32 x, float32 y);
 	int applyTorqueFromCenter(float32 rotation);

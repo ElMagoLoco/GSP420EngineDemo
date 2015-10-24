@@ -86,10 +86,23 @@ void Player::update(const float dt)
 	//make sure we don't go offscreen
 	int screenRadX = (GFX->windowWidth()) / 2 - 20;
 	int screenRadY = (GFX->windowHeight()) / 2 - 20;
+
+	/*
+
+	 should not change player x and y it will mess with physics. 
 	if (physObj.x < -screenRadX)	physObj.x = -screenRadX;
 	if (physObj.x > screenRadX)		physObj.x = screenRadX;
 	if (physObj.y < -screenRadY)	physObj.y = -screenRadY;
 	if (physObj.y > screenRadY)		physObj.y = screenRadY;
+
+	*/
+
+	//Instead apply an force to keep it from going 
+	if (physObj.x < -screenRadX) physObj.applyForceFromCenter(PLAYER_SPEED, 0.0);
+	if (physObj.x > screenRadX)	 physObj.applyForceFromCenter(-PLAYER_SPEED, 0.0);
+	if (physObj.y < -screenRadY) physObj.applyForceFromCenter(0.00, PLAYER_SPEED);
+	if (physObj.y > screenRadY)	 physObj.applyForceFromCenter(0.00, -PLAYER_SPEED);
+
 	//count timers
 	if (invulnerable > 0.f)
 		invulnerable -= dt;

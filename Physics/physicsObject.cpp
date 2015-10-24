@@ -4,8 +4,9 @@
 physicsObject::physicsObject() 
 { 
  
-	body      = NULL; 
-    userData  = NULL; 
+	body           = NULL; 
+    userData       = NULL; 
+	markedForDeath = false;
 	collissionCategory = 0; //Im a thing
 	collissionMask = 0;     // I collide with everything.
 }
@@ -31,8 +32,9 @@ int physicsObject::deactivate()
 
 
 // remove this object from the game manager. This is  stub method that will call the gameManagers remove method
-int physicsObject::remove()
+int physicsObject::markForDeath()
 {
+	markedForDeath = true;
 	return 0;
 }
 

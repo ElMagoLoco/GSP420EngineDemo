@@ -102,7 +102,8 @@ void Game::init()
  	States[STATE_PLAY]->init();
 // 	States[STATE_EXIT]->init();
 	// TODO: change later to be STATE_MENU
-	State = STATE_MENU;
+	//State = STATE_MENU;
+	State = STATE_PLAY;
 	QuitNow = false;
 	GFX->initModules();
 

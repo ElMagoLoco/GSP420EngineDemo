@@ -223,6 +223,8 @@ physicsObject* gameObjectManager::findByName(std::string name)
 // finds and returns a the instance of the object by name
 int gameObjectManager::removeByName(std::string name)
 {
+	
+	
 	return 0;
 }
 
