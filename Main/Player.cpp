@@ -29,11 +29,15 @@ void Player::fireMissile()
 	if (lastMissile <= 0 && missileAmmo > 0)
 	{
 		//create missile with velocity, position, and target
-		Missile* m = new Missile(position, OT_PLAYER_MISSILE);
+		//Missile* m = new Missile(position, OT_PLAYER_MISSILE);
+		Missile* m = new Missile(OT_PLAYER_MISSILE);
+
 		//m.init(1, 1); need to find out what to use for IDs from graphics
 		static int id = 0;
-		std::string missileNme = "PlayerMissile" + to_string(id);
 		++id;
+
+		std::string missileNme = "PlayerMissile" + to_string(id);
+		
 		gamePhysics->GameObjectManager->addBoxDynamicRigidBody(missileNme,
 												physObj.x, physObj.y, MISSILE_RADIUS, MISSILE_RADIUS, true, &m->physObj);
 // 		m->physObj.setCollissionCategory((uint16)gameObjectCollissionCategory::gocMISSLE); // I am a missile

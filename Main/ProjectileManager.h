@@ -30,9 +30,11 @@ class Missile : public GSP420::ABC
 {
 public:
 	//initial velocity is 0 because that will be set after it's target is set
-	Missile(const D3DXVECTOR3 pos, const ObjType t, Enemy* targ = NULL);
+	//Missile(const D3DXVECTOR3 pos, const ObjType t, Enemy* targ = NULL);
+	Missile(const ObjType t) : ABC(t) {}
 	void update(const float) {}
 	//bool init(const int modelId, const int textureId) { return true; }
+	bool init(const int modelId, const int textureId) { this->nModelId = modelId; this->nTextureId = textureId; return true; }
 	void shutdown() {}
 	inline void setEnemyTarget(Enemy*e) { target = e; }
 	inline Enemy* getEnemyTarget() { return target; }//returns NULL if it needs re-targeted or if player is target

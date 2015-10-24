@@ -170,6 +170,9 @@ int physics::updateWorld(float dt)
 				}
 
 			}
+			else { 
+				std::cout << "why is this null !!!!" << std::endl; 
+			}
 
 		}
 

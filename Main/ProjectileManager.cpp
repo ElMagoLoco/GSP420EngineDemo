@@ -92,9 +92,9 @@ void ProjectileManager::clear()
 	Missiles.resize(0);
 }
 
-Missile::Missile(const D3DXVECTOR3 pos, const ObjType t, Enemy* targ/* = NULL*/) :
-ABC(pos, D3DXVECTOR3(0.f, 0.f, 0.f), t), target(targ)
-{
+//Missile::Missile(const D3DXVECTOR3 pos, const ObjType t, Enemy* targ/* = NULL*/) :
+//ABC(pos, D3DXVECTOR3(0.f, 0.f, 0.f), t), target(targ)
+//{
 // 	static int id = 0;
 // 	physObj.x = pos.x;
 // 	physObj.y = pos.y;
@@ -104,4 +104,4 @@ ABC(pos, D3DXVECTOR3(0.f, 0.f, 0.f), t), target(targ)
 // 	physObj.setCollissionCategory((uint16)gameObjectCollissionCategory::gocMISSLE); // I am a missile
 // 	physObj.setCollissionMask((uint16)gocBOUNDARY || gocENEMY); // i can collide with 
 
-}
+//}
